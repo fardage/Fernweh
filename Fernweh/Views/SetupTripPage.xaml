@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
+             xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
+             xmlns:models="clr-namespace:Fernweh.Models"
+             x:Class="Fernweh.Views.SetupTripPage" x:DataType="viewmodels:SetupTripViewModel">
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <swipeCardView:SwipeCardView
+                x:Name="SwipeCardView"
+                ItemsSource="{Binding TemplateCategories}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                SwipedCommand="{Binding SwipedCommand}"
+                SupportedSwipeDirections="{Binding SupportedSwipeDirections}"
+                Threshold="100">
+                <swipeCardView:SwipeCardView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ItemCategory">
+                        <Frame CornerRadius="10" Padding="0" HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand">
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding Name}" FontSize="Large" />
+                                <Label x:Name="DirectionLabel" />
+                                <Label x:Name="PositionLabel" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </swipeCardView:SwipeCardView.ItemTemplate>
+            </swipeCardView:SwipeCardView>
+            <Label Text="Drag slowly to see colors feedback" HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fernweh.Views.ItemDetailPage"
+             xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
+             xmlns:models="clr-namespace:Fernweh.Models;assembly=Fernweh"
+             Title="{Binding Title}" x:DataType="viewmodels:TripDetailViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Clicked="DeleteItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="{Binding Trip.Destination}"
+               FontSize="Large" />
+        <Label Text="{Binding Trip.StartDate}"
+               FontSize="Medium" />
+        <Label Text="{Binding Trip.EndDate}"
+               FontSize="Medium" />
+
+        <CollectionView ItemsSource="{Binding ChecklistGroups}"
+                        IsGrouped="true">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="viewmodels:GroupedList">
+                    <Label Text="{Binding GroupName}" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Item">
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="checkBox" IsChecked="{Binding Packed}" />
+                        <Label Text="{ Binding Name }" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>

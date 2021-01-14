@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fernweh.Views.ItemsPage"
+             xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
+             xmlns:models="clr-namespace:Fernweh.Models"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage" x:DataType="viewmodels:TripsViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadTripsCommand}">
+        <CollectionView x:Name="ItemsCollectionView"
+                        ItemsSource="{Binding Trips}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Trip">
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Destination}"
+                               LineBreakMode="NoWrap"
+                               Style="{DynamicResource ListItemTextStyle}"
+                               FontSize="16" />
+                        <Label Text="{Binding StartDate}"
+                               LineBreakMode="NoWrap"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               FontSize="13" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
