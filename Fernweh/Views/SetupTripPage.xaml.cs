@@ -32,12 +32,13 @@ namespace Fernweh.Views
             var positionLabel = view.FindByName<Label>("PositionLabel");
             positionLabel.Text = e.Position.ToString();
 
-            var lightColor = Color.FromHex(Application.Current.Resources["LightPrimaryPageBackgroundColor"].ToString());
-            var darkColor = Color.FromHex(Application.Current.Resources["DarkSecondaryPageBackgroundColor"].ToString());
+            var lightColor = (Color) Application.Current.Resources["LightSecondaryPageBackgroundColor"];
+            var darkColor = (Color) Application.Current.Resources["DarkSecondaryPageBackgroundColor"];
 
             switch (e.Position)
             {
                 case DraggingCardPosition.Start:
+                    view.SetAppThemeColor(BackgroundColorProperty, lightColor, darkColor);
                     break;
 
                 case DraggingCardPosition.UnderThreshold:
@@ -60,13 +61,14 @@ namespace Fernweh.Views
                             break;
 
                         case SwipeCardDirection.Down:
+                            view.SetAppThemeColor(BackgroundColorProperty, lightColor, darkColor);
                             break;
                     }
 
                     break;
 
                 case DraggingCardPosition.FinishedUnderThreshold:
-                    view.BackgroundColor = Color.Beige;
+                    view.SetAppThemeColor(BackgroundColorProperty, lightColor, darkColor);
                     break;
 
                 case DraggingCardPosition.FinishedOverThreshold:
