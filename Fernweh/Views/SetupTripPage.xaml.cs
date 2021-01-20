@@ -32,13 +32,16 @@ namespace Fernweh.Views
             var positionLabel = view.FindByName<Label>("PositionLabel");
             positionLabel.Text = e.Position.ToString();
 
+            var lightColor = Color.FromHex(Application.Current.Resources["LightPrimaryPageBackgroundColor"].ToString());
+            var darkColor = Color.FromHex(Application.Current.Resources["DarkSecondaryPageBackgroundColor"].ToString());
+
             switch (e.Position)
             {
                 case DraggingCardPosition.Start:
                     break;
 
                 case DraggingCardPosition.UnderThreshold:
-                    view.BackgroundColor = Color.DarkTurquoise;
+                    view.SetAppThemeColor(BackgroundColorProperty, lightColor, darkColor);
                     break;
 
                 case DraggingCardPosition.OverThreshold:
@@ -57,7 +60,6 @@ namespace Fernweh.Views
                             break;
 
                         case SwipeCardDirection.Down:
-                            view.BackgroundColor = Color.MediumPurple;
                             break;
                     }
 
@@ -68,7 +70,7 @@ namespace Fernweh.Views
                     break;
 
                 case DraggingCardPosition.FinishedOverThreshold:
-                    view.BackgroundColor = Color.Beige;
+                    view.SetAppThemeColor(BackgroundColorProperty, lightColor, darkColor);
                     directionLabel.Text = string.Empty;
                     positionLabel.Text = string.Empty;
                     break;
@@ -76,6 +78,17 @@ namespace Fernweh.Views
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+
+        private async void DismissCard_Clicked(object sender, EventArgs e)
+        {
+            await SwipeCardView.InvokeSwipe(SwipeCardDirection.Left, 20, 10, new TimeSpan(1), new TimeSpan(200));
+        }
+
+        private async void AcceptCard_Clicked(object sender, EventArgs e)
+        {
+            await SwipeCardView.InvokeSwipe(SwipeCardDirection.Right, 20, 10, new TimeSpan(1), new TimeSpan(200));
         }
     }
 }

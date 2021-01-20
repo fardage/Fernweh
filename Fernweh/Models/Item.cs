@@ -7,7 +7,8 @@ namespace Fernweh.Models
 {
     public class Item
     {
-        private bool packed;
+        private bool _packed;
+
         [JsonIgnore] public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public string Name { get; set; }
@@ -15,10 +16,10 @@ namespace Fernweh.Models
         [JsonIgnore]
         public bool Packed
         {
-            get => packed;
+            get => _packed;
             set
             {
-                packed = value;
+                _packed = value;
                 new Task(async () => { await DataStore.UpdateItemAsync(Id, value); }).Start();
             }
         }

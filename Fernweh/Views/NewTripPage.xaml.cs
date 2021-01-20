@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Fernweh.ViewModels;
 using Xamarin.Forms;
 
@@ -23,7 +24,7 @@ namespace Fernweh.Views
         private async void Next_Clicked(object sender, EventArgs e)
         {
             var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, viewModel.NewTrip));
-            await Navigation.PushModalAsync(new NavigationPage(setupPage));
+            await Navigation.PushAsync(new NavigationPage(setupPage));
         }
     }
 }

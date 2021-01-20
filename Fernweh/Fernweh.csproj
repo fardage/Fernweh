@@ -16,12 +16,9 @@
     <PackageReference Include="MLToolkit.Forms.SwipeCardView" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Resources\JSON\ChecklistsTemplate.json" />
-    <None Remove="Resources\JSON\Beach %28copy%29.json" />
-    <None Remove="Resources\JSON\Essentials %28copy%29.json" />
-    <None Remove="Resources\JSON\Ski %28copy%29.json" />
     <None Remove="Resources\JSON\ChecklistTemplate.json" />
   </ItemGroup>
   <ItemGroup>

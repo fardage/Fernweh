@@ -26,6 +26,7 @@ namespace Fernweh.ViewModels
         public Collection<ItemCategory> TemplateCategories { get; set; }
         public Collection<ItemCategory> SelectedCategories { get; set; }
         public SwipeCardDirection SupportedSwipeDirections => SwipeCardDirection.Right | SwipeCardDirection.Left;
+
         public ICommand SwipedCommand { get; }
 
         private void ExecuteSwipedCommand(SwipedCardEventArgs eventArgs)
@@ -38,7 +39,7 @@ namespace Fernweh.ViewModels
             {
                 NewTrip.Categories = SelectedCategories;
                 MessagingCenter.Send(this, "AddTrip", NewTrip);
-                Navigation.PopModalAsync();
+                Navigation.PopToRootAsync();
                 Navigation.PopModalAsync();
             }
         }

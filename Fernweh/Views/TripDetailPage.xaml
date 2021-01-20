@@ -5,37 +5,53 @@
              x:Class="Fernweh.Views.ItemDetailPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models;assembly=Fernweh"
-             Title="{Binding Title}" x:DataType="viewmodels:TripDetailViewModel">
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             Title="Your Trip" x:DataType="viewmodels:TripDetailViewModel"
+             Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" Clicked="DeleteItem_Clicked" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="{Binding Trip.Destination}"
-               FontSize="Large" />
-        <Label Text="{Binding Trip.StartDate}"
-               FontSize="Medium" />
-        <Label Text="{Binding Trip.EndDate}"
-               FontSize="Medium" />
+    <CollectionView ItemsSource="{Binding ChecklistGroups}" IsGrouped="true">
+        <CollectionView.Header>
+            <yummy:PancakeView Style="{DynamicResource HeaderCard}">
+                <yummy:PancakeView.BackgroundGradientStops>
+                    <yummy:GradientStopCollection>
+                        <yummy:GradientStop Color="{Binding Trip.ColorA}" Offset="0" />
+                        <yummy:GradientStop Color="{Binding Trip.ColorB}" Offset="1" />
+                    </yummy:GradientStopCollection>
+                </yummy:PancakeView.BackgroundGradientStops>
+                <StackLayout>
+                    <Label Style="{DynamicResource HeaderTitle}" Text="{Binding Trip.Destination}" />
+                    <Label Style="{DynamicResource HeaderSubtitle}" Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                </StackLayout>
+            </yummy:PancakeView>
+        </CollectionView.Header>
 
-        <CollectionView ItemsSource="{Binding ChecklistGroups}"
-                        IsGrouped="true">
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate x:DataType="viewmodels:GroupedList">
-                    <Label Text="{Binding GroupName}" />
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate x:DataType="viewmodels:GroupedList">
+                <StackLayout>
+                    <Label Style="{DynamicResource ChecklistGroupTitle}" Text="{Binding GroupName}" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Item">
-                    <StackLayout Orientation="Horizontal">
-                        <CheckBox x:Name="checkBox" IsChecked="{Binding Packed}" />
-                        <Label Text="{ Binding Name }" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
-
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Item">
+                <StackLayout Style="{DynamicResource ChecklistItemRow}">
+                    <CheckBox Style="{DynamicResource ChecklistItemCheckbox}" x:Name="checkBox"
+                              IsChecked="{Binding Packed}" />
+                    <Label Style="{DynamicResource ChecklistItemName}" Text="{Binding Name}">
+                        <Label.Triggers>
+                            <DataTrigger Value="true" TargetType="Label"
+                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                <Setter Property="TextDecorations" Value="Strikethrough" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

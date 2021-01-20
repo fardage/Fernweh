@@ -4,24 +4,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fernweh.Views.NewItemPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
-             Title="New Item" x:DataType="viewmodels:NewTripViewModel">
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             Title="New Checklist" x:DataType="viewmodels:NewTripViewModel"
+             Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Destination" FontSize="Large" />
-            <Entry Text="{Binding NewTrip.Destination}" FontSize="Small" />
+        <StackLayout>
+            <yummy:PancakeView Style="{DynamicResource OverviewCard}">
+                <yummy:PancakeView.BackgroundGradientStops>
+                    <yummy:GradientStopCollection>
+                        <yummy:GradientStop Color="{Binding NewTrip.ColorA}" Offset="0" />
+                        <yummy:GradientStop Color="{Binding NewTrip.ColorB}" Offset="1" />
+                    </yummy:GradientStopCollection>
+                </yummy:PancakeView.BackgroundGradientStops>
 
-            <Label Text="Start Date:" FontSize="Medium" />
-            <DatePicker Date="{Binding NewTrip.StartDate}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <Label Text="End Date:" FontSize="Medium" />
-            <DatePicker Date="{Binding NewTrip.StartDate}" />
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Style="{DynamicResource OverviewCardTitle}"
+                           Text="{Binding Destination}" />
 
-            <Button Text="Next" Clicked="Next_Clicked" />
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Style="{DynamicResource OverviewCardSubtitle}"
+                           Text="From:" />
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{DynamicResource OverviewCardSubtitle}"
+                           Text="To:" />
+
+                    <Label Grid.Row="2" Grid.Column="0"
+                           Style="{DynamicResource OverviewCardDate}"
+                           Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                    <Label Grid.Row="2" Grid.Column="1"
+                           Style="{DynamicResource OverviewCardDate}"
+                           Text="{Binding EndDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                </Grid>
+            </yummy:PancakeView>
+
+            <Grid Style="{StaticResource GridStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Style="{DynamicResource InputLabelStyle}" Grid.Row="0" Grid.ColumnSpan="2"
+                       Text="Where are you going?" />
+                <Entry Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Style="{DynamicResource EntryStyle}" Text="{Binding Destination}" />
+                <Label Grid.Row="2" Style="{DynamicResource InputLabelStyle}" Grid.Column="0" Text="Start Date:" />
+                <Label Grid.Row="2" Style="{DynamicResource InputLabelStyle}" Grid.Column="1" Text="End Date:" />
+                <DatePicker Grid.Row="3" Grid.Column="0" Style="{DynamicResource EntryStyle}" Date="{Binding NewTrip.StartDate}" />
+                <DatePicker Grid.Row="3" Grid.Column="1" Style="{DynamicResource EntryStyle}" Date="{Binding NewTrip.StartDate}" />
+
+                <yummy:PancakeView Style="{StaticResource PrimaryButtonStyle}" Grid.Row="4" Grid.ColumnSpan="2"
+                                   Grid.Column="0">
+                    <yummy:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Next_Clicked" />
+                    </yummy:PancakeView.GestureRecognizers>
+                    <Label Style="{StaticResource PrimaryButtonStyleText}" Text="Next" />
+                </yummy:PancakeView>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 

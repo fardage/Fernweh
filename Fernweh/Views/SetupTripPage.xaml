@@ -5,11 +5,18 @@
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models"
-             x:Class="Fernweh.Views.SetupTripPage" x:DataType="viewmodels:SetupTripViewModel">
+             Title="What are you packing?"
+             x:Class="Fernweh.Views.SetupTripPage" x:DataType="viewmodels:SetupTripViewModel"
+             Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.Content>
-        <StackLayout Padding="10">
+        <Grid Style="{DynamicResource GridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <swipeCardView:SwipeCardView
+                Grid.Row="0"
                 x:Name="SwipeCardView"
                 ItemsSource="{Binding TemplateCategories}"
                 HorizontalOptions="FillAndExpand"
@@ -19,10 +26,9 @@
                 Threshold="100">
                 <swipeCardView:SwipeCardView.ItemTemplate>
                     <DataTemplate x:DataType="models:ItemCategory">
-                        <Frame CornerRadius="10" Padding="0" HorizontalOptions="FillAndExpand"
-                               VerticalOptions="FillAndExpand">
+                        <Frame Style="{DynamicResource SwipeCardStyle}" >
                             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" FontSize="Large" />
+                                <Label Text="{Binding Name}" />
                                 <Label x:Name="DirectionLabel" />
                                 <Label x:Name="PositionLabel" />
                             </StackLayout>
@@ -30,8 +36,11 @@
                     </DataTemplate>
                 </swipeCardView:SwipeCardView.ItemTemplate>
             </swipeCardView:SwipeCardView>
-            <Label Text="Drag slowly to see colors feedback" HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="1">
+                <Button Text="&#xf056;" Style="{DynamicResource IconButtonStyle}" Clicked="DismissCard_Clicked" />
+                <Button Text="&#xf055;" Style="{DynamicResource IconButtonStyle}" Clicked="AcceptCard_Clicked" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>

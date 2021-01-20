@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
@@ -16,7 +17,7 @@ namespace Fernweh.Services
             var stream = assembly.GetManifestResourceStream(TEMPLATE_FILE);
 
             var jsonContent = "";
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(stream ?? throw new InvalidOperationException()))
             {
                 jsonContent = reader.ReadToEnd();
             }

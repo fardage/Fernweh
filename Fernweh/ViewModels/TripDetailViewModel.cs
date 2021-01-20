@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
-using Xamarin.Forms;
 
 namespace Fernweh.ViewModels
 {
@@ -15,34 +12,20 @@ namespace Fernweh.ViewModels
             Title = trip?.Destination;
             Trip = trip;
             ChecklistGroups = new ObservableCollection<GroupedList>();
-            LoadChecklistsAsync().Wait();
+            _ = LoadChecklists();
         }
-        
+
         public Trip Trip { get; set; }
         public ObservableCollection<GroupedList> ChecklistGroups { get; set; }
 
-        private async Task LoadChecklistsAsync()
+        private async Task LoadChecklists()
         {
-            IsBusy = true;
-
-            try
+            var checklists = await DataStore.GetItemCategoriesAsync(Trip.Id);
+            foreach (var category in checklists)
             {
-                ChecklistGroups.Clear();
-                var checklists = await DataStore.GetItemCategoriesAsync(Trip.Id);
-                foreach (var category in checklists)
-                {
-                    var listGroup = new GroupedList {GroupName = category.Name};
-                    listGroup.AddRange(category.Items);
-                    ChecklistGroups.Add(listGroup);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
+                var listGroup = new GroupedList {GroupName = category.Name};
+                listGroup.AddRange(category.Items);
+                ChecklistGroups.Add(listGroup);
             }
         }
     }

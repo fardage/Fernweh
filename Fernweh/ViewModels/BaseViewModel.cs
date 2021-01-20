@@ -7,19 +7,19 @@ namespace Fernweh.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private bool isBusy;
-        private string title = string.Empty;
+        private bool _isBusy;
+        private string _title = string.Empty;
 
         public bool IsBusy
         {
-            get => isBusy;
-            set => SetProperty(ref isBusy, value);
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
 
         public string Title
         {
-            get => title;
-            set => SetProperty(ref title, value);
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
@@ -42,10 +42,7 @@ namespace Fernweh.ViewModels
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            changed?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

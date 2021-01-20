@@ -13,7 +13,6 @@ namespace Fernweh.Services
 
         public TravelContext()
         {
-
             Database.EnsureCreated();
         }
 

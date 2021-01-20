@@ -5,30 +5,35 @@
              x:Class="Fernweh.Views.ItemsPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="{Binding Title}"
-             x:Name="BrowseItemsPage" x:DataType="viewmodels:TripsViewModel">
+             x:DataType="viewmodels:TripsViewModel"
+             Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadTripsCommand}">
-        <CollectionView x:Name="ItemsCollectionView"
-                        ItemsSource="{Binding Trips}">
+        <CollectionView ItemsSource="{Binding Trips}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Trip">
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding Destination}"
-                               LineBreakMode="NoWrap"
-                               Style="{DynamicResource ListItemTextStyle}"
-                               FontSize="16" />
-                        <Label Text="{Binding StartDate}"
-                               LineBreakMode="NoWrap"
-                               Style="{DynamicResource ListItemDetailTextStyle}"
-                               FontSize="13" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
-                        </StackLayout.GestureRecognizers>
+                    <StackLayout>
+                        <yummy:PancakeView Style="{DynamicResource OverviewCard}">
+                            <yummy:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
+                            </yummy:PancakeView.GestureRecognizers>
+                            <yummy:PancakeView.BackgroundGradientStops>
+                                <yummy:GradientStopCollection>
+                                    <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
+                                    <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
+                                </yummy:GradientStopCollection>
+                            </yummy:PancakeView.BackgroundGradientStops>
+                            <StackLayout>
+                                <Label Style="{DynamicResource OverviewCardTitle}" Text="{Binding Destination}" />
+                                <Label Style="{DynamicResource OverviewCardSubtitle}" Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                            </StackLayout>
+                        </yummy:PancakeView>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

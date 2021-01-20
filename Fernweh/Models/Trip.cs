@@ -21,5 +21,7 @@ namespace Fernweh.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Collection<ItemCategory> Categories { get; set; }
+        public string ColorA { get; set; }
+        public string ColorB { get; set; }
     }
 }

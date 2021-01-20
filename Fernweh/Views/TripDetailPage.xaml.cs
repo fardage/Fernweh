@@ -19,5 +19,13 @@ namespace Fernweh.Views
         {
             await Navigation.PopAsync().ContinueWith(_ => MessagingCenter.Send(this, "DeleteTrip", viewModel.Trip));
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (viewModel.ChecklistGroups.Count == 0)
+                viewModel.IsBusy = true;
+        }
     }
 }
