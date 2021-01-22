@@ -125,7 +125,7 @@
         <!-- Styling - SwipeCards -->
         <Style x:Key="SwipeCardStyle" TargetType="Frame">
             <Setter Property="BackgroundColor" Value="{AppThemeBinding 
-                        Light={StaticResource LightPrimaryPageBackgroundColor}, 
+                        Light={StaticResource LightSecondaryPageBackgroundColor}, 
                         Dark={StaticResource DarkSecondaryPageBackgroundColor}}"/>
             <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
