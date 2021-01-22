@@ -79,6 +79,12 @@
                     Value="{AppThemeBinding 
                         Light={StaticResource LightPrimaryColor}, 
                         Dark={StaticResource DarkPrimaryColor}}" />
+            <Setter Property="BarBackgroundColor" Value="{AppThemeBinding 
+                    Light={StaticResource LightNavigationBarColor}, 
+                    Dark={StaticResource DarkNavigationBarColor}}"/>
+            <Setter Property="UnselectedTabColor" Value="{AppThemeBinding 
+                    Light={StaticResource LightTertiaryTextColor}, 
+                    Dark={StaticResource DarkTertiaryTextColor}}"/>
         </Style>
 
         <!-- Styling - Layouts -->
@@ -89,7 +95,7 @@
                     Dark={StaticResource DarkPrimaryPageBackgroundColor}}" />
         </Style>
         <Style x:Key="GridStyle" TargetType="Grid">
-            <Setter Property="Margin" Value="24" />
+            <Setter Property="Padding" Value="24" />
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding 
                         Light={StaticResource LightPrimaryPageBackgroundColor}, 
@@ -203,7 +209,6 @@
                     Value="{AppThemeBinding 
                         Light={StaticResource LightSecondaryColor}, 
                         Dark={StaticResource DarkSecondaryColor}}" />
-            <Setter Property="Visual" Value="Material" />
         </Style>
 
         <!-- Styling - Inputs -->

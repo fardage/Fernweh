@@ -14,12 +14,15 @@
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
+
+
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadTripsCommand}">
-        <CollectionView ItemsSource="{Binding Trips}">
+        <CollectionView
+            ItemsSource="{Binding Trips}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Trip">
                     <StackLayout>
-                        <yummy:PancakeView Style="{DynamicResource OverviewCard}">
+                        <yummy:PancakeView Style="{StaticResource OverviewCard}">
                             <yummy:PancakeView.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
                             </yummy:PancakeView.GestureRecognizers>
