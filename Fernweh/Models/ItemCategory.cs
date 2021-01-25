@@ -16,6 +16,8 @@ namespace Fernweh.Models
 
         public string Name { get; set; }
 
+        public string Icon { get; set; }
+
         public List<Item> Items { get; set; }
     }
 }

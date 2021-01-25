@@ -71,11 +71,14 @@
                 </Grid.ColumnDefinitions>
                 <Label Style="{DynamicResource InputLabelStyle}" Grid.Row="0" Grid.ColumnSpan="2"
                        Text="Where are you going?" />
-                <Entry Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Style="{DynamicResource EntryStyle}" Text="{Binding Destination}" />
+                <Entry Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Style="{DynamicResource EntryStyle}"
+                       Text="{Binding Destination}" />
                 <Label Grid.Row="2" Style="{DynamicResource InputLabelStyle}" Grid.Column="0" Text="Start Date:" />
                 <Label Grid.Row="2" Style="{DynamicResource InputLabelStyle}" Grid.Column="1" Text="End Date:" />
-                <DatePicker Grid.Row="3" Grid.Column="0" Style="{DynamicResource EntryStyle}" Date="{Binding NewTrip.StartDate}" />
-                <DatePicker Grid.Row="3" Grid.Column="1" Style="{DynamicResource EntryStyle}" Date="{Binding NewTrip.StartDate}" />
+                <DatePicker Grid.Row="3" Grid.Column="0" Style="{DynamicResource EntryStyle}"
+                            Date="{Binding NewTrip.StartDate}" />
+                <DatePicker Grid.Row="3" Grid.Column="1" Style="{DynamicResource EntryStyle}"
+                            Date="{Binding NewTrip.StartDate}" />
 
                 <yummy:PancakeView Style="{StaticResource PrimaryButtonStyle}" Grid.Row="4" Grid.ColumnSpan="2"
                                    Grid.Column="0">

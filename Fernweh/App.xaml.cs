@@ -12,6 +12,9 @@ namespace Fernweh
             MainPage = new MainPage();
         }
 
+        public static double ScreenHeight { get; set; }
+        public static double ScreenWidth { get; set; }
+
         protected override void OnStart()
         {
         }

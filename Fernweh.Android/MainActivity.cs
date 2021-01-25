@@ -22,6 +22,14 @@ namespace Fernweh.Droid
 
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
+
+            var width = Resources.DisplayMetrics.WidthPixels;
+            var height = Resources.DisplayMetrics.HeightPixels;
+            var density = Resources.DisplayMetrics.Density;
+
+            App.ScreenWidth = (width - 0.5f) / density;
+            App.ScreenHeight = (height - 0.5f) / density;
+
             LoadApplication(new App());
         }
 

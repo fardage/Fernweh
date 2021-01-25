@@ -24,7 +24,8 @@
                 </yummy:PancakeView.BackgroundGradientStops>
                 <StackLayout>
                     <Label Style="{DynamicResource HeaderTitle}" Text="{Binding Trip.Destination}" />
-                    <Label Style="{DynamicResource HeaderSubtitle}" Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                    <Label Style="{DynamicResource HeaderSubtitle}"
+                           Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
                 </StackLayout>
             </yummy:PancakeView>
         </CollectionView.Header>

@@ -33,7 +33,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleIdentifier</key>
-	<string>ch.tseng.fernweh</string>
+	<string>ch.tseng.Fernweh</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome5Brands.otf</string>

@@ -25,6 +25,10 @@ namespace Fernweh.iOS
             Calabash.Start();
 #endif
             Forms.Init();
+
+            App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
+            App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

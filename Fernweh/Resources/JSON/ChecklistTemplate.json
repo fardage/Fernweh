@@ -1,6 +1,7 @@
 ﻿[
   {
     "Name": "Lorem",
+    "Icon": "\uf5ca",
     "Items": [
       {
         "Name": "Maecenas"
@@ -15,6 +16,7 @@
   },
   {
     "Name": "Ipsum Dolor",
+    "Icon": "\uf5c9",
     "Items": [
       {
         "Name": "Proin"
@@ -38,6 +40,7 @@
   },
   {
     "Name": "Nullam",
+    "Icon": "\uf083",
     "Items": [
       {
         "Name": "Fusce"
