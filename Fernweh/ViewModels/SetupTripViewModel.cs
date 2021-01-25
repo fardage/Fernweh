@@ -10,12 +10,16 @@ namespace Fernweh.ViewModels
 {
     public class SetupTripViewModel : BaseViewModel
     {
+        private uint _threshold;
+
         public SetupTripViewModel(INavigation navigation, Trip trip)
         {
             Navigation = navigation;
             NewTrip = trip;
 
             SwipedCommand = new Command<SwipedCardEventArgs>(eventArgs => ExecuteSwipedCommand(eventArgs));
+
+            Threshold = (uint) (App.ScreenWidth / 3);
 
             TemplateCategories = TemplateProvider.GetChecklist();
             SelectedCategories = new Collection<ItemCategory>();
@@ -28,6 +32,12 @@ namespace Fernweh.ViewModels
         public SwipeCardDirection SupportedSwipeDirections => SwipeCardDirection.Right | SwipeCardDirection.Left;
 
         public ICommand SwipedCommand { get; }
+
+        public uint Threshold
+        {
+            get => _threshold;
+            set => SetProperty(ref _threshold, value);
+        }
 
         private void ExecuteSwipedCommand(SwipedCardEventArgs eventArgs)
         {

@@ -26,12 +26,45 @@
                 Threshold="100">
                 <swipeCardView:SwipeCardView.ItemTemplate>
                     <DataTemplate x:DataType="models:ItemCategory">
-                        <Frame Style="{DynamicResource SwipeCardStyle}" >
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" />
-                                <Label x:Name="DirectionLabel" />
-                                <Label x:Name="PositionLabel" />
-                            </StackLayout>
+                        <Frame Style="{DynamicResource SwipeCardStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0"
+                                       Style="{DynamicResource SwipeCardIconStyle}"
+                                       Text="{Binding Icon}" />
+                                <Label Grid.Row="1"
+                                       Style="{DynamicResource SwipeCardNameStyle}"
+                                       Text="{Binding Name}" />
+
+                                <Frame Grid.Row="2"
+                                       x:Name="NopeFrame"
+                                       Style="{DynamicResource SwipeCardStampFrameStyle}"
+                                       Padding="0"
+                                       Rotation="-20" Opacity="0">
+                                    <Label Text="NOPE"
+                                           Style="{DynamicResource SwipeCardStampTextStyle}"
+                                           BackgroundColor="Transparent"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           VerticalOptions="CenterAndExpand" />
+                                </Frame>
+                                <Frame Grid.Row="2"
+                                       x:Name="AddFrame"
+                                       Style="{DynamicResource SwipeCardStampFrameStyle}"
+                                       Padding="0"
+                                       CornerRadius="20"
+                                       Rotation="20" Opacity="0">
+                                    <Label Text="PACK"
+                                           Style="{DynamicResource SwipeCardStampTextStyle}"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           VerticalOptions="CenterAndExpand" />
+                                </Frame>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </swipeCardView:SwipeCardView.ItemTemplate>

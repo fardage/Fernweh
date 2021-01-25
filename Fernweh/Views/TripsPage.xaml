@@ -15,7 +15,6 @@
     </ContentPage.ToolbarItems>
 
 
-
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadTripsCommand}">
         <CollectionView
             ItemsSource="{Binding Trips}">
@@ -34,7 +33,8 @@
                             </yummy:PancakeView.BackgroundGradientStops>
                             <StackLayout>
                                 <Label Style="{DynamicResource OverviewCardTitle}" Text="{Binding Destination}" />
-                                <Label Style="{DynamicResource OverviewCardSubtitle}" Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                                <Label Style="{DynamicResource OverviewCardSubtitle}"
+                                       Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
                             </StackLayout>
                         </yummy:PancakeView>
                     </StackLayout>
