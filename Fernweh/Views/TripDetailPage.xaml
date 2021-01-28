@@ -5,45 +5,60 @@
              x:Class="Fernweh.Views.ItemDetailPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models;assembly=Fernweh"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Your Trip" x:DataType="viewmodels:TripDetailViewModel"
              Style="{DynamicResource ContentPageStyle}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" Clicked="DeleteItem_Clicked" />
-    </ContentPage.ToolbarItems>
-
     <CollectionView ItemsSource="{Binding ChecklistGroups}" IsGrouped="true">
         <CollectionView.Header>
-            <yummy:PancakeView Style="{DynamicResource HeaderCard}">
-                <yummy:PancakeView.BackgroundGradientStops>
-                    <yummy:GradientStopCollection>
-                        <yummy:GradientStop Color="{Binding Trip.ColorA}" Offset="0" />
-                        <yummy:GradientStop Color="{Binding Trip.ColorB}" Offset="1" />
-                    </yummy:GradientStopCollection>
-                </yummy:PancakeView.BackgroundGradientStops>
-                <StackLayout>
-                    <Label Style="{DynamicResource HeaderTitle}" Text="{Binding Trip.Destination}" />
-                    <Label Style="{DynamicResource HeaderSubtitle}"
-                           Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
-                </StackLayout>
-            </yummy:PancakeView>
+            <Grid Padding="12,0,24,48">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Trip.Destination}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{DynamicResource Heading1Style}" />
+                <Label Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Style="{DynamicResource Heading2Style}" />
+
+                <Button Text="&#xf1f8;"
+                        Style="{DynamicResource IconButtonMediumStyle}"
+                        Clicked="DeleteItem_Clicked"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Grid.RowSpan="2" />
+            </Grid>
         </CollectionView.Header>
 
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate x:DataType="viewmodels:GroupedList">
-                <StackLayout>
-                    <Label Style="{DynamicResource ChecklistGroupTitle}" Text="{Binding GroupName}" />
-                </StackLayout>
+                <Label Padding="8,24,8,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{DynamicResource IconMediumStyle}" Text="{Binding Icon}" />
+                            <Span Text="  "/>
+                            <Span Style="{DynamicResource Heading2Style}" Text="{Binding GroupName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>
 
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Item">
-                <StackLayout Style="{DynamicResource ChecklistItemRow}">
-                    <CheckBox Style="{DynamicResource ChecklistItemCheckbox}" x:Name="checkBox"
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="checkBox"
                               IsChecked="{Binding Packed}" />
-                    <Label Style="{DynamicResource ChecklistItemName}" Text="{Binding Name}">
+                    <Label VerticalOptions="Center" Text="{Binding Name}">
                         <Label.Triggers>
                             <DataTrigger Value="true" TargetType="Label"
                                          Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">

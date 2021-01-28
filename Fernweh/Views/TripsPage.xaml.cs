@@ -5,11 +5,11 @@ using Xamarin.Forms;
 
 namespace Fernweh.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class TripsPage : ContentPage
     {
         private readonly TripsViewModel viewModel;
 
-        public ItemsPage()
+        public TripsPage()
         {
             InitializeComponent();
 

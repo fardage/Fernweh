@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Resources\JSON\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\JSON\ChecklistTemplate.json" />

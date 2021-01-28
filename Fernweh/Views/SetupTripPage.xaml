@@ -34,11 +34,14 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0"
-                                       Style="{DynamicResource SwipeCardIconStyle}"
-                                       Text="{Binding Icon}" />
+                                       Style="{DynamicResource IconLargeStyle}"
+                                       Text="{Binding Icon}"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="End"/>
                                 <Label Grid.Row="1"
-                                       Style="{DynamicResource SwipeCardNameStyle}"
-                                       Text="{Binding Name}" />
+                                       Style="{DynamicResource Heading1Style}"
+                                       Text="{Binding Name}"
+                                       HorizontalOptions="CenterAndExpand" />
 
                                 <Frame Grid.Row="2"
                                        x:Name="NopeFrame"
@@ -46,7 +49,7 @@
                                        Padding="0"
                                        Rotation="-20" Opacity="0">
                                     <Label Text="NOPE"
-                                           Style="{DynamicResource SwipeCardStampTextStyle}"
+                                           Style="{DynamicResource Heading1WhiteStyle}"
                                            BackgroundColor="Transparent"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center"
@@ -59,7 +62,7 @@
                                        CornerRadius="20"
                                        Rotation="20" Opacity="0">
                                     <Label Text="PACK"
-                                           Style="{DynamicResource SwipeCardStampTextStyle}"
+                                           Style="{DynamicResource Heading1WhiteStyle}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center"
                                            VerticalOptions="CenterAndExpand" />
@@ -70,8 +73,8 @@
                 </swipeCardView:SwipeCardView.ItemTemplate>
             </swipeCardView:SwipeCardView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="1">
-                <Button Text="&#xf056;" Style="{DynamicResource IconButtonStyle}" Clicked="DismissCard_Clicked" />
-                <Button Text="&#xf055;" Style="{DynamicResource IconButtonStyle}" Clicked="AcceptCard_Clicked" />
+                <Button Text="&#xf056;" Style="{DynamicResource IconButtonLargeStyle}" Clicked="DismissCard_Clicked" />
+                <Button Text="&#xf055;" Style="{DynamicResource IconButtonLargeStyle}" Clicked="AcceptCard_Clicked" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

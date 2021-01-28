@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <yummy:PancakeView Style="{DynamicResource OverviewCard}">
+            <yummy:PancakeView Style="{DynamicResource CardStyle}">
                 <yummy:PancakeView.BackgroundGradientStops>
                     <yummy:GradientStopCollection>
                         <yummy:GradientStop Color="{Binding NewTrip.ColorA}" Offset="0" />
@@ -36,24 +36,24 @@
                     <Label Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
-                           Style="{DynamicResource OverviewCardTitle}"
+                           Style="{DynamicResource Heading1WhiteStyle}"
                            Text="{Binding Destination}" />
 
                     <Label Grid.Row="1"
                            Grid.Column="0"
-                           Style="{DynamicResource OverviewCardSubtitle}"
+                           Style="{DynamicResource Heading2WhiteStyle}"
                            Text="From:" />
                     <Label Grid.Row="1"
                            Grid.Column="1"
-                           Style="{DynamicResource OverviewCardSubtitle}"
+                           Style="{DynamicResource Heading2WhiteStyle}"
                            Text="To:" />
 
                     <Label Grid.Row="2" Grid.Column="0"
-                           Style="{DynamicResource OverviewCardDate}"
-                           Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                           Style="{DynamicResource Heading3WhiteStyle}"
+                           Text="{Binding StartDate, StringFormat='{0:dd. MMM yyyy}'}" />
                     <Label Grid.Row="2" Grid.Column="1"
-                           Style="{DynamicResource OverviewCardDate}"
-                           Text="{Binding EndDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                           Style="{DynamicResource Heading3WhiteStyle}"
+                           Text="{Binding EndDate, StringFormat='{0:dd. MMM yyyy}'}" />
                 </Grid>
             </yummy:PancakeView>
 
@@ -69,12 +69,12 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Style="{DynamicResource InputLabelStyle}" Grid.Row="0" Grid.ColumnSpan="2"
+                <Label Style="{DynamicResource Heading2Style}" Grid.Row="0" Grid.ColumnSpan="2"
                        Text="Where are you going?" />
                 <Entry Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Style="{DynamicResource EntryStyle}"
                        Text="{Binding Destination}" />
-                <Label Grid.Row="2" Style="{DynamicResource InputLabelStyle}" Grid.Column="0" Text="Start Date:" />
-                <Label Grid.Row="2" Style="{DynamicResource InputLabelStyle}" Grid.Column="1" Text="End Date:" />
+                <Label Grid.Row="2" Style="{DynamicResource Heading2Style}" Grid.Column="0" Text="Start Date:" />
+                <Label Grid.Row="2" Style="{DynamicResource Heading2Style}" Grid.Column="1" Text="End Date:" />
                 <DatePicker Grid.Row="3" Grid.Column="0" Style="{DynamicResource EntryStyle}"
                             Date="{Binding NewTrip.StartDate}" />
                 <DatePicker Grid.Row="3" Grid.Column="1" Style="{DynamicResource EntryStyle}"
@@ -85,7 +85,7 @@
                     <yummy:PancakeView.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Next_Clicked" />
                     </yummy:PancakeView.GestureRecognizers>
-                    <Label Style="{StaticResource PrimaryButtonStyleText}" Text="Next" />
+                    <Label Style="{StaticResource Heading2WhiteStyle}" Text="Next" />
                 </yummy:PancakeView>
             </Grid>
         </StackLayout>

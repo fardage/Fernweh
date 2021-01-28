@@ -2,44 +2,78 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fernweh.Views.ItemsPage"
+             x:Class="Fernweh.Views.TripsPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             Title="{Binding Title}"
+             Title="Fernweh"
              x:DataType="viewmodels:TripsViewModel"
              Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Settings" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
+    <StackLayout>
+        <Grid Padding="8,0,24,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadTripsCommand}">
-        <CollectionView
-            ItemsSource="{Binding Trips}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Trip">
-                    <StackLayout>
-                        <yummy:PancakeView Style="{StaticResource OverviewCard}">
-                            <yummy:PancakeView.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
-                            </yummy:PancakeView.GestureRecognizers>
-                            <yummy:PancakeView.BackgroundGradientStops>
-                                <yummy:GradientStopCollection>
-                                    <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
-                                    <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
-                                </yummy:GradientStopCollection>
-                            </yummy:PancakeView.BackgroundGradientStops>
-                            <StackLayout>
-                                <Label Style="{DynamicResource OverviewCardTitle}" Text="{Binding Destination}" />
-                                <Label Style="{DynamicResource OverviewCardSubtitle}"
-                                       Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
-                            </StackLayout>
-                        </yummy:PancakeView>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+            <Label Text="Trips"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{DynamicResource Heading1Style}" />
+            <Label Grid.Row="1"
+                   Grid.Column="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Style="{StaticResource Heading3Style}"
+                              Text="{Binding Trips.Count}" />
+                        <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Button Text="&#xf65e;"
+                    Style="{DynamicResource IconButtonMediumStyle}"
+                    Clicked="AddItem_Clicked"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Grid.RowSpan="2" />
+        </Grid>
+        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" 
+                     Command="{Binding LoadTripsCommand}">
+            <CollectionView ItemsSource="{Binding Trips}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Trip">
+                        <StackLayout>
+                            <yummy:PancakeView Style="{StaticResource CardStyle}">
+                                <yummy:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
+                                </yummy:PancakeView.GestureRecognizers>
+                                <yummy:PancakeView.BackgroundGradientStops>
+                                    <yummy:GradientStopCollection>
+                                        <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
+                                        <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
+                                    </yummy:GradientStopCollection>
+                                </yummy:PancakeView.BackgroundGradientStops>
+                                <StackLayout>
+                                    <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
+                                    <Label Style="{DynamicResource Heading2WhiteStyle}"
+                                           Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                                </StackLayout>
+                            </yummy:PancakeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

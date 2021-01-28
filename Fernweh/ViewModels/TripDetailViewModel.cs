@@ -23,7 +23,7 @@ namespace Fernweh.ViewModels
             var checklists = await DataStore.GetItemCategoriesAsync(Trip.Id);
             foreach (var category in checklists)
             {
-                var listGroup = new GroupedList {GroupName = category.Name};
+                var listGroup = new GroupedList {GroupName = category.Name, Icon = category.Icon};
                 listGroup.AddRange(category.Items);
                 ChecklistGroups.Add(listGroup);
             }

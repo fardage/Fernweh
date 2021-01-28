@@ -19,7 +19,9 @@ namespace Fernweh.Data
         public static async Task<IEnumerable<Trip>> GetTripsAsync()
         {
             var travelContext = new TravelContext();
-            var storedTrips = travelContext.Trips.ToList();
+            var storedTrips = travelContext.Trips
+                .AsNoTracking()
+                .ToList();
             return await Task.FromResult(storedTrips);
         }
 
@@ -39,6 +41,7 @@ namespace Fernweh.Data
         {
             var travelContext = new TravelContext();
             var storedChecklists = travelContext.Trips
+                .AsNoTracking()
                 .Where(x => x.Id.Equals(id))
                 .Include(y => y.Categories)
                 .ThenInclude(z => z.Items)

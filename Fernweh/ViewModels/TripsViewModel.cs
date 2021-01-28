@@ -34,7 +34,6 @@ namespace Fernweh.ViewModels
         public ObservableCollection<Trip> Trips { get; set; }
         public Command LoadTripsCommand { get; set; }
 
-
         public async Task ExecuteLoadTripsCommand()
         {
             IsBusy = true;

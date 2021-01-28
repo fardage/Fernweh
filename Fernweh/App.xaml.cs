@@ -9,7 +9,7 @@ namespace Fernweh
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new TripsPage());
         }
 
         public static double ScreenHeight { get; set; }
