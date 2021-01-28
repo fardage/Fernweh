@@ -10,10 +10,6 @@
              x:DataType="viewmodels:TripsViewModel"
              Style="{DynamicResource ContentPageStyle}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Settings" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
-
     <StackLayout>
         <Grid Padding="8,0,24,8">
             <Grid.RowDefinitions>
