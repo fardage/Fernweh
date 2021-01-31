@@ -1,4 +1,5 @@
 ﻿using Fernweh.Views;
+using MonkeyCache.FileStore;
 using Xamarin.Forms;
 
 namespace Fernweh
@@ -8,6 +9,9 @@ namespace Fernweh
         public App()
         {
             InitializeComponent();
+
+            Barrel.ApplicationId = "ch.tseng.Fernweh";
+            Barrel.Current.EmptyExpired();
 
             MainPage = new NavigationPage(new TripsPage());
         }

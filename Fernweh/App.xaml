@@ -61,25 +61,28 @@
         <Color x:Key="DarkSecondaryTextColor">White</Color>
         <Color x:Key="DarkTertiaryTextColor">WhiteSmoke</Color>
         <Color x:Key="DarkTransparentColor">Transparent</Color>
-        
+
         <!-- Styling - Text -->
         <Style x:Key="Heading1Style" TargetType="Label">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="TextColor" Value="{AppThemeBinding 
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding 
                     Light={StaticResource LightPrimaryTextColor}, 
                     Dark={StaticResource DarkPrimaryTextColor}}" />
         </Style>
         <Style x:Key="Heading2Style" TargetType="Label">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="TextColor" Value="{AppThemeBinding 
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding 
                     Light={StaticResource LightPrimaryTextColor}, 
                     Dark={StaticResource DarkPrimaryTextColor}}" />
         </Style>
         <Style x:Key="Heading3Style" TargetType="Label">
             <Setter Property="FontSize" Value="18" />
-            <Setter Property="TextColor" Value="{AppThemeBinding 
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding 
                     Light={StaticResource LightTertiaryTextColor}, 
                     Dark={StaticResource DarkTertiaryTextColor}}" />
         </Style>
@@ -97,7 +100,7 @@
             <Setter Property="FontSize" Value="18" />
             <Setter Property="TextColor" Value="{StaticResource DarkTertiaryTextColor}" />
         </Style>
-        
+
         <!-- Styling - Icon -->
         <Style x:Key="IconLargeStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
@@ -115,7 +118,7 @@
                     Light={StaticResource LightTertiaryTextColor}, 
                     Dark={StaticResource DarkTertiaryTextColor}}" />
         </Style>
-        
+
         <!-- Styling - Buttons -->
         <Style x:Key="PrimaryButtonStyle" TargetType="yummy:PancakeView">
             <Setter Property="CornerRadius" Value="20" />
@@ -153,7 +156,6 @@
                         Dark={StaticResource DarkSecondaryColor}}" />
             <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         </Style>
-        
 
         <!-- Styling - Inputs -->
         <Style x:Key="EntryStyle" TargetType="Entry">
@@ -203,7 +205,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+        <Style x:Key="TileStyle" TargetType="yummy:PancakeView">
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="HeightRequest" Value="80" />
+            <Setter Property="WidthRequest" Value="200" />
+            <Setter Property="Margin" Value="4,0" />
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="BackgroundColor" Value="Gray" />
+        </Style>
+
 
         <!-- Styling - SwipeCards -->
         <Style x:Key="SwipeCardStyle" TargetType="Frame">

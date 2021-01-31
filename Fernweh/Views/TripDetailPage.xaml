@@ -2,50 +2,86 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fernweh.Views.ItemDetailPage"
+             x:Class="Fernweh.Views.TripDetailPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models;assembly=Fernweh"
-             Title="Your Trip" x:DataType="viewmodels:TripDetailViewModel"
-             Style="{DynamicResource ContentPageStyle}">
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             Title="Your Trip" x:DataType="viewmodels:TripDetailViewModel">
 
     <CollectionView ItemsSource="{Binding ChecklistGroups}" IsGrouped="true">
         <CollectionView.Header>
-            <Grid Padding="12,0,24,48">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+            <StackLayout>
+                <Grid Padding="24,24,24,12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <Label Text="{Binding Trip.Destination}"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       Style="{DynamicResource Heading1Style}" />
-                <Label Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}"
-                       Grid.Row="1"
-                       Grid.Column="0"
-                       Style="{DynamicResource Heading2Style}" />
+                    <Label Text="{Binding Trip.Destination}"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{DynamicResource Heading1Style}" />
+                    <Label Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Style="{DynamicResource Heading2Style}" />
 
-                <Button Text="&#xf1f8;"
-                        Style="{DynamicResource IconButtonMediumStyle}"
-                        Clicked="DeleteItem_Clicked"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Grid.RowSpan="2" />
-            </Grid>
+                    <Button Text="&#xf1f8;"
+                            Style="{DynamicResource IconButtonMediumStyle}"
+                            Clicked="DeleteItem_Clicked"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.RowSpan="2" />
+                </Grid>
+                <ScrollView Orientation="Horizontal"
+                            Margin="12,12,0,24">
+                    <StackLayout Orientation="Horizontal">
+                        <yummy:PancakeView Style="{StaticResource TileStyle}">
+                            <StackLayout>
+                                <Label Style="{DynamicResource Heading2WhiteStyle}" Text="Average Temperature" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Style="{DynamicResource Heading3WhiteStyle}"
+                                                  Text="{Binding AverageTemperature}" />
+                                            <Span Style="{StaticResource Heading3WhiteStyle}" Text="°C" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView Style="{StaticResource TileStyle}">
+                            <StackLayout>
+                                <Label Style="{DynamicResource Heading2WhiteStyle}" Text="Native Name" />
+                                <Label Style="{DynamicResource Heading3WhiteStyle}"
+                                       Text="{Binding NativeName}" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView Style="{StaticResource TileStyle}">
+                            <StackLayout>
+                                <Label Style="{DynamicResource Heading2WhiteStyle}" Text="Population" />
+                                <Label Style="{DynamicResource Heading3WhiteStyle}"
+                                       Text="{Binding Population}" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
         </CollectionView.Header>
 
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate x:DataType="viewmodels:GroupedList">
-                <Label Padding="8,24,8,0">
+                <Label Padding="24,12,24,12">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Style="{DynamicResource IconMediumStyle}" Text="{Binding Icon}" />
-                            <Span Text="  "/>
+                            <Span Text="      " />
                             <Span Style="{DynamicResource Heading2Style}" Text="{Binding GroupName}" />
                         </FormattedString>
                     </Label.FormattedText>
@@ -55,7 +91,8 @@
 
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Item">
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal"
+                             Padding="24,0">
                     <CheckBox x:Name="checkBox"
                               IsChecked="{Binding Packed}" />
                     <Label VerticalOptions="Center" Text="{Binding Name}">

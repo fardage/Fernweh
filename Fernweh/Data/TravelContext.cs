@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 using Xamarin.Forms;
 
-namespace Fernweh.Services
+namespace Fernweh.Data
 {
     public class TravelContext : DbContext
     {
-        private const string databaseName = "database.db";
+        private const string DatabaseName = "database.db";
 
         public TravelContext()
         {
@@ -28,12 +28,12 @@ namespace Fernweh.Services
                 case Device.iOS:
                     Batteries_V2.Init();
                     databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
-                        "Library", databaseName);
+                        "Library", DatabaseName);
                     ;
                     break;
                 case Device.Android:
                     databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                        databaseName);
+                        DatabaseName);
                     break;
                 default:
                     throw new NotImplementedException("Platform not supported");

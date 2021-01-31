@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Models;
-using Fernweh.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fernweh.Data
@@ -52,7 +51,7 @@ namespace Fernweh.Data
         public static async Task UpdateItemAsync(string id, bool newValue)
         {
             var travelContext = new TravelContext();
-            var toUpdate = travelContext.ChecklistItems.Find(id);
+            var toUpdate = await travelContext.ChecklistItems.FindAsync(id);
             toUpdate.Packed = newValue;
             await travelContext.SaveChangesAsync();
         }

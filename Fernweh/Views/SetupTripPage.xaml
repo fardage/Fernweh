@@ -37,7 +37,7 @@
                                        Style="{DynamicResource IconLargeStyle}"
                                        Text="{Binding Icon}"
                                        HorizontalOptions="CenterAndExpand"
-                                       VerticalOptions="End"/>
+                                       VerticalOptions="End" />
                                 <Label Grid.Row="1"
                                        Style="{DynamicResource Heading1Style}"
                                        Text="{Binding Name}"

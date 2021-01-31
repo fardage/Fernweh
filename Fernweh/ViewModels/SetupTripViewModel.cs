@@ -45,13 +45,16 @@ namespace Fernweh.ViewModels
 
             if (eventArgs.Direction == SwipeCardDirection.Right) SelectedCategories.Add(eventArgs.Item as ItemCategory);
 
-            if (selected == TemplateCategories.Last())
-            {
-                NewTrip.Categories = SelectedCategories;
-                MessagingCenter.Send(this, "AddTrip", NewTrip);
-                Navigation.PopToRootAsync();
-                Navigation.PopModalAsync();
-            }
+            if (selected == TemplateCategories.Last()) WrapUpTrip();
+        }
+
+        private void WrapUpTrip()
+        {
+            NewTrip.Categories = SelectedCategories;
+            MessagingCenter.Send(this, "AddTrip", NewTrip);
+
+            Navigation.PopToRootAsync();
+            Navigation.PopModalAsync(false);
         }
     }
 }

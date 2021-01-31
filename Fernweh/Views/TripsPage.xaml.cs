@@ -20,7 +20,7 @@ namespace Fernweh.Views
         {
             var layout = (BindableObject) sender;
             var item = (Trip) layout.BindingContext;
-            await Navigation.PushAsync(new ItemDetailPage(new TripDetailViewModel(item)));
+            await Navigation.PushAsync(new TripDetailPage(new TripDetailViewModel(item)));
         }
 
         private async void AddItem_Clicked(object sender, EventArgs e)

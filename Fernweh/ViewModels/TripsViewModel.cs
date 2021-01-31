@@ -16,23 +16,27 @@ namespace Fernweh.ViewModels
             Title = "Trips";
             Trips = new ObservableCollection<Trip>();
             LoadTripsCommand = new Command(async () => await ExecuteLoadTripsCommand());
+            SubscribeToMessagingCenter();
+        }
 
+        public ObservableCollection<Trip> Trips { get; set; }
+        public Command LoadTripsCommand { get; set; }
+
+        private void SubscribeToMessagingCenter()
+        {
             MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "AddTrip", async (obj, trip) =>
             {
                 Trips.Add(trip);
                 await DataStore.AddTripAsync(trip);
             });
 
-            MessagingCenter.Subscribe<ItemDetailPage, Trip>(this, "DeleteTrip",
+            MessagingCenter.Subscribe<TripDetailPage, Trip>(this, "DeleteTrip",
                 async (obj, trip) =>
                 {
                     Trips.Remove(trip);
                     await DataStore.DeleteTripAsync(trip.Id);
                 });
         }
-
-        public ObservableCollection<Trip> Trips { get; set; }
-        public Command LoadTripsCommand { get; set; }
 
         public async Task ExecuteLoadTripsCommand()
         {

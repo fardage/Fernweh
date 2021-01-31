@@ -37,14 +37,14 @@
                 </Label.FormattedText>
             </Label>
 
-            <Button Text="&#xf65e;"
+            <Button Text="&#xf067;"
                     Style="{DynamicResource IconButtonMediumStyle}"
                     Clicked="AddItem_Clicked"
                     Grid.Row="0"
                     Grid.Column="2"
                     Grid.RowSpan="2" />
         </Grid>
-        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" 
+        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
                      Command="{Binding LoadTripsCommand}">
             <CollectionView ItemsSource="{Binding Trips}">
                 <CollectionView.ItemTemplate>

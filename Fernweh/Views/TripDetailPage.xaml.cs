@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace Fernweh.Views
 {
-    public partial class ItemDetailPage : ContentPage
+    public partial class TripDetailPage : ContentPage
     {
         private readonly TripDetailViewModel viewModel;
 
-        public ItemDetailPage(TripDetailViewModel viewModel)
+        public TripDetailPage(TripDetailViewModel viewModel)
         {
             InitializeComponent();
 
@@ -18,14 +18,6 @@ namespace Fernweh.Views
         private async void DeleteItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync().ContinueWith(_ => MessagingCenter.Send(this, "DeleteTrip", viewModel.Trip));
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (viewModel.ChecklistGroups.Count == 0)
-                viewModel.IsBusy = true;
         }
     }
 }
