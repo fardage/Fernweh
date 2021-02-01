@@ -7,69 +7,67 @@
              xmlns:models="clr-namespace:Fernweh.Models"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Fernweh"
-             x:DataType="viewmodels:TripsViewModel"
-             Style="{DynamicResource ContentPageStyle}">
+             Style="{DynamicResource ContentPageStyle}"
+             x:DataType="viewmodels:TripsViewModel" >
+    
+    <CollectionView ItemsSource="{Binding Trips}">
+        <CollectionView.Header>
+            <Grid Padding="24">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-    <StackLayout>
-        <Grid Padding="8,0,24,8">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <Label Text="Trips"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{DynamicResource Heading1Style}" />
+                <Label Grid.Row="1"
+                       Grid.Column="0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource Heading3Style}"
+                                  Text="{Binding Trips.Count}" />
+                            <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-            <Label Text="Trips"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   Style="{DynamicResource Heading1Style}" />
-            <Label Grid.Row="1"
-                   Grid.Column="0">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Style="{StaticResource Heading3Style}"
-                              Text="{Binding Trips.Count}" />
-                        <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-
-            <Button Text="&#xf067;"
-                    Style="{DynamicResource IconButtonMediumStyle}"
-                    Clicked="AddItem_Clicked"
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Grid.RowSpan="2" />
-        </Grid>
-        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
-                     Command="{Binding LoadTripsCommand}">
-            <CollectionView ItemsSource="{Binding Trips}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Trip">
+                <Button Text="&#xf067;"
+                        Style="{DynamicResource IconButtonMediumStyle}"
+                        Clicked="AddItem_Clicked"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Grid.RowSpan="2"
+                        HorizontalOptions="End"/>
+            </Grid>
+        </CollectionView.Header>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Trip">
+                <StackLayout>
+                    <yummy:PancakeView Style="{StaticResource CardStyle}">
+                        <yummy:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
+                        </yummy:PancakeView.GestureRecognizers>
+                        <yummy:PancakeView.BackgroundGradientStops>
+                            <yummy:GradientStopCollection>
+                                <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
+                                <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
+                            </yummy:GradientStopCollection>
+                        </yummy:PancakeView.BackgroundGradientStops>
                         <StackLayout>
-                            <yummy:PancakeView Style="{StaticResource CardStyle}">
-                                <yummy:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
-                                </yummy:PancakeView.GestureRecognizers>
-                                <yummy:PancakeView.BackgroundGradientStops>
-                                    <yummy:GradientStopCollection>
-                                        <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
-                                        <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
-                                    </yummy:GradientStopCollection>
-                                </yummy:PancakeView.BackgroundGradientStops>
-                                <StackLayout>
-                                    <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
-                                    <Label Style="{DynamicResource Heading2WhiteStyle}"
-                                           Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
-                                </StackLayout>
-                            </yummy:PancakeView>
+                            <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
+                            <Label Style="{DynamicResource Heading2WhiteStyle}"
+                                   Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
                         </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
-    </StackLayout>
+                    </yummy:PancakeView>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

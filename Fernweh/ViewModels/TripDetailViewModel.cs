@@ -86,7 +86,7 @@ namespace Fernweh.ViewModels
                 var weather = await CountryInfoProvider.GetAverageWeatherAsync(country.Alpha3Code);
                 var startTemp = weather.MonthVals[Trip.StartDate.Month - 1];
                 var endTemp = weather.MonthVals[Trip.EndDate.Month - 1];
-                AverageTemperature = Math.Round((startTemp + endTemp) / 2, 2);
+                AverageTemperature = Math.Round((startTemp + endTemp) / 2, 1);
             }
             catch (Exception ex)
             {

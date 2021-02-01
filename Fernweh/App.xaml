@@ -37,8 +37,8 @@
         </ResourceDictionary>
 
         <!-- Light colors -->
-        <Color x:Key="LightPrimaryPageBackgroundColor">White</Color>
-        <Color x:Key="LightSecondaryPageBackgroundColor">#F2F2F2</Color>
+        <Color x:Key="LightPrimaryPageBackgroundColor">#F8F7F8</Color>
+        <Color x:Key="LightSecondaryPageBackgroundColor">#FFFFFF</Color>
         <Color x:Key="LightNavigationBarColor">WhiteSmoke</Color>
 
         <Color x:Key="LightPrimaryColor">#7E57FF</Color>
@@ -64,7 +64,7 @@
 
         <!-- Styling - Text -->
         <Style x:Key="Heading1Style" TargetType="Label">
-            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontSize" Value="28" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor"
                     Value="{AppThemeBinding 
@@ -132,6 +132,8 @@
         </Style>
         <Style x:Key="IconButtonLargeStyle" TargetType="Button">
             <Setter Property="FontSize" Value="36" />
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="HeightRequest" Value="50" />
             <Setter Property="TextColor"
                     Value="{AppThemeBinding 
                         Light={StaticResource LightTertiaryTextColor}, 
@@ -145,6 +147,8 @@
         </Style>
         <Style x:Key="IconButtonMediumStyle" TargetType="Button">
             <Setter Property="FontSize" Value="24" />
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
             <Setter Property="TextColor"
                     Value="{AppThemeBinding 
                         Light={StaticResource LightTertiaryTextColor}, 
@@ -155,17 +159,23 @@
                         Light={StaticResource LightSecondaryColor}, 
                         Dark={StaticResource DarkSecondaryColor}}" />
             <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+                        Light={StaticResource LightSecondaryPageBackgroundColor}, 
+                        Dark={StaticResource DarkSecondaryPageBackgroundColor}}"/>
         </Style>
 
         <!-- Styling - Inputs -->
-        <Style x:Key="EntryStyle" TargetType="Entry">
+        <Style x:Key="DatePickerStyle" TargetType="DatePicker">
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding 
                     Light={StaticResource LightSecondaryPageBackgroundColor}, 
                     Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
         </Style>
+        <Style x:Key="CheckboxStyle" TargetType="CheckBox">
+            <Setter Property="Color" Value="{StaticResource LightPrimaryColor}" />
+        </Style>
 
-        <!-- Styling - Navigation -->
+        <!-- Styling - Layouts -->
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor"
                     Value="{AppThemeBinding 
@@ -176,34 +186,24 @@
                     Light={StaticResource LightPrimaryColor}, 
                     Dark={StaticResource DarkPrimaryColor}}" />
         </Style>
-
-        <!-- Styling - Layouts -->
         <Style x:Key="ContentPageStyle" TargetType="ContentPage">
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding 
                     Light={StaticResource LightPrimaryPageBackgroundColor}, 
                     Dark={StaticResource DarkPrimaryPageBackgroundColor}}" />
-            <Setter Property="Padding" Value="12,36" />
         </Style>
-        <Style x:Key="GridStyle" TargetType="Grid">
-            <Setter Property="Padding" Value="12" />
-            <Setter Property="BackgroundColor"
-                    Value="{AppThemeBinding 
-                        Light={StaticResource LightPrimaryPageBackgroundColor}, 
-                        Dark={StaticResource DarkPrimaryPageBackgroundColor}}" />
+        <Style x:Key="ChecklistRowStyle" TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+                    Light={StaticResource LightSecondaryPageBackgroundColor}, 
+                    Dark={StaticResource DarkSecondaryPageBackgroundColor}}"></Setter>
         </Style>
 
         <!-- Styling - Cards -->
         <Style x:Key="CardStyle" TargetType="yummy:PancakeView">
             <Setter Property="CornerRadius" Value="20" />
             <Setter Property="HeightRequest" Value="100" />
-            <Setter Property="Margin" Value="4,12,12,6" />
+            <Setter Property="Margin" Value="20,8" />
             <Setter Property="Padding" Value="18" />
-            <Setter Property="Shadow">
-                <Setter.Value>
-                    <yummy:DropShadow BlurRadius="2" />
-                </Setter.Value>
-            </Setter>
         </Style>
         <Style x:Key="TileStyle" TargetType="yummy:PancakeView">
             <Setter Property="CornerRadius" Value="20" />
@@ -211,7 +211,9 @@
             <Setter Property="WidthRequest" Value="200" />
             <Setter Property="Margin" Value="4,0" />
             <Setter Property="Padding" Value="18" />
-            <Setter Property="BackgroundColor" Value="Gray" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+                        Light={StaticResource LightSecondaryPageBackgroundColor}, 
+                        Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
         </Style>
 
 

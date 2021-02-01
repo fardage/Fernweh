@@ -34,14 +34,13 @@ namespace Fernweh.Services
 
         public static async Task<Country> GetCountryAsync(string countryName)
         {
-            var countries = new List<Country>();
             var json = await GetAsync(AllCountriesUrl);
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-            countries = JsonSerializer.Deserialize<List<Country>>(json, options);
+            var countries = JsonSerializer.Deserialize<List<Country>>(json, options);
 
             return countries.Find(c => c.Name.Equals(countryName));
         }
@@ -76,6 +75,7 @@ namespace Fernweh.Services
                     json = await Client.GetStringAsync(url);
                     Barrel.Current.Add(url, json, TimeSpan.FromDays(days));
                 }
+
                 return json;
             }
             catch (Exception ex)

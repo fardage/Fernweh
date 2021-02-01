@@ -17,6 +17,7 @@ namespace Fernweh.ViewModels
             Trips = new ObservableCollection<Trip>();
             LoadTripsCommand = new Command(async () => await ExecuteLoadTripsCommand());
             SubscribeToMessagingCenter();
+            _ = ExecuteLoadTripsCommand();
         }
 
         public ObservableCollection<Trip> Trips { get; set; }
