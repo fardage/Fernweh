@@ -48,11 +48,10 @@ namespace Fernweh.Data
             return await Task.FromResult(storedChecklists);
         }
 
-        public static async Task UpdateItemAsync(string id, bool newValue)
+        public static async Task UpdateItemAsync(Item item)
         {
             var travelContext = new TravelContext();
-            var toUpdate = await travelContext.ChecklistItems.FindAsync(id);
-            toUpdate.Packed = newValue;
+            travelContext.Update(item);
             await travelContext.SaveChangesAsync();
         }
     }

@@ -20,7 +20,7 @@ namespace Fernweh.Models
             set
             {
                 _packed = value;
-                new Task(async () => { await DataStore.UpdateItemAsync(Id, value); }).Start();
+                new Task(async () => { await DataStore.UpdateItemAsync(this); }).Start();
             }
         }
     }

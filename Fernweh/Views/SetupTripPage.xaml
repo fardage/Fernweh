@@ -10,7 +10,7 @@
              Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.Content>
-        <Grid Style="{DynamicResource GridStyle}">
+        <Grid Padding="24">
             <Grid.RowDefinitions>
                 <RowDefinition Height="8*" />
                 <RowDefinition Height="*" />
