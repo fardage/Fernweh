@@ -57,14 +57,14 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                
-                                <Label Grid.Row="0" 
-                                       Grid.Column="0" 
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
                                        Grid.ColumnSpan="2"
-                                       Style="{DynamicResource Heading2Style}" 
+                                       Style="{DynamicResource Heading2Style}"
                                        Text="Average Temperature" />
-                                <Label Grid.Row="1" 
-                                       Grid.Column="0" 
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
                                        Grid.ColumnSpan="2">
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -82,10 +82,10 @@
                                        Grid.ColumnSpan="2"
                                        Style="{DynamicResource IconLargeStyle}"
                                        Text="&#xf76b;"
-                                       HorizontalTextAlignment="End"/>
+                                       HorizontalTextAlignment="End" />
                             </Grid>
                         </yummy:PancakeView>
-                        
+
                         <yummy:PancakeView Style="{StaticResource TileStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -98,27 +98,27 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                
-                                <Label Grid.Row="0" 
-                                       Grid.Column="0" 
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
                                        Grid.ColumnSpan="2"
-                                       Style="{DynamicResource Heading2Style}" 
+                                       Style="{DynamicResource Heading2Style}"
                                        Text="Native Name" />
-                                <Label Grid.Row="1" 
-                                       Grid.Column="0" 
-                                       Grid.ColumnSpan="2" 
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
                                        Style="{DynamicResource Heading3Style}"
-                                       Text="{Binding NativeName}"/>
+                                       Text="{Binding NativeName}" />
                                 <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Grid.RowSpan="2"
                                        Grid.ColumnSpan="2"
                                        Style="{DynamicResource IconLargeStyle}"
                                        Text="&#xf57c;"
-                                       HorizontalTextAlignment="End"/>
+                                       HorizontalTextAlignment="End" />
                             </Grid>
                         </yummy:PancakeView>
-                        
+
                         <yummy:PancakeView Style="{StaticResource TileStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -131,24 +131,24 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                
-                                <Label Grid.Row="0" 
-                                       Grid.Column="0" 
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
                                        Grid.ColumnSpan="2"
-                                       Style="{DynamicResource Heading2Style}" 
+                                       Style="{DynamicResource Heading2Style}"
                                        Text="Population" />
-                                <Label Grid.Row="1" 
-                                       Grid.Column="0" 
-                                       Grid.ColumnSpan="2" 
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
                                        Style="{DynamicResource Heading3Style}"
-                                       Text="{Binding Population}"/>
+                                       Text="{Binding Population}" />
                                 <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Grid.RowSpan="2"
                                        Grid.ColumnSpan="2"
                                        Style="{DynamicResource IconLargeStyle}"
                                        Text="&#xf0c0;"
-                                       HorizontalTextAlignment="End"/>
+                                       HorizontalTextAlignment="End" />
                             </Grid>
                         </yummy:PancakeView>
                     </StackLayout>
@@ -177,7 +177,7 @@
                              Style="{DynamicResource ChecklistRowStyle}">
                     <CheckBox x:Name="checkBox"
                               IsChecked="{Binding Packed}"
-                              Style="{StaticResource CheckboxStyle}"/>
+                              Style="{StaticResource CheckboxStyle}" />
                     <Label VerticalOptions="Center" Text="{Binding Name}">
                         <Label.Triggers>
                             <DataTrigger Value="true" TargetType="Label"
@@ -189,9 +189,9 @@
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-        
+
         <CollectionView.Footer>
-            <Label Padding="24"></Label>
+            <Label Padding="24" />
         </CollectionView.Footer>
     </CollectionView>
 </ContentPage>

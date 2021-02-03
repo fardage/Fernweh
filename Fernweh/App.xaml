@@ -159,13 +159,17 @@
                         Light={StaticResource LightSecondaryColor}, 
                         Dark={StaticResource DarkSecondaryColor}}" />
             <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
                         Light={StaticResource LightSecondaryPageBackgroundColor}, 
-                        Dark={StaticResource DarkSecondaryPageBackgroundColor}}"/>
+                        Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
         </Style>
 
         <!-- Styling - Inputs -->
         <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+            <Setter Property="TextColor" Value="{AppThemeBinding 
+                    Light={StaticResource LightTertiaryTextColor}, 
+                    Dark={StaticResource DarkTertiaryTextColor}}"></Setter>
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding 
                     Light={StaticResource LightSecondaryPageBackgroundColor}, 
@@ -176,12 +180,19 @@
         </Style>
         <Style x:Key="SearchBoxButtonStyle" TargetType="yummy:PancakeView">
             <Setter Property="CornerRadius" Value="20" />
-            <Setter Property="Padding" Value="12" />
-            <Setter Property="Margin" Value="0,12" />
-            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            <Setter Property="Margin" Value="0,12"></Setter>
+            <Setter Property="Padding" Value="48,12" />
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
                     Light={StaticResource LightSecondaryPageBackgroundColor}, 
-                    Dark={StaticResource DarkSecondaryPageBackgroundColor}} "/>
+                    Dark={StaticResource DarkSecondaryPageBackgroundColor}} " />
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <yummy:DropShadow BlurRadius="2" />
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- Styling - Layouts -->
@@ -202,7 +213,8 @@
                     Dark={StaticResource DarkPrimaryPageBackgroundColor}}" />
         </Style>
         <Style x:Key="ChecklistRowStyle" TargetType="StackLayout">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
                     Light={StaticResource LightSecondaryPageBackgroundColor}, 
                     Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
         </Style>
@@ -214,13 +226,21 @@
             <Setter Property="Margin" Value="20,8" />
             <Setter Property="Padding" Value="18" />
         </Style>
+        <Style x:Key="CardFullWidthStyle" TargetType="yummy:PancakeView">
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="HeightRequest" Value="300" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="Margin" Value="20,8" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
         <Style x:Key="TileStyle" TargetType="yummy:PancakeView">
             <Setter Property="CornerRadius" Value="20" />
             <Setter Property="HeightRequest" Value="80" />
             <Setter Property="WidthRequest" Value="200" />
             <Setter Property="Margin" Value="4,0" />
             <Setter Property="Padding" Value="18" />
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
                         Light={StaticResource LightSecondaryPageBackgroundColor}, 
                         Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
         </Style>

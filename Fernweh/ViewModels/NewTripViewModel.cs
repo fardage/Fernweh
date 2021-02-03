@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using dotMorten.Xamarin.Forms;
 using Fernweh.Models;
 using Fernweh.Services;
+using Xamarin.Essentials;
 
 namespace Fernweh.ViewModels
 {
@@ -77,15 +78,34 @@ namespace Fernweh.ViewModels
         }
 
 
-        public void ExecuteTextChangedCommand(AutoSuggestBox autoSuggestBox, AutoSuggestBoxTextChangedEventArgs args)
+        public async void ExecuteTextChangedCommand(AutoSuggestBox autoSuggestBox,
+            AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput || CountriesList.Count == 0) return;
 
-            var suggestion = (from country in CountriesList
-                where country.Name.Contains(autoSuggestBox.Text)
-                select country.Name).ToList();
+            var suggestions = new List<string>();
+            Placemark placemark;
 
-            autoSuggestBox.ItemsSource = suggestion;
+            try
+            {
+                var locations = await Geocoding.GetLocationsAsync(autoSuggestBox.Text);
+
+                if (locations != null)
+                {
+                    var location = locations.FirstOrDefault();
+                    var placemarks = await Geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude);
+
+                    placemark = placemarks.FirstOrDefault();
+
+                    if (placemark != null) suggestions.Add($"{placemark.Locality}, {placemark.CountryName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Feature not supported on device
+            }
+
+            autoSuggestBox.ItemsSource = suggestions;
             Destination = autoSuggestBox.Text;
         }
 

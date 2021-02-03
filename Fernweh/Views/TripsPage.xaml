@@ -8,8 +8,8 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Fernweh"
              Style="{DynamicResource ContentPageStyle}"
-             x:DataType="viewmodels:TripsViewModel" >
-    
+             x:DataType="viewmodels:TripsViewModel">
+
     <CollectionView ItemsSource="{Binding Trips}">
         <CollectionView.Header>
             <Grid Padding="24">
@@ -44,7 +44,7 @@
                         Grid.Row="0"
                         Grid.Column="2"
                         Grid.RowSpan="2"
-                        HorizontalOptions="End"/>
+                        HorizontalOptions="End" />
             </Grid>
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
