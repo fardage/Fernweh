@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using dotMorten.Xamarin.Forms;
 using Fernweh.Models;
 using Fernweh.Services;
+using Fernweh.Views;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Fernweh.ViewModels
 {
@@ -28,6 +30,8 @@ namespace Fernweh.ViewModels
                 StartDate = _startDate,
                 EndDate = _endDate
             };
+
+            SubscribeToMessagingCenter();
         }
 
         public Trip NewTrip { get; }
@@ -62,57 +66,20 @@ namespace Fernweh.ViewModels
             }
         }
 
-        public List<Country> CountriesList { get; set; } = new List<Country>();
+        private void SubscribeToMessagingCenter()
+        {
+            MessagingCenter.Subscribe<SearchDestinationPage, string>(this, "ItemSelected", (obj, selected) =>
+            {
+                Destination = selected;
+            });
 
+        }
 
         private string GetRandomColor()
         {
             var random = new Random();
             var index = random.Next(_colors.Count);
             return _colors[index];
-        }
-
-        public async Task UpdateCountrySuggestionsAsync()
-        {
-            CountriesList = await CountryInfoProvider.GetCountriesAsync();
-        }
-
-
-        public async void ExecuteTextChangedCommand(AutoSuggestBox autoSuggestBox,
-            AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput || CountriesList.Count == 0) return;
-
-            var suggestions = new List<string>();
-            Placemark placemark;
-
-            try
-            {
-                var locations = await Geocoding.GetLocationsAsync(autoSuggestBox.Text);
-
-                if (locations != null)
-                {
-                    var location = locations.FirstOrDefault();
-                    var placemarks = await Geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude);
-
-                    placemark = placemarks.FirstOrDefault();
-
-                    if (placemark != null) suggestions.Add($"{placemark.Locality}, {placemark.CountryName}");
-                }
-            }
-            catch (Exception ex)
-            {
-                // Feature not supported on device
-            }
-
-            autoSuggestBox.ItemsSource = suggestions;
-            Destination = autoSuggestBox.Text;
-        }
-
-        public void ExecuteSuggestionChosenCommand(AutoSuggestBox autoSuggestBox,
-            AutoSuggestBoxSuggestionChosenEventArgs args)
-        {
-            Destination = autoSuggestBox.Text;
         }
     }
 }

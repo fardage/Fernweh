@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Fernweh.Services;
 
 namespace Fernweh.ViewModels
 {
@@ -6,15 +8,25 @@ namespace Fernweh.ViewModels
     {
         private string _searchText;
 
-        public SearchDestinationViewModel(string searchText)
-        {
-            SearchText = searchText;
-        }
-
         public string SearchText
         {
             get => _searchText;
-            set => SetProperty(ref _searchText, value);
+            set
+            {
+                SetProperty(ref _searchText, value);
+                _ = GetSuggestionsAsync();
+            }
+        }
+
+        private async Task GetSuggestionsAsync()
+        {
+            var suggestions = await HereMapsProvider.GetAutocomplete(_searchText);
+            SearchSuggestions.Clear();
+            SearchSuggestions.Add(SearchText);
+            foreach (var suggestion in suggestions)
+            {
+                SearchSuggestions.Add(suggestion);
+            }
         }
 
         public ObservableCollection<string> SearchSuggestions { get; set; } = new ObservableCollection<string>();

@@ -28,12 +28,6 @@ namespace Fernweh.Views
             await Navigation.PushAsync(new NavigationPage(setupPage));
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await viewModel.UpdateCountrySuggestionsAsync();
-        }
-
         private async void Search_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new SearchDestinationPage()));

@@ -58,7 +58,7 @@ namespace Fernweh.Services
             return weathers!.FirstOrDefault();
         }
 
-        public static async Task<string> GetAsync(string url, int days = 7, bool forceRefresh = false)
+        private static async Task<string> GetAsync(string url, int days = 7, bool forceRefresh = false)
         {
             var json = string.Empty;
 

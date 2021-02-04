@@ -6,9 +6,16 @@
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              x:DataType="viewmodels:SearchDestinationViewModel"
              Style="{DynamicResource ContentPageStyle}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
-        <SearchBar Placeholder="Where are you going?"
-                   Text="{Binding SearchText}"/>
-        <CollectionView ItemsSource="{Binding SearchSuggestions}"/>
+        <SearchBar x:Name="searchBar"
+                   Placeholder="Where are you going?"
+                   Text="{Binding SearchText}" />
+        <ListView ItemsSource="{Binding SearchSuggestions}"
+                  ItemTapped="ListView_ItemTapped"/>
     </StackLayout>
 </ContentPage>

@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="dotMorten.Xamarin.Forms.AutoSuggestBox" Version="1.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="MLToolkit.Forms.SwipeCardView" Version="2.2.0" />
@@ -27,6 +26,8 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Resources\JSON\" />
+    <Folder Include="Services\HereMaps\" />
+    <Folder Include="Services\CountryInfo\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\JSON\ChecklistTemplate.json" />
