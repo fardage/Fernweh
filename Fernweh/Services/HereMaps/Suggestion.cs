@@ -1,5 +1,4 @@
-﻿using System;
-namespace Fernweh.Services
+﻿namespace Fernweh.Services
 {
     public class Suggestion
     {

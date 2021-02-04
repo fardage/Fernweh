@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using dotMorten.Xamarin.Forms;
 using Fernweh.Models;
-using Fernweh.Services;
 using Fernweh.Views;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Fernweh.ViewModels
@@ -68,11 +63,8 @@ namespace Fernweh.ViewModels
 
         private void SubscribeToMessagingCenter()
         {
-            MessagingCenter.Subscribe<SearchDestinationPage, string>(this, "ItemSelected", (obj, selected) =>
-            {
-                Destination = selected;
-            });
-
+            MessagingCenter.Subscribe<SearchDestinationPage, string>(this, "ItemSelected",
+                (obj, selected) => { Destination = selected; });
         }
 
         private string GetRandomColor()

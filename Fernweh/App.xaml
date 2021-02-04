@@ -167,9 +167,10 @@
 
         <!-- Styling - Inputs -->
         <Style x:Key="DatePickerStyle" TargetType="DatePicker">
-            <Setter Property="TextColor" Value="{AppThemeBinding 
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding 
                     Light={StaticResource LightTertiaryTextColor}, 
-                    Dark={StaticResource DarkTertiaryTextColor}}"></Setter>
+                    Dark={StaticResource DarkTertiaryTextColor}}" />
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding 
                     Light={StaticResource LightSecondaryPageBackgroundColor}, 
@@ -180,9 +181,9 @@
         </Style>
         <Style x:Key="SearchBoxButtonStyle" TargetType="yummy:PancakeView">
             <Setter Property="CornerRadius" Value="20" />
-            <Setter Property="Margin" Value="0,12"></Setter>
+            <Setter Property="Margin" Value="0,12" />
             <Setter Property="Padding" Value="48,12" />
-            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding 

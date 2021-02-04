@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
-using dotMorten.Xamarin.Forms;
 using Fernweh.ViewModels;
 using Xamarin.Forms;
 

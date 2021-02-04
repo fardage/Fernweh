@@ -16,6 +16,6 @@
                    Placeholder="Where are you going?"
                    Text="{Binding SearchText}" />
         <ListView ItemsSource="{Binding SearchSuggestions}"
-                  ItemTapped="ListView_ItemTapped"/>
+                  ItemTapped="ListView_ItemTapped" />
     </StackLayout>
 </ContentPage>

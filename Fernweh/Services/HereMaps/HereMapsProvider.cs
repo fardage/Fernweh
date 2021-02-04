@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Web;
-using Fernweh.Models;
 using MonkeyCache.FileStore;
 using Xamarin.Essentials;
 
@@ -14,12 +10,14 @@ namespace Fernweh.Services
 {
     public class HereMapsProvider
     {
-        private static readonly string HereAutocompleteUrl = "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?query=";
+        private static readonly string HereAutocompleteUrl =
+            "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?query=";
+
         private static readonly string HereAutocompleteApiKey = $"&apiKey={Credentials.ApiKeyHereMaps}";
 
-        public static async Task<List<String>> GetAutocomplete(string searchText)
+        public static async Task<List<string>> GetAutocomplete(string searchText)
         {
-            string url = HereAutocompleteUrl + searchText + HereAutocompleteApiKey;
+            var url = HereAutocompleteUrl + searchText + HereAutocompleteApiKey;
             var json = await GetAsync(url);
 
             var options = new JsonSerializerOptions
@@ -30,14 +28,11 @@ namespace Fernweh.Services
             var hereMapsResponse = JsonSerializer.Deserialize<HereMapsResponse>(json, options);
             var suggestionsList = new List<string>();
 
-            foreach(var suggestion in hereMapsResponse.Suggestions)
-            {
-                suggestionsList.Add(suggestion.Label);
-            }
+            foreach (var suggestion in hereMapsResponse.Suggestions) suggestionsList.Add(suggestion.Label);
 
             return suggestionsList;
         }
-        
+
         private static async Task<string> GetAsync(string url, int days = 7, bool forceRefresh = false)
         {
             var json = string.Empty;
@@ -52,7 +47,7 @@ namespace Fernweh.Services
             {
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    HttpClient client = new HttpClient();
+                    var client = new HttpClient();
                     json = await client.GetStringAsync(url);
                     Barrel.Current.Add(url, json, TimeSpan.FromDays(days));
                 }

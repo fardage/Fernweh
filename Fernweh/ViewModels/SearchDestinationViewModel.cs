@@ -18,17 +18,14 @@ namespace Fernweh.ViewModels
             }
         }
 
+        public ObservableCollection<string> SearchSuggestions { get; set; } = new ObservableCollection<string>();
+
         private async Task GetSuggestionsAsync()
         {
             var suggestions = await HereMapsProvider.GetAutocomplete(_searchText);
             SearchSuggestions.Clear();
             SearchSuggestions.Add(SearchText);
-            foreach (var suggestion in suggestions)
-            {
-                SearchSuggestions.Add(suggestion);
-            }
+            foreach (var suggestion in suggestions) SearchSuggestions.Add(suggestion);
         }
-
-        public ObservableCollection<string> SearchSuggestions { get; set; } = new ObservableCollection<string>();
     }
 }

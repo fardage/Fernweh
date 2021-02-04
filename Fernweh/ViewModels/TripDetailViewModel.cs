@@ -50,7 +50,7 @@ namespace Fernweh.ViewModels
 
         public ObservableCollection<GroupedList> ChecklistGroups { get; set; }
 
-        public async Task ExecuteLoadChecklistsCommand()
+        private async Task ExecuteLoadChecklistsCommand()
         {
             IsBusy = true;
 
@@ -75,7 +75,7 @@ namespace Fernweh.ViewModels
             }
         }
 
-        public async Task ExecuteLoadInfoCommand()
+        private async Task ExecuteLoadInfoCommand()
         {
             try
             {
