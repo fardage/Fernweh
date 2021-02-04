@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fernweh.Views.SearchDestinationPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
+             xmlns:services="clr-namespace:Fernweh.Services"
              x:DataType="viewmodels:SearchDestinationViewModel"
              Style="{DynamicResource ContentPageStyle}">
 
@@ -12,10 +13,28 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <SearchBar x:Name="searchBar"
-                   Placeholder="Where are you going?"
+        <SearchBar Placeholder="Where are you going?"
                    Text="{Binding SearchText}" />
         <ListView ItemsSource="{Binding SearchSuggestions}"
-                  ItemTapped="ListView_ItemTapped" />
+                  ItemTapped="ListView_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="services:Suggestion">
+                    <ViewCell>
+                        <Grid Padding="8,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Icon}"
+                                   Style="{DynamicResource IconMediumStyle}"
+                                   VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Label}"
+                                   VerticalTextAlignment="Center" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

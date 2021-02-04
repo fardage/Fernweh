@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using MonkeyCache.FileStore;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 
 namespace Fernweh.Services
@@ -11,26 +11,18 @@ namespace Fernweh.Services
     public class HereMapsProvider
     {
         private static readonly string HereAutocompleteUrl =
-            "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?query=";
+            "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?&language=en&query=";
 
         private static readonly string HereAutocompleteApiKey = $"&apiKey={Credentials.ApiKeyHereMaps}";
 
-        public static async Task<List<string>> GetAutocomplete(string searchText)
+        public static async Task<List<Suggestion>> GetAutocomplete(string searchText)
         {
             var url = HereAutocompleteUrl + searchText + HereAutocompleteApiKey;
             var json = await GetAsync(url);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
+            var hereMapsResponse = JsonConvert.DeserializeObject<HereMapsResponse>(json);
 
-            var hereMapsResponse = JsonSerializer.Deserialize<HereMapsResponse>(json, options);
-            var suggestionsList = new List<string>();
-
-            foreach (var suggestion in hereMapsResponse.Suggestions) suggestionsList.Add(suggestion.Label);
-
-            return suggestionsList;
+            return hereMapsResponse.Suggestions;
         }
 
         private static async Task<string> GetAsync(string url, int days = 7, bool forceRefresh = false)

@@ -14,18 +14,49 @@ namespace Fernweh.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
-                _ = GetSuggestionsAsync();
+                if (!IsBusy)
+                {
+                    IsBusy = true;
+                    _ = GetSuggestionsAsync();
+                    IsBusy = false;
+                }
             }
         }
 
-        public ObservableCollection<string> SearchSuggestions { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<Suggestion> SearchSuggestions { get; set; } =
+            new ObservableCollection<Suggestion>();
 
         private async Task GetSuggestionsAsync()
         {
-            var suggestions = await HereMapsProvider.GetAutocomplete(_searchText);
             SearchSuggestions.Clear();
-            SearchSuggestions.Add(SearchText);
-            foreach (var suggestion in suggestions) SearchSuggestions.Add(suggestion);
+            SearchSuggestions.Add(new Suggestion {Label = SearchText});
+
+            var suggestions = await HereMapsProvider.GetAutocomplete(_searchText);
+
+            foreach (var suggestion in suggestions)
+                switch (suggestion.MatchLevel)
+                {
+                    case SuggestionKind.City:
+                        suggestion.Icon = "\uf64f";
+                        SearchSuggestions.Add(suggestion);
+                        break;
+                    case SuggestionKind.Country:
+                        suggestion.Icon = "\uf024";
+                        SearchSuggestions.Add(suggestion);
+                        break;
+                    case SuggestionKind.District:
+                        suggestion.Icon = "\uf1ad";
+                        SearchSuggestions.Add(suggestion);
+                        break;
+                    case SuggestionKind.Intersection:
+                        suggestion.Icon = "\uf1ad";
+                        SearchSuggestions.Add(suggestion);
+                        break;
+                    case SuggestionKind.State:
+                        suggestion.Icon = "\uf041";
+                        SearchSuggestions.Add(suggestion);
+                        break;
+                }
         }
     }
 }
