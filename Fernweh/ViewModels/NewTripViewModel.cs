@@ -69,6 +69,8 @@ namespace Fernweh.ViewModels
                 {
                     if (!string.IsNullOrEmpty(selected.Address.City))
                         Destination = selected.Address.City;
+                    else if (!string.IsNullOrEmpty(selected.Address.State))
+                        Destination = selected.Address.State;
                     else if (!string.IsNullOrEmpty(selected.Address.CountryName))
                         Destination = selected.Address.CountryName;
                     else
