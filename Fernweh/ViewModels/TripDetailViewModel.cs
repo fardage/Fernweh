@@ -76,9 +76,7 @@ namespace Fernweh.ViewModels
         {
             var address = await _hereMapsProvider.GetGeocode(Trip.Destination);
             if (!string.IsNullOrEmpty(address.CountryCode))
-            {
                 _ = Task.WhenAll(LoadWeather(address.CountryCode), LoadFacts(address.CountryCode));
-            }
         }
 
         private async Task LoadWeather(string countryCode)

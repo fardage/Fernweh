@@ -65,7 +65,15 @@ namespace Fernweh.ViewModels
         private void SubscribeToMessagingCenter()
         {
             MessagingCenter.Subscribe<SearchDestinationPage, Suggestion>(this, "ItemSelected",
-                (obj, selected) => { Destination = selected.Label; });
+                (obj, selected) =>
+                {
+                    if (!string.IsNullOrEmpty(selected.Address.City))
+                        Destination = selected.Address.City;
+                    else if (!string.IsNullOrEmpty(selected.Address.CountryName))
+                        Destination = selected.Address.CountryName;
+                    else
+                        Destination = selected.Label;
+                });
         }
 
         private string GetRandomColor()

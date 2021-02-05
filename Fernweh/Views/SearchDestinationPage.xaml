@@ -25,12 +25,12 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Icon}"
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="{Binding Icon}"
                                    Style="{DynamicResource IconMediumStyle}"
                                    VerticalTextAlignment="Center" />
-                            <Label Grid.Column="1"
-                                   Text="{Binding Label}"
-                                   VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" VerticalTextAlignment="Center" Text="{Binding Label}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
