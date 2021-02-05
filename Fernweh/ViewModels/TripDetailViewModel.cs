@@ -4,16 +4,20 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
-using Fernweh.Services;
+using Fernweh.Services.HereMaps;
+using Fernweh.Services.RestCountries;
+using Fernweh.Services.WorldBank;
 using Xamarin.Forms;
 
 namespace Fernweh.ViewModels
 {
     public class TripDetailViewModel : BaseViewModel
     {
+        private readonly HereMapsProvider _hereMapsProvider = new HereMapsProvider();
+        private readonly RestCountriesProvider _restCountriesProvider = new RestCountriesProvider();
+        private readonly WorldBankProvider _worldBankProvider = new WorldBankProvider();
         private double _averageTemperature;
-        private string _nativeName;
-        private int _population;
+        private CountryFacts _facts;
 
         public TripDetailViewModel(Trip trip = null)
         {
@@ -22,7 +26,6 @@ namespace Fernweh.ViewModels
             ChecklistGroups = new ObservableCollection<GroupedList>();
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
 
-            // TODO: Clean this up
             _ = ExecuteLoadChecklistsCommand();
             _ = ExecuteLoadInfoCommand();
         }
@@ -30,16 +33,10 @@ namespace Fernweh.ViewModels
         public Command LoadChecklistsCommand { get; set; }
         public Trip Trip { get; set; }
 
-        public string NativeName
+        public CountryFacts Facts
         {
-            get => _nativeName;
-            set => SetProperty(ref _nativeName, value);
-        }
-
-        public int Population
-        {
-            get => _population;
-            set => SetProperty(ref _population, value);
+            get => _facts;
+            set => SetProperty(ref _facts, value);
         }
 
         public double AverageTemperature
@@ -77,21 +74,24 @@ namespace Fernweh.ViewModels
 
         private async Task ExecuteLoadInfoCommand()
         {
-            try
+            var address = await _hereMapsProvider.GetGeocode(Trip.Destination);
+            if (!string.IsNullOrEmpty(address.CountryCode))
             {
-                var country = await CountryInfoProvider.GetCountryAsync(Trip.Destination);
-                Population = country.Population;
-                NativeName = country.NativeName;
+                _ = Task.WhenAll(LoadWeather(address.CountryCode), LoadFacts(address.CountryCode));
+            }
+        }
 
-                var weather = await CountryInfoProvider.GetAverageWeatherAsync(country.Alpha3Code);
-                var startTemp = weather.MonthVals[Trip.StartDate.Month - 1];
-                var endTemp = weather.MonthVals[Trip.EndDate.Month - 1];
-                AverageTemperature = Math.Round((startTemp + endTemp) / 2, 1);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+        private async Task LoadWeather(string countryCode)
+        {
+            var weather = await _worldBankProvider.GetAverageWeatherAsync(countryCode);
+            var startTemp = weather.MonthVals[Trip.StartDate.Month - 1];
+            var endTemp = weather.MonthVals[Trip.EndDate.Month - 1];
+            AverageTemperature = Math.Round((startTemp + endTemp) / 2, 1);
+        }
+
+        private async Task LoadFacts(string countryCode)
+        {
+            Facts = await _restCountriesProvider.GetCountryFactsAsync(countryCode);
         }
     }
 }

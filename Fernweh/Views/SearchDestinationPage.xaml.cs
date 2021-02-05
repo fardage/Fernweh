@@ -1,4 +1,5 @@
 ﻿using System;
+using Fernweh.Services.HereMaps;
 using Fernweh.ViewModels;
 using Xamarin.Forms;
 
@@ -17,7 +18,8 @@ namespace Fernweh.Views
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            MessagingCenter.Send(this, "ItemSelected", e.Item.ToString());
+            var selected = (Suggestion) e.Item;
+            MessagingCenter.Send(this, "ItemSelected", selected);
             Navigation.PopModalAsync();
         }
 

@@ -1,23 +1,23 @@
-using System;
 using System.Collections.Generic;
-using System.Net.Http;
+using System.Linq;
 using System.Threading.Tasks;
-using MonkeyCache.FileStore;
 using Newtonsoft.Json;
-using Xamarin.Essentials;
 
-namespace Fernweh.Services
+namespace Fernweh.Services.HereMaps
 {
-    public class HereMapsProvider
+    public class HereMapsProvider : ApiProvider
     {
-        private static readonly string HereAutocompleteUrl =
+        private const string HereAutocompleteUrl =
             "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?&language=en&query=";
 
-        private static readonly string HereAutocompleteApiKey = $"&apiKey={Credentials.ApiKeyHereMaps}";
+        private const string HereGeocode =
+            "https://geocode.search.hereapi.com/v1/geocode?q=";
 
-        public static async Task<List<Suggestion>> GetAutocomplete(string searchText)
+        private readonly string _hereAutocompleteApiKey = $"&apiKey={Credentials.ApiKeyHereMaps}";
+
+        public async Task<List<Suggestion>> GetAutocomplete(string searchText)
         {
-            var url = HereAutocompleteUrl + searchText + HereAutocompleteApiKey;
+            var url = HereAutocompleteUrl + searchText + _hereAutocompleteApiKey;
             var json = await GetAsync(url);
 
             var hereMapsResponse = JsonConvert.DeserializeObject<HereMapsResponse>(json);
@@ -25,33 +25,14 @@ namespace Fernweh.Services
             return hereMapsResponse.Suggestions;
         }
 
-        private static async Task<string> GetAsync(string url, int days = 7, bool forceRefresh = false)
+        public async Task<Address> GetGeocode(string searchText)
         {
-            var json = string.Empty;
+            var url = HereGeocode + searchText + _hereAutocompleteApiKey;
+            var json = await GetAsync(url);
 
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                json = Barrel.Current.Get<string>(url);
+            var hereMapsResponse = JsonConvert.DeserializeObject<HereMapsResponse>(json);
 
-            if (!forceRefresh && !Barrel.Current.IsExpired(url))
-                json = Barrel.Current.Get<string>(url);
-
-            try
-            {
-                if (string.IsNullOrWhiteSpace(json))
-                {
-                    var client = new HttpClient();
-                    json = await client.GetStringAsync(url);
-                    Barrel.Current.Add(url, json, TimeSpan.FromDays(days));
-                }
-
-                return json;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Unable to get information from server {ex}");
-            }
-
-            return json;
+            return hereMapsResponse.Items.FirstOrDefault().Address;
         }
     }
 }

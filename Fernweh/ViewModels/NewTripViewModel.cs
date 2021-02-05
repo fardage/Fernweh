@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fernweh.Models;
-using Fernweh.Services;
+using Fernweh.Services.HereMaps;
 using Fernweh.Views;
 using Xamarin.Forms;
 

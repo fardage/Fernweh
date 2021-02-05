@@ -27,7 +27,6 @@
     <Folder Include="Resources\" />
     <Folder Include="Resources\JSON\" />
     <Folder Include="Services\HereMaps\" />
-    <Folder Include="Services\CountryInfo\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\JSON\ChecklistTemplate.json" />

@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fernweh.Views.SearchDestinationPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
-             xmlns:services="clr-namespace:Fernweh.Services"
+             xmlns:hereMaps="clr-namespace:Fernweh.Services.HereMaps;assembly=Fernweh"
              x:DataType="viewmodels:SearchDestinationViewModel"
              Style="{DynamicResource ContentPageStyle}">
 
@@ -18,7 +18,7 @@
         <ListView ItemsSource="{Binding SearchSuggestions}"
                   ItemTapped="ListView_ItemTapped">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="services:Suggestion">
+                <DataTemplate x:DataType="hereMaps:Suggestion">
                     <ViewCell>
                         <Grid Padding="8,0">
                             <Grid.ColumnDefinitions>

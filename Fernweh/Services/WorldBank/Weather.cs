@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Fernweh.Models
+namespace Fernweh.Services.WorldBank
 {
     public class Weather
     {

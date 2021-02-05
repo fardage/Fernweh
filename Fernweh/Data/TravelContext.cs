@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Fernweh.Data
 {
-    public class TravelContext : DbContext
+    public sealed class TravelContext : DbContext
     {
         private const string DatabaseName = "database.db";
 

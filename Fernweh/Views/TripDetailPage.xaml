@@ -65,11 +65,11 @@
                                        Text="Average Temperature" />
                                 <Label Grid.Row="1"
                                        Grid.Column="0"
-                                       Grid.ColumnSpan="2">
+                                       Grid.ColumnSpan="3">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Style="{DynamicResource Heading3Style}"
-                                                  Text="{Binding Trip.EndDate, StringFormat='{0:MMMM: }'}" />
+                                                  Text="{Binding Trip.StartDate, StringFormat='{0:MMM: }'}" />
                                             <Span Style="{DynamicResource Heading3Style}"
                                                   Text="{Binding AverageTemperature}" />
                                             <Span Style="{StaticResource Heading3Style}" Text="°C" />
@@ -108,7 +108,7 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2"
                                        Style="{DynamicResource Heading3Style}"
-                                       Text="{Binding NativeName}" />
+                                       Text="{Binding Facts.NativeName}" />
                                 <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Grid.RowSpan="2"
@@ -141,7 +141,7 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2"
                                        Style="{DynamicResource Heading3Style}"
-                                       Text="{Binding Population}" />
+                                       Text="{Binding Facts.Population, StringFormat='{}{0:N0}'}" />
                                 <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Grid.RowSpan="2"

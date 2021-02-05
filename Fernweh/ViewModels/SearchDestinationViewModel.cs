@@ -1,11 +1,12 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Fernweh.Services;
+using Fernweh.Services.HereMaps;
 
 namespace Fernweh.ViewModels
 {
     public class SearchDestinationViewModel : BaseViewModel
     {
+        private readonly HereMapsProvider _hereMapsProvider = new HereMapsProvider();
         private string _searchText;
 
         public string SearchText
@@ -14,12 +15,7 @@ namespace Fernweh.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
-                if (!IsBusy)
-                {
-                    IsBusy = true;
-                    _ = GetSuggestionsAsync();
-                    IsBusy = false;
-                }
+                _ = GetSuggestionsAsync();
             }
         }
 
@@ -31,7 +27,8 @@ namespace Fernweh.ViewModels
             SearchSuggestions.Clear();
             SearchSuggestions.Add(new Suggestion {Label = SearchText});
 
-            var suggestions = await HereMapsProvider.GetAutocomplete(_searchText);
+
+            var suggestions = await _hereMapsProvider.GetAutocomplete(_searchText);
 
             foreach (var suggestion in suggestions)
                 switch (suggestion.MatchLevel)
@@ -42,14 +39,6 @@ namespace Fernweh.ViewModels
                         break;
                     case SuggestionKind.Country:
                         suggestion.Icon = "\uf024";
-                        SearchSuggestions.Add(suggestion);
-                        break;
-                    case SuggestionKind.District:
-                        suggestion.Icon = "\uf1ad";
-                        SearchSuggestions.Add(suggestion);
-                        break;
-                    case SuggestionKind.Intersection:
-                        suggestion.Icon = "\uf1ad";
                         SearchSuggestions.Add(suggestion);
                         break;
                     case SuggestionKind.State:

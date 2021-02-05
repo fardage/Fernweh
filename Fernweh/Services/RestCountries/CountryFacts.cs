@@ -1,11 +1,11 @@
 using System;
 
-namespace Fernweh.Models
+namespace Fernweh.Services.RestCountries
 {
-    public class Country
+    public class CountryFacts
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string Alpha3Code { get; set; }
+        public string Cioc { get; set; }
         public string Name { get; set; }
         public string NativeName { get; set; }
         public int Population { get; set; }

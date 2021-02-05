@@ -9,12 +9,12 @@ namespace Fernweh.Services
 {
     public static class TemplateProvider
     {
-        private const string TEMPLATE_FILE = "Fernweh.Resources.JSON.ChecklistTemplate.json";
+        private const string TemplateFile = "Fernweh.Resources.JSON.ChecklistTemplate.json";
 
         public static Collection<ItemCategory> GetChecklist()
         {
             var assembly = typeof(TemplateProvider).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(TEMPLATE_FILE);
+            var stream = assembly.GetManifestResourceStream(TemplateFile);
 
             var jsonContent = "";
             using (var reader = new StreamReader(stream ?? throw new InvalidOperationException()))
