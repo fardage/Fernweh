@@ -20,6 +20,8 @@ namespace Fernweh.Droid
 
             base.OnCreate(savedInstanceState);
 
+            Forms.SetFlags("SwipeView_Experimental");
+
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
 

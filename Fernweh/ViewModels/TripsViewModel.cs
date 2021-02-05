@@ -16,12 +16,15 @@ namespace Fernweh.ViewModels
             Title = "Trips";
             Trips = new ObservableCollection<Trip>();
             LoadTripsCommand = new Command(async () => await ExecuteLoadTripsCommand());
+            DeleteTripCommand = new Command<Trip>(async (trip) => await ExecuteDeleteTripCommand(trip));
+
             SubscribeToMessagingCenter();
             _ = ExecuteLoadTripsCommand();
         }
 
         public ObservableCollection<Trip> Trips { get; set; }
         public Command LoadTripsCommand { get; set; }
+        public Command<Trip> DeleteTripCommand { get; set; }
 
         private void SubscribeToMessagingCenter()
         {
@@ -57,6 +60,12 @@ namespace Fernweh.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private async Task ExecuteDeleteTripCommand(Trip trip)
+        {
+            Trips.Remove(trip);
+            await DataStore.DeleteTripAsync(trip.Id);
         }
     }
 }

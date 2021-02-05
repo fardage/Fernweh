@@ -24,6 +24,7 @@ namespace Fernweh.iOS
 #if ENABLE_TEST_CLOUD
             Calabash.Start();
 #endif
+            Forms.SetFlags("SwipeView_Experimental");
             Forms.Init();
 
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;

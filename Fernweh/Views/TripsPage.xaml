@@ -8,7 +8,8 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Fernweh"
              Style="{DynamicResource ContentPageStyle}"
-             x:DataType="viewmodels:TripsViewModel">
+             x:DataType="viewmodels:TripsViewModel"
+             x:Name="tripsPage">
 
     <CollectionView ItemsSource="{Binding Trips}">
         <CollectionView.Header>
@@ -49,23 +50,34 @@
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Trip">
-                <StackLayout>
-                    <yummy:PancakeView Style="{StaticResource CardStyle}">
-                        <yummy:PancakeView.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
-                        </yummy:PancakeView.GestureRecognizers>
-                        <yummy:PancakeView.BackgroundGradientStops>
-                            <yummy:GradientStopCollection>
-                                <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
-                                <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
-                            </yummy:GradientStopCollection>
-                        </yummy:PancakeView.BackgroundGradientStops>
-                        <StackLayout>
-                            <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
-                            <Label Style="{DynamicResource Heading2WhiteStyle}"
-                                   Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
-                        </StackLayout>
-                    </yummy:PancakeView>
+                <StackLayout Padding="18" BackgroundColor="Transparent">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripsViewModel}}, 
+                                              Path=DeleteTripCommand}"
+                                           CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <yummy:PancakeView Style="{StaticResource CardStyle}">
+                            <yummy:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
+                            </yummy:PancakeView.GestureRecognizers>
+                            <yummy:PancakeView.BackgroundGradientStops>
+                                <yummy:GradientStopCollection>
+                                    <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
+                                    <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
+                                </yummy:GradientStopCollection>
+                            </yummy:PancakeView.BackgroundGradientStops>
+                            <StackLayout>
+                                <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
+                                <Label Style="{DynamicResource Heading2WhiteStyle}"
+                                       Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                            </StackLayout>
+                            </yummy:PancakeView>
+                    </SwipeView>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
