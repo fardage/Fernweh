@@ -1,61 +1,691 @@
 ﻿[
   {
-    "Name": "Lorem",
+    "Name": "Camping",
+    "Icon": "\uf6bb",
+    "Items": [
+      {
+        "Name": "Towel"
+      },
+      {
+        "Name": "First Aid Kit"
+      },
+      {
+        "Name": "Bug Spray"
+      },
+      {
+        "Name": "Snacks"
+      },
+      {
+        "Name": "Lighter / Matches"
+      },
+      {
+        "Name": "Headlamp"
+      },
+      {
+        "Name": "Pillow"
+      },
+      {
+        "Name": "Tent"
+      },
+      {
+        "Name": "Sleeping Bag"
+      },
+      {
+        "Name": "Flashlight"
+      },
+      {
+        "Name": "Cooking Tools"
+      },
+      {
+        "Name": "Swiss Army Knife"
+      },
+      {
+        "Name": "Plastic Bags"
+      },
+      {
+        "Name": "Long Underwear"
+      },
+      {
+        "Name": "Water Bottle"
+      },
+      {
+        "Name": "Toilet Paper"
+      },
+      {
+        "Name": "Sleeping Pad"
+      }
+    ]
+  },
+  {
+    "Name": "Hotel",
+    "Icon": "\uf594",
+    "Items": [
+      {
+        "Name": "Reservation"
+      },
+      {
+        "Name": "Swimsuit Coverup"
+      },
+      {
+        "Name": "Swimsuit"
+      }
+    ]
+  },
+  {
+    "Name": "Airplane",
+    "Icon": "\uf072",
+    "Items": [
+      {
+        "Name": "Headphones"
+      },
+      {
+        "Name": "Neck Pillow"
+      },
+      {
+        "Name": "Passport / ID"
+      },
+      {
+        "Name": "Eye Mask"
+      },
+      {
+        "Name": "Boarding pass"
+      }
+    ]
+  },
+  {
+    "Name": "Car",
+    "Icon": "\uf1b9",
+    "Items": [
+      {
+        "Name": "Car papers"
+      },
+      {
+        "Name": "Car keys"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Driving Licence"
+      }
+    ]
+  },
+  {
+    "Name": "Motorcycling",
+    "Icon": "\uf21c",
+    "Items": [
+      {
+        "Name": "Motorcycle Papers"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Waterproof Pouch"
+      },
+      {
+        "Name": "Motorcycle GPS"
+      },
+      {
+        "Name": "Rain Gear"
+      },
+      {
+        "Name": "Ear Plugs"
+      },
+      {
+        "Name": "Motorcycle Gloves"
+      },
+      {
+        "Name": "Motorcycle Boots"
+      },
+      {
+        "Name": "Motorcycle Pants"
+      },
+      {
+        "Name": "Motorcycle Jacket"
+      },
+      {
+        "Name": "Helmet"
+      },
+      {
+        "Name": "Driving Licence"
+      }
+    ]
+  },
+  {
+    "Name": "Boat",
+    "Icon": "\uf21a",
+    "Items": [
+      {
+        "Name": "Boat Tickets"
+      },
+      {
+        "Name": "Sunscreen"
+      },
+      {
+        "Name": "Seasickness pills"
+      }
+    ]
+  },
+  {
+    "Name": "Train",
+    "Icon": "\uf238",
+    "Items": [
+      {
+        "Name": "Book"
+      },
+      {
+        "Name": "Train Tickets"
+      }
+    ]
+  },
+  {
+    "Name": "Cycling",
+    "Icon": "\uf206",
+    "Items": [
+      {
+        "Name": "Waterproof Pouch"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Sunscreen"
+      }
+    ]
+  },
+  {
+    "Name": "Beach",
     "Icon": "\uf5ca",
     "Items": [
       {
-        "Name": "Maecenas"
+        "Name": "After Sun"
       },
       {
-        "Name": "Nulla"
+        "Name": "Beach Bag"
       },
       {
-        "Name": "Nam metus"
+        "Name": "Swimsuit Coverup"
+      },
+      {
+        "Name": "Beach umbrella"
+      },
+      {
+        "Name": "Swimsuit"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Sunscreen"
+      },
+      {
+        "Name": "Hat"
+      },
+      {
+        "Name": "Sandals"
+      },
+      {
+        "Name": "Beach Towel"
       }
     ]
   },
   {
-    "Name": "Ipsum Dolor",
-    "Icon": "\uf5c9",
+    "Name": "Clothes",
+    "Icon": "\uf553",
     "Items": [
       {
-        "Name": "Proin"
+        "Name": "Scarf"
       },
       {
-        "Name": "Ullamcorper est ultrices"
+        "Name": "Bras"
       },
       {
-        "Name": "Pellentesque"
+        "Name": "Light Jacket"
       },
       {
-        "Name": "Hendrerit"
+        "Name": "Heavy Coat"
       },
       {
-        "Name": "Phasellus"
+        "Name": "Sweater"
       },
       {
-        "Name": "Pellentesque"
+        "Name": "Shoes"
+      },
+      {
+        "Name": "Skirt"
+      },
+      {
+        "Name": "Dress"
+      },
+      {
+        "Name": "Underwear"
+      },
+      {
+        "Name": "Socks"
+      },
+      {
+        "Name": "Casual shirt"
+      },
+      {
+        "Name": "Shorts"
+      },
+      {
+        "Name": "Belt"
+      },
+      {
+        "Name": "Swimsuit"
+      },
+      {
+        "Name": "Pyjamas"
+      },
+      {
+        "Name": "Trousers"
       }
     ]
   },
   {
-    "Name": "Nullam",
+    "Name": "Essentials",
+    "Icon": "\uf005",
+    "Items": [
+      {
+        "Name": "Phone Charger"
+      },
+      {
+        "Name": "Camera"
+      },
+      {
+        "Name": "Book"
+      },
+      {
+        "Name": "Printed Trip Itinerary"
+      },
+      {
+        "Name": "Reading Glasses"
+      },
+      {
+        "Name": "Watch"
+      },
+      {
+        "Name": "Headache pills"
+      },
+      {
+        "Name": "Medication"
+      },
+      {
+        "Name": "Hand sanitizer"
+      },
+      {
+        "Name": "Phone"
+      },
+      {
+        "Name": "Tampons"
+      },
+      {
+        "Name": "Birth Control Pills"
+      },
+      {
+        "Name": "House Key"
+      },
+      {
+        "Name": "Handbag"
+      },
+      {
+        "Name": "Wallet"
+      },
+      {
+        "Name": "Umbrella"
+      },
+      {
+        "Name": "Headphones"
+      },
+      {
+        "Name": "Health Insurance Card"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Jewelry"
+      },
+      {
+        "Name": "Pen"
+      },
+      {
+        "Name": "Foreign Currency"
+      },
+      {
+        "Name": "Power Adapter"
+      },
+      {
+        "Name": "Powerbank"
+      }
+    ]
+  },
+  {
+    "Name": "Formal Clothes",
+    "Icon": "\uf508",
+    "Items": [
+      {
+        "Name": "Make-up Bag"
+      },
+      {
+        "Name": "Evening Bag"
+      },
+      {
+        "Name": "High-Heels"
+      },
+      {
+        "Name": "Dress"
+      },
+      {
+        "Name": "Tie"
+      },
+      {
+        "Name": "Work Pants"
+      },
+      {
+        "Name": "Suit Jacket"
+      },
+      {
+        "Name": "Shoe Polish"
+      },
+      {
+        "Name": "Shirt"
+      },
+      {
+        "Name": "Belt"
+      },
+      {
+        "Name": "Shoes"
+      },
+      {
+        "Name": "Jewelry"
+      }
+    ]
+  },
+  {
+    "Name": "Gym",
+    "Icon": "\uf70c",
+    "Items": [
+      {
+        "Name": "Deodorant"
+      },
+      {
+        "Name": "Gym Bra"
+      },
+      {
+        "Name": "Gym Shoes"
+      },
+      {
+        "Name": "Gym T-Shirt"
+      },
+      {
+        "Name": "Padlock"
+      },
+      {
+        "Name": "Headphones"
+      },
+      {
+        "Name": "Gym Towel"
+      },
+      {
+        "Name": "Water Bottle"
+      }
+    ]
+  },
+  {
+    "Name": "Hiking",
+    "Icon": "\uf6ec",
+    "Items": [
+      {
+        "Name": "Backpack"
+      },
+      {
+        "Name": "Binoculars"
+      },
+      {
+        "Name": "Water Bottle"
+      },
+      {
+        "Name": "Hiking Shoes"
+      },
+      {
+        "Name": "Hat"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Sunscreen"
+      },
+      {
+        "Name": "Bug Spray"
+      },
+      {
+        "Name": "First Aid Kit"
+      },
+      {
+        "Name": "Adhesive Bandage"
+      }
+    ]
+  },
+  {
+    "Name": "Swimming",
+    "Icon": "\uf5c5",
+    "Items": [
+      {
+        "Name": "Beach Towel"
+      },
+      {
+        "Name": "Swimsuit"
+      },
+      {
+        "Name": "Swimsuit Coverup"
+      },
+      {
+        "Name": "Goggles"
+      },
+      {
+        "Name": "Sandals"
+      }
+    ]
+  },
+  {
+    "Name": "Winter Sports",
+    "Icon": "\uf7ce",
+    "Items": [
+      {
+        "Name": "Long Underwear"
+      },
+      {
+        "Name": "Lip Balm"
+      },
+      {
+        "Name": "Snow Gloves"
+      },
+      {
+        "Name": "Sunglasses"
+      },
+      {
+        "Name": "Snow Hat"
+      },
+      {
+        "Name": "Snow Pants"
+      },
+      {
+        "Name": "Snow Jacket"
+      },
+      {
+        "Name": "Long-sleeved Shirt"
+      },
+      {
+        "Name": "Snow Goggles"
+      },
+      {
+        "Name": "Sunscreen"
+      },
+      {
+        "Name": "Scarf"
+      },
+      {
+        "Name": "Ski / Snowboard"
+      },
+      {
+        "Name": "Ski / Snowboard Boots"
+      },
+      {
+        "Name": "Helmet"
+      },
+      {
+        "Name": "Ski Poles"
+      },
+      {
+        "Name": "Winter Boots"
+      }
+    ]
+  },
+  {
+    "Name": "Photography",
     "Icon": "\uf083",
     "Items": [
       {
-        "Name": "Fusce"
+        "Name": "Lenses"
       },
       {
-        "Name": "Nullam pulvinar erat eu metus"
+        "Name": "Camera"
       },
       {
-        "Name": "Nunc"
+        "Name": "Tripod"
       },
       {
-        "Name": "Nec"
+        "Name": "Memory Cards"
       },
       {
-        "Name": "Duis ut diam"
+        "Name": "Batteries"
+      },
+      {
+        "Name": "Camera Charger"
+      },
+      {
+        "Name": "Battery Charger"
+      },
+      {
+        "Name": "Camera Bag"
+      }
+    ]
+  },
+  {
+    "Name": "Toiletries",
+    "Icon": "\uf2cc",
+    "Items": [
+      {
+        "Name": "Contact Lense"
+      },
+      {
+        "Name": "Contact Lense Solution"
+      },
+      {
+        "Name": "Razor"
+      },
+      {
+        "Name": "Shaving Gel"
+      },
+      {
+        "Name": "Electric Shaver"
+      },
+      {
+        "Name": "Deodorant"
+      },
+      {
+        "Name": "Hairbrush"
+      },
+      {
+        "Name": "Toothpaste"
+      },
+      {
+        "Name": "Toothbrush"
+      },
+      {
+        "Name": "Nail Clippers"
+      },
+      {
+        "Name": "Tweezers"
+      },
+      {
+        "Name": "Cologne"
+      },
+      {
+        "Name": "Make-up Remover"
+      },
+      {
+        "Name": "Nail Polish"
+      },
+      {
+        "Name": "Nail Polish Remover"
+      },
+      {
+        "Name": "Moisturizer"
+      },
+      {
+        "Name": "Shampoo"
+      },
+      {
+        "Name": "Conditioner"
+      },
+      {
+        "Name": "Shower Gel"
+      },
+      {
+        "Name": "Perfume"
+      },
+      {
+        "Name": "Cotton Buds"
+      },
+      {
+        "Name": "Adhesive Bandage"
+      }
+    ]
+  },
+  {
+    "Name": "Baby",
+    "Icon": "\uf77c",
+    "Items": [
+      {
+        "Name": "Baby Socks"
+      },
+      {
+        "Name": "Baby Clothes"
+      },
+      {
+        "Name": "Tissues"
+      },
+      {
+        "Name": "Baby Wipes"
+      },
+      {
+        "Name": "Baby Lotion"
+      },
+      {
+        "Name": "Baby Soap"
+      },
+      {
+        "Name": "Plastic Bags"
+      },
+      {
+        "Name": "Blankets"
+      },
+      {
+        "Name": "Changing Mat"
+      },
+      {
+        "Name": "Baby Car Seat"
+      },
+      {
+        "Name": "Toys"
+      },
+      {
+        "Name": "Nappies"
       }
     ]
   }
