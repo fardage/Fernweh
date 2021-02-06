@@ -158,15 +158,23 @@
 
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate x:DataType="viewmodels:GroupedList">
-                <Label Padding="24,24,24,18">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{DynamicResource IconMediumStyle}" Text="{Binding Icon}" />
-                            <Span Text=" " />
-                            <Span Style="{DynamicResource Heading2Style}" Text="{Binding GroupName}" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <StackLayout Orientation="Horizontal" Padding="24,24,24,16">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{DynamicResource IconMediumStyle}" Text="{Binding Icon}" />
+                                <Span Text=" " />
+                                <Span Style="{DynamicResource Heading2Style}" Text="{Binding GroupName}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button Style="{StaticResource IconButtonSmallStyle}"
+                            HorizontalOptions="EndAndExpand"
+                            Text="&#xf067;"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
+                                              Path=AddItemCommand}"
+                            CommandParameter="{Binding .}"/>
+                </StackLayout>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>
 
@@ -190,7 +198,7 @@
                               Style="{StaticResource CheckboxStyle}" />
                         <Label VerticalOptions="Center" Text="{Binding Name}">
                             <Label.Triggers>
-                                <DataTrigger Value="true" TargetType="Label"
+                                <DataTrigger Value="True" TargetType="Label"
                                          Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
                                     <Setter Property="TextDecorations" Value="Strikethrough" />
                                 </DataTrigger>

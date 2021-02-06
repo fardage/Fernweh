@@ -47,6 +47,15 @@ namespace Fernweh.Data
                 .Select(c => c.Categories).SingleOrDefault();
             return await Task.FromResult(storedChecklists);
         }
+        
+        public static async Task AddItemAsync(string categoryId, Item item)
+        {
+            var travelContext = new TravelContext();
+            var targetCategory = await travelContext.Checklists.FindAsync(categoryId);
+            targetCategory.Items.Add(item);
+            travelContext.Update(targetCategory);
+            await travelContext.SaveChangesAsync();
+        }
 
         public static async Task UpdateItemAsync(Item item)
         {

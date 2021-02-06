@@ -144,11 +144,34 @@
                         Light={StaticResource LightSecondaryColor}, 
                         Dark={StaticResource DarkSecondaryColor}}" />
             <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
+                        Light={StaticResource LightSecondaryPageBackgroundColor}, 
+                        Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
         </Style>
         <Style x:Key="IconButtonMediumStyle" TargetType="Button">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="WidthRequest" Value="50" />
             <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding 
+                        Light={StaticResource LightTertiaryTextColor}, 
+                        Dark={StaticResource DarkTertiaryTextColor}}" />
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding 
+                        Light={StaticResource LightSecondaryColor}, 
+                        Dark={StaticResource DarkSecondaryColor}}" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
+                        Light={StaticResource LightSecondaryPageBackgroundColor}, 
+                        Dark={StaticResource DarkSecondaryPageBackgroundColor}}" />
+        </Style>
+        <Style x:Key="IconButtonSmallStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="WidthRequest" Value="35" />
+            <Setter Property="HeightRequest" Value="35" />
             <Setter Property="TextColor"
                     Value="{AppThemeBinding 
                         Light={StaticResource LightTertiaryTextColor}, 

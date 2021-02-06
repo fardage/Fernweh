@@ -1,4 +1,5 @@
 ﻿using System;
+using Fernweh.Models;
 using Fernweh.ViewModels;
 using Xamarin.Forms;
 
