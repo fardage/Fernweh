@@ -172,21 +172,32 @@
 
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Item">
-                <StackLayout Orientation="Horizontal"
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItems>
+                            <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
+                                              Path=DeleteChecklistItemCommand}"
+                                           CommandParameter="{Binding .}"/>
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+                    <StackLayout Orientation="Horizontal"
                              Padding="24,0"
                              Style="{DynamicResource ChecklistRowStyle}">
-                    <CheckBox x:Name="checkBox"
+                        <CheckBox x:Name="checkBox"
                               IsChecked="{Binding Packed}"
                               Style="{StaticResource CheckboxStyle}" />
-                    <Label VerticalOptions="Center" Text="{Binding Name}">
-                        <Label.Triggers>
-                            <DataTrigger Value="true" TargetType="Label"
+                        <Label VerticalOptions="Center" Text="{Binding Name}">
+                            <Label.Triggers>
+                                <DataTrigger Value="true" TargetType="Label"
                                          Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
-                                <Setter Property="TextDecorations" Value="Strikethrough" />
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
-                </StackLayout>
+                                    <Setter Property="TextDecorations" Value="Strikethrough" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </StackLayout>
+                </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>
 

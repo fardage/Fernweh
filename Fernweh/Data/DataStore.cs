@@ -54,5 +54,12 @@ namespace Fernweh.Data
             travelContext.Update(item);
             await travelContext.SaveChangesAsync();
         }
+
+        public static async Task DeleteItemAsync(Item item)
+        {
+            var travelContext = new TravelContext();
+            travelContext.ChecklistItems.Remove(item);
+            await travelContext.SaveChangesAsync();
+        }
     }
 }

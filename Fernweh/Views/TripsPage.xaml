@@ -50,8 +50,7 @@
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Trip">
-                <StackLayout Padding="18" BackgroundColor="Transparent">
-                    <SwipeView>
+                    <SwipeView BackgroundColor="Transparent">
                         <SwipeView.LeftItems>
                             <SwipeItems>
                                 <SwipeItem Text="Delete"
@@ -61,7 +60,8 @@
                                            CommandParameter="{Binding .}"/>
                             </SwipeItems>
                         </SwipeView.LeftItems>
-                        <yummy:PancakeView Style="{StaticResource CardStyle}">
+                        <StackLayout>
+                            <yummy:PancakeView Style="{StaticResource CardStyle}">
                             <yummy:PancakeView.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
                             </yummy:PancakeView.GestureRecognizers>
@@ -77,8 +77,8 @@
                                        Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
                             </StackLayout>
                             </yummy:PancakeView>
+                        </StackLayout>
                     </SwipeView>
-                </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

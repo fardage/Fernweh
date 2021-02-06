@@ -25,12 +25,14 @@ namespace Fernweh.ViewModels
             Trip = trip;
             ChecklistGroups = new ObservableCollection<GroupedList>();
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
+            DeleteChecklistItemCommand = new Command<Models.Item>(async (item) => await ExecuteDeleteChecklistItemCommand(item));
 
             _ = ExecuteLoadChecklistsCommand();
             _ = ExecuteLoadInfoCommand();
         }
 
         public Command LoadChecklistsCommand { get; set; }
+        public Command<Models.Item> DeleteChecklistItemCommand { get; set; }
         public Trip Trip { get; set; }
 
         public CountryFacts Facts
@@ -57,9 +59,15 @@ namespace Fernweh.ViewModels
 
                 foreach (var category in checklists)
                 {
-                    var listGroup = new GroupedList {GroupName = category.Name, Icon = category.Icon};
-                    listGroup.AddRange(category.Items);
-                    ChecklistGroups.Add(listGroup);
+                    if (category.Items.Count != 0)
+                    {
+                        var listGroup = new GroupedList { GroupName = category.Name, Icon = category.Icon };
+                        foreach (var item in category.Items)
+                        {
+                            listGroup.Add(item);
+                        }
+                        ChecklistGroups.Add(listGroup);
+                    }
                 }
             }
             catch (Exception ex)
@@ -76,7 +84,8 @@ namespace Fernweh.ViewModels
         {
             var address = await _hereMapsProvider.GetGeocode(Trip.Destination);
             if (!string.IsNullOrEmpty(address.CountryCode))
-                _ = Task.WhenAll(LoadWeather(address.CountryCode), LoadFacts(address.CountryCode));
+                _ = LoadWeather(address.CountryCode);
+                _ = LoadFacts(address.CountryCode);
         }
 
         private async Task LoadWeather(string countryCode)
@@ -90,6 +99,19 @@ namespace Fernweh.ViewModels
         private async Task LoadFacts(string countryCode)
         {
             Facts = await _restCountriesProvider.GetCountryFactsAsync(countryCode);
+        }
+
+        private async Task ExecuteDeleteChecklistItemCommand(Models.Item item)
+        {
+            await DataStore.DeleteItemAsync(item);
+            for (int i = ChecklistGroups.Count - 1; i >= 0; i--)
+            {
+                ChecklistGroups[i].Remove(item);
+                if (ChecklistGroups[i].Count == 0)
+                {
+                    ChecklistGroups.Remove(ChecklistGroups[i]);
+                }
+            }
         }
     }
 }
