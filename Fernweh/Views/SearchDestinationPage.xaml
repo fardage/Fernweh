@@ -6,6 +6,7 @@
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:hereMaps="clr-namespace:Fernweh.Services.HereMaps;assembly=Fernweh"
              x:DataType="viewmodels:SearchDestinationViewModel"
+             Title="Enter Destination"
              Style="{DynamicResource ContentPageStyle}">
 
     <ContentPage.ToolbarItems>

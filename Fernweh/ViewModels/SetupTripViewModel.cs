@@ -54,7 +54,7 @@ namespace Fernweh.ViewModels
             MessagingCenter.Send(this, "AddTrip", NewTrip);
 
             Navigation.PopToRootAsync();
-            Navigation.PopModalAsync(false);
+            Navigation.PopModalAsync();
         }
     }
 }
