@@ -100,6 +100,9 @@
     <ImageAsset Include="Resources\Assets.xcassets\LaunchScreenIcon.imageset\iocon.png" />
     <ImageAsset Include="Resources\Assets.xcassets\LaunchScreenIcon.imageset\Contents.json" />
     <ImageAsset Include="Resources\Assets.xcassets\LaunchScreenIcon.imageset\iocon-1.png" />
+    <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve.png" />
+    <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\undraw_Traveling_re_weve.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -129,5 +132,8 @@
       <Project>{C9D6B84F-91D8-4849-999D-2A2BCD3CE328}</Project>
       <Name>Fernweh</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\travelingreweve.imageset\" />
   </ItemGroup>
 </Project>

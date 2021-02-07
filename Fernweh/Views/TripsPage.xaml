@@ -5,51 +5,62 @@
              x:Class="Fernweh.Views.TripsPage"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models"
+             xmlns:converters="clr-namespace:Fernweh.Converters"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Fernweh"
              Style="{DynamicResource ContentPageStyle}"
              x:DataType="viewmodels:TripsViewModel"
              x:Name="tripsPage">
 
-    <CollectionView ItemsSource="{Binding Trips}">
-        <CollectionView.Header>
-            <Grid Padding="24">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CountToBoolConverter x:Key="countToBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-                <Label Text="Trips"
+    <Grid>
+        <Image Source="travelingreweve.png"
+               IsVisible="{Binding Converter={StaticResource countToBool}, Path=Trips.Count}"
+               Margin="48"/>
+        <CollectionView ItemsSource="{Binding Trips}">
+            <CollectionView.Header>
+                <Grid Padding="24">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Trips"
                        Grid.Row="0"
                        Grid.Column="0"
                        Style="{DynamicResource Heading1Style}" />
-                <Label Grid.Row="1"
+                    <Label Grid.Row="1"
                        Grid.Column="0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource Heading3Style}"
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource Heading3Style}"
                                   Text="{Binding Trips.Count}" />
-                            <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                                <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Button Text="&#xf067;"
+                    <Button Text="&#xf067;"
                         Style="{DynamicResource IconButtonMediumStyle}"
                         Clicked="AddItem_Clicked"
                         Grid.Row="0"
                         Grid.Column="2"
                         Grid.RowSpan="2"
                         HorizontalOptions="End" />
-            </Grid>
-        </CollectionView.Header>
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:Trip">
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Trip">
                     <SwipeView BackgroundColor="Transparent">
                         <SwipeView.LeftItems>
                             <SwipeItems>
@@ -62,24 +73,25 @@
                         </SwipeView.LeftItems>
                         <StackLayout>
                             <yummy:PancakeView Style="{StaticResource CardStyle}">
-                            <yummy:PancakeView.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
-                            </yummy:PancakeView.GestureRecognizers>
-                            <yummy:PancakeView.BackgroundGradientStops>
-                                <yummy:GradientStopCollection>
-                                    <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
-                                    <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
-                                </yummy:GradientStopCollection>
-                            </yummy:PancakeView.BackgroundGradientStops>
-                            <StackLayout>
-                                <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
-                                <Label Style="{DynamicResource Heading2WhiteStyle}"
+                                <yummy:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected" />
+                                </yummy:PancakeView.GestureRecognizers>
+                                <yummy:PancakeView.BackgroundGradientStops>
+                                    <yummy:GradientStopCollection>
+                                        <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
+                                        <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
+                                    </yummy:GradientStopCollection>
+                                </yummy:PancakeView.BackgroundGradientStops>
+                                <StackLayout>
+                                    <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
+                                    <Label Style="{DynamicResource Heading2WhiteStyle}"
                                        Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
-                            </StackLayout>
+                                </StackLayout>
                             </yummy:PancakeView>
                         </StackLayout>
                     </SwipeView>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
