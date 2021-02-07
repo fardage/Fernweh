@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Fernweh.Models;
@@ -11,6 +12,7 @@ namespace Fernweh.ViewModels
     public class SetupTripViewModel : BaseViewModel
     {
         private uint _threshold;
+        private List<Item> _existingItems = new List<Item>();
 
         public SetupTripViewModel(INavigation navigation, Trip trip)
         {
@@ -43,7 +45,10 @@ namespace Fernweh.ViewModels
         {
             var selected = eventArgs.Item as ItemCategory;
 
-            if (eventArgs.Direction == SwipeCardDirection.Right) SelectedCategories.Add(eventArgs.Item as ItemCategory);
+            if (eventArgs.Direction == SwipeCardDirection.Right)
+            {
+                AddCategory(selected);
+            }
 
             if (selected == TemplateCategories.Last()) WrapUpTrip();
         }
@@ -55,6 +60,13 @@ namespace Fernweh.ViewModels
 
             Navigation.PopToRootAsync();
             Navigation.PopModalAsync();
+        }
+
+        private void AddCategory(ItemCategory category)
+        {
+            category.Items.RemoveAll(x => _existingItems.Exists(y => y.Name.ToLower().Equals(x.Name.ToLower())));
+            _existingItems.AddRange(category.Items);
+            SelectedCategories.Add(category);
         }
     }
 }
