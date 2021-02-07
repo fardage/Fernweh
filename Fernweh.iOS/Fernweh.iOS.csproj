@@ -103,6 +103,9 @@
     <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve.png" />
     <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\undraw_Traveling_re_weve.png" />
+    <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve%401x.png" />
+    <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve%402x.png" />
+    <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
