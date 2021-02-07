@@ -159,7 +159,7 @@
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate x:DataType="viewmodels:GroupedList">
                 <StackLayout Orientation="Horizontal" Padding="24,24,24,16">
-                    <Label>
+                    <Label VerticalOptions="End">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Style="{DynamicResource IconMediumStyle}" Text="{Binding Icon}" />
