@@ -21,7 +21,7 @@
     <Grid>
         <Image Source="travelingreweve.png"
                IsVisible="{Binding Converter={StaticResource countToBool}, Path=Trips.Count}"
-               Margin="48"/>
+               Margin="48" />
         <CollectionView ItemsSource="{Binding Trips}">
             <CollectionView.Header>
                 <Grid Padding="24">
@@ -36,27 +36,27 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Text="Trips"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       Style="{DynamicResource Heading1Style}" />
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{DynamicResource Heading1Style}" />
                     <Label Grid.Row="1"
-                       Grid.Column="0">
+                           Grid.Column="0">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Style="{StaticResource Heading3Style}"
-                                  Text="{Binding Trips.Count}" />
+                                      Text="{Binding Trips.Count}" />
                                 <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
 
                     <Button Text="&#xf067;"
-                        Style="{DynamicResource IconButtonMediumStyle}"
-                        Clicked="AddItem_Clicked"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Grid.RowSpan="2"
-                        HorizontalOptions="End" />
+                            Style="{DynamicResource IconButtonMediumStyle}"
+                            Clicked="AddItem_Clicked"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.RowSpan="2"
+                            HorizontalOptions="End" />
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
@@ -68,7 +68,7 @@
                                            BackgroundColor="Red"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripsViewModel}}, 
                                               Path=DeleteTripCommand}"
-                                           CommandParameter="{Binding .}"/>
+                                           CommandParameter="{Binding .}" />
                             </SwipeItems>
                         </SwipeView.LeftItems>
                         <StackLayout>
@@ -85,7 +85,7 @@
                                 <StackLayout>
                                     <Label Style="{DynamicResource Heading1WhiteStyle}" Text="{Binding Destination}" />
                                     <Label Style="{DynamicResource Heading2WhiteStyle}"
-                                       Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
+                                           Text="{Binding StartDate, StringFormat='{0:dd. MMMM, yyyy}'}" />
                                 </StackLayout>
                             </yummy:PancakeView>
                         </StackLayout>

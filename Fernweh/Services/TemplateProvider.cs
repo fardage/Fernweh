@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -11,7 +11,7 @@ namespace Fernweh.Services
     {
         private const string TemplateFile = "Fernweh.Resources.JSON.ChecklistTemplate.json";
 
-        public static Collection<ItemCategory> GetChecklist()
+        public static List<ItemCategory> GetChecklist()
         {
             var assembly = typeof(TemplateProvider).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream(TemplateFile);
@@ -22,7 +22,7 @@ namespace Fernweh.Services
                 jsonContent = reader.ReadToEnd();
             }
 
-            return JsonSerializer.Deserialize<Collection<ItemCategory>>(jsonContent);
+            return JsonSerializer.Deserialize<List<ItemCategory>>(jsonContent);
         }
     }
 }

@@ -10,12 +10,10 @@ namespace Fernweh.Droid
 {
     [Activity(Label = "Fernweh", Icon = "@mipmap/icon", Theme = "@style/MainTheme",
         ConfigurationChanges = ConfigChanges.ScreenSize
-        | ConfigChanges.UiMode
-        | ConfigChanges.ScreenLayout
-        | ConfigChanges.SmallestScreenSize
-        | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
-
-
+                               | ConfigChanges.UiMode
+                               | ConfigChanges.ScreenLayout
+                               | ConfigChanges.SmallestScreenSize
+                               | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

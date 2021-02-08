@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Fernweh.Models;
@@ -11,26 +10,27 @@ namespace Fernweh.ViewModels
 {
     public class SetupTripViewModel : BaseViewModel
     {
+        private readonly List<Item> _existingItems = new List<Item>();
         private uint _threshold;
-        private List<Item> _existingItems = new List<Item>();
 
         public SetupTripViewModel(INavigation navigation, Trip trip)
         {
             Navigation = navigation;
-            NewTrip = trip;
+            Trip = trip;
 
             SwipedCommand = new Command<SwipedCardEventArgs>(eventArgs => ExecuteSwipedCommand(eventArgs));
 
             Threshold = (uint) (App.ScreenWidth / 3);
 
             TemplateCategories = TemplateProvider.GetChecklist();
-            SelectedCategories = new Collection<ItemCategory>();
+            TemplateCategories.RemoveAll(x => Trip.Categories.Exists(y => y.Name.Equals(x.Name)));
+            SelectedCategories = new List<ItemCategory>();
         }
 
         public INavigation Navigation { get; set; }
-        public Trip NewTrip { get; set; }
-        public Collection<ItemCategory> TemplateCategories { get; set; }
-        public Collection<ItemCategory> SelectedCategories { get; set; }
+        public Trip Trip { get; set; }
+        public List<ItemCategory> TemplateCategories { get; set; }
+        public List<ItemCategory> SelectedCategories { get; set; }
         public SwipeCardDirection SupportedSwipeDirections => SwipeCardDirection.Right | SwipeCardDirection.Left;
 
         public ICommand SwipedCommand { get; }
@@ -45,26 +45,22 @@ namespace Fernweh.ViewModels
         {
             var selected = eventArgs.Item as ItemCategory;
 
-            if (eventArgs.Direction == SwipeCardDirection.Right)
-            {
-                AddCategory(selected);
-            }
+            if (eventArgs.Direction == SwipeCardDirection.Right) AddCategory(selected);
 
             if (selected == TemplateCategories.Last()) WrapUpTrip();
         }
 
         private void WrapUpTrip()
         {
-            NewTrip.Categories = SelectedCategories;
-            MessagingCenter.Send(this, "AddTrip", NewTrip);
+            Trip.Categories.AddRange(SelectedCategories);
+            MessagingCenter.Send(this, "SetupTrip", Trip);
 
-            Navigation.PopToRootAsync();
             Navigation.PopModalAsync();
         }
 
         private void AddCategory(ItemCategory category)
         {
-            category.Items.RemoveAll(x => _existingItems.Exists(y => y.Name.ToLower().Equals(x.Name.ToLower())));
+            category.Items.RemoveAll(x => _existingItems.Exists(y => y.Name.Equals(x.Name)));
             _existingItems.AddRange(category.Items);
             SelectedCategories.Add(category);
         }

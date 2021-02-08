@@ -19,23 +19,25 @@ namespace Fernweh.ViewModels
         private readonly WorldBankProvider _worldBankProvider = new WorldBankProvider();
         private double _averageTemperature;
         private CountryFacts _facts;
+        private string _tripName;
 
         public TripDetailViewModel(Trip trip = null)
         {
             Title = trip?.Destination;
+            TripName = trip?.Destination;
             Trip = trip;
             ChecklistGroups = new ObservableCollection<GroupedList>();
 
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
-            DeleteChecklistItemCommand = new Command<Models.Item>(async (item) => await ExecuteDeleteChecklistItemCommand(item));
-            AddItemCommand = new Command<GroupedList>(async (groupedList) => await ExecuteAddItemCommand(groupedList));
+            DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
+            AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
 
             _ = ExecuteLoadChecklistsCommand();
             _ = ExecuteLoadInfoCommand();
         }
 
         public Command LoadChecklistsCommand { get; set; }
-        public Command<Models.Item> DeleteChecklistItemCommand { get; set; }
+        public Command<Item> DeleteChecklistItemCommand { get; set; }
         public Command<GroupedList> AddItemCommand { get; set; }
         public Trip Trip { get; set; }
 
@@ -53,6 +55,12 @@ namespace Fernweh.ViewModels
 
         public ObservableCollection<GroupedList> ChecklistGroups { get; set; }
 
+        public string TripName
+        {
+            get => _tripName;
+            set => SetProperty(ref _tripName, value);
+        }
+
         private async Task ExecuteLoadChecklistsCommand()
         {
             IsBusy = true;
@@ -62,23 +70,17 @@ namespace Fernweh.ViewModels
                 var checklists = await DataStore.GetItemCategoriesAsync(Trip.Id);
 
                 foreach (var category in checklists)
-                {
                     if (category.Items.Count != 0)
                     {
                         var listGroup = new GroupedList
                         {
                             Id = category.Id,
                             GroupName = category.Name,
-                            Icon = category.Icon 
-                            
+                            Icon = category.Icon
                         };
-                        foreach (var item in category.Items)
-                        {
-                            listGroup.Add(item);
-                        }
+                        foreach (var item in category.Items) listGroup.Add(item);
                         ChecklistGroups.Add(listGroup);
                     }
-                }
             }
             catch (Exception ex)
             {
@@ -113,16 +115,13 @@ namespace Fernweh.ViewModels
             Facts = await _restCountriesProvider.GetCountryFactsAsync(countryCode);
         }
 
-        private async Task ExecuteDeleteChecklistItemCommand(Models.Item item)
+        private async Task ExecuteDeleteChecklistItemCommand(Item item)
         {
             await DataStore.DeleteItemAsync(item);
-            for (int i = ChecklistGroups.Count - 1; i >= 0; i--)
+            for (var i = ChecklistGroups.Count - 1; i >= 0; i--)
             {
                 ChecklistGroups[i].Remove(item);
-                if (ChecklistGroups[i].Count == 0)
-                {
-                    ChecklistGroups.Remove(ChecklistGroups[i]);
-                }
+                if (ChecklistGroups[i].Count == 0) ChecklistGroups.Remove(ChecklistGroups[i]);
             }
         }
 
@@ -130,7 +129,7 @@ namespace Fernweh.ViewModels
         {
             var itemName = await Application.Current
                 .MainPage.DisplayPromptAsync("Add Item", "Enter name of item:");
-            var newItem = new Item() {Name = itemName};
+            var newItem = new Item {Name = itemName};
             groupedList.Add(newItem);
             await DataStore.AddItemAsync(groupedList.Id, newItem);
         }

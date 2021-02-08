@@ -1,7 +1,9 @@
-﻿using Foundation;
+﻿using System.Linq;
+using Foundation;
 using UIKit;
 
-[assembly: Preserve(typeof(System.Linq.Queryable), AllMembers = true)]
+[assembly: Preserve(typeof(Queryable), AllMembers = true)]
+
 namespace Fernweh.iOS
 {
     public class Application

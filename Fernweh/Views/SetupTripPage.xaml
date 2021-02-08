@@ -5,9 +5,17 @@
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              xmlns:viewmodels="clr-namespace:Fernweh.ViewModels"
              xmlns:models="clr-namespace:Fernweh.Models"
+             xmlns:converters="clr-namespace:Fernweh.Converters"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="What are you packing?"
              x:Class="Fernweh.Views.SetupTripPage" x:DataType="viewmodels:SetupTripViewModel"
              Style="{DynamicResource ContentPageStyle}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CountToBoolConverter x:Key="countToBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid Padding="24">
@@ -72,9 +80,32 @@
                     </DataTemplate>
                 </swipeCardView:SwipeCardView.ItemTemplate>
             </swipeCardView:SwipeCardView>
+
+            <StackLayout Grid.Row="0"
+                         IsVisible="{Binding Converter={StaticResource countToBool}, Path=TemplateCategories.Count}">
+                <Image Source="nodata.png"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand" />
+                <Label Text="No Categories left..."
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand" />
+                <yummy:PancakeView Style="{StaticResource PrimaryButtonStyle}">
+                    <yummy:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Done_Clicked" />
+                    </yummy:PancakeView.GestureRecognizers>
+                    <Label Style="{StaticResource Heading2WhiteStyle}" Text="Close" />
+                </yummy:PancakeView>
+            </StackLayout>
+
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="1">
-                <Button Text="&#xf056;" Style="{DynamicResource IconButtonLargeStyle}" Clicked="DismissCard_Clicked" />
-                <Button Text="&#xf055;" Style="{DynamicResource IconButtonLargeStyle}" Clicked="AcceptCard_Clicked" />
+                <Button Text="&#xf056;"
+                        Style="{DynamicResource IconButtonLargeStyle}"
+                        Clicked="DismissCard_Clicked"
+                        TextColor="#FE5D7A"/>
+                <Button Text="&#xf055;"
+                        Style="{DynamicResource IconButtonLargeStyle}"
+                        Clicked="AcceptCard_Clicked"
+                        TextColor="#45EC9C"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

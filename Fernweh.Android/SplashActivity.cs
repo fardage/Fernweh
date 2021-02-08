@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
@@ -9,7 +8,7 @@ namespace Fernweh.Droid
     [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
-        static readonly string TAG = "X:" + typeof(SplashActivity).Name;
+        private static readonly string TAG = "X:" + typeof(SplashActivity).Name;
 
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
         {
@@ -22,7 +21,8 @@ namespace Fernweh.Droid
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
 
-        public override void OnBackPressed() { }
-
+        public override void OnBackPressed()
+        {
+        }
     }
 }

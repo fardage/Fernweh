@@ -16,7 +16,7 @@ namespace Fernweh.ViewModels
             Title = "Trips";
             Trips = new ObservableCollection<Trip>();
             LoadTripsCommand = new Command(async () => await ExecuteLoadTripsCommand());
-            DeleteTripCommand = new Command<Trip>(async (trip) => await ExecuteDeleteTripCommand(trip));
+            DeleteTripCommand = new Command<Trip>(async trip => await ExecuteDeleteTripCommand(trip));
 
             SubscribeToMessagingCenter();
             _ = ExecuteLoadTripsCommand();
@@ -28,10 +28,17 @@ namespace Fernweh.ViewModels
 
         private void SubscribeToMessagingCenter()
         {
-            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "AddTrip", async (obj, trip) =>
+            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip", async (obj, trip) =>
             {
-                Trips.Add(trip);
-                await DataStore.AddTripAsync(trip);
+                if (!Trips.Contains(trip))
+                {
+                    Trips.Add(trip);
+                    await DataStore.AddTripAsync(trip);
+                }
+                else
+                {
+                    await DataStore.UpdateTripChecklistsAsync(trip);
+                }
             });
 
             MessagingCenter.Subscribe<TripDetailPage, Trip>(this, "DeleteTrip",
@@ -39,6 +46,13 @@ namespace Fernweh.ViewModels
                 {
                     Trips.Remove(trip);
                     await DataStore.DeleteTripAsync(trip.Id);
+                });
+
+            MessagingCenter.Subscribe<TripDetailPage, Trip>(this, "RenameTrip",
+                async (obj, trip) =>
+                {
+                    await DataStore.UpdateTripAsync(trip);
+                    await ExecuteLoadTripsCommand();
                 });
         }
 

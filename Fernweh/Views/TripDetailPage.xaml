@@ -26,7 +26,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="{Binding Trip.Destination}"
+                    <Label Text="{Binding TripName}"
                            Grid.Row="0"
                            Grid.Column="0"
                            Style="{DynamicResource Heading1Style}" />
@@ -35,9 +35,9 @@
                            Grid.Column="0"
                            Style="{DynamicResource Heading2Style}" />
 
-                    <Button Text="&#xf1f8;"
+                    <Button Text="&#xf142;"
                             Style="{DynamicResource IconButtonMediumStyle}"
-                            Clicked="DeleteItem_Clicked"
+                            Clicked="Menu_Clicked"
                             Grid.Row="0"
                             Grid.Column="2"
                             Grid.RowSpan="2" />
@@ -159,7 +159,7 @@
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate x:DataType="viewmodels:GroupedList">
                 <StackLayout Orientation="Horizontal" Padding="24,24,24,16">
-                    <Label VerticalOptions="End">
+                    <Label VerticalOptions="CenterAndExpand">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Style="{DynamicResource IconMediumStyle}" Text="{Binding Icon}" />
@@ -169,11 +169,12 @@
                         </Label.FormattedText>
                     </Label>
                     <Button Style="{StaticResource IconButtonSmallStyle}"
+                            VerticalOptions="EndAndExpand"
                             HorizontalOptions="EndAndExpand"
                             Text="&#xf067;"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
                                               Path=AddItemCommand}"
-                            CommandParameter="{Binding .}"/>
+                            CommandParameter="{Binding .}" />
                 </StackLayout>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>
@@ -184,22 +185,22 @@
                     <SwipeView.RightItems>
                         <SwipeItems>
                             <SwipeItem Text="Delete"
-                                           BackgroundColor="Red"
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
+                                       BackgroundColor="Red"
+                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
                                               Path=DeleteChecklistItemCommand}"
-                                           CommandParameter="{Binding .}"/>
+                                       CommandParameter="{Binding .}" />
                         </SwipeItems>
                     </SwipeView.RightItems>
                     <StackLayout Orientation="Horizontal"
-                             Padding="24,0"
-                             Style="{DynamicResource ChecklistRowStyle}">
+                                 Padding="24,0"
+                                 Style="{DynamicResource ChecklistRowStyle}">
                         <CheckBox x:Name="checkBox"
-                              IsChecked="{Binding Packed}"
-                              Style="{StaticResource CheckboxStyle}" />
+                                  IsChecked="{Binding Packed}"
+                                  Style="{StaticResource CheckboxStyle}" />
                         <Label VerticalOptions="Center" Text="{Binding Name}">
                             <Label.Triggers>
                                 <DataTrigger Value="True" TargetType="Label"
-                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                             Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
                                     <Setter Property="TextDecorations" Value="Strikethrough" />
                                 </DataTrigger>
                             </Label.Triggers>

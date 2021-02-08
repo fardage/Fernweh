@@ -19,9 +19,35 @@ namespace Fernweh.Data
         {
             var travelContext = new TravelContext();
             var storedTrips = travelContext.Trips
+                .Include(t => t.Categories)
+                .ThenInclude(c => c.Items)
                 .AsNoTracking()
                 .ToList();
             return await Task.FromResult(storedTrips);
+        }
+
+        public static async Task UpdateTripAsync(Trip trip)
+        {
+            var travelContext = new TravelContext();
+            travelContext.Update(trip);
+            await travelContext.SaveChangesAsync();
+        }
+
+        public static async Task UpdateTripChecklistsAsync(Trip trip)
+        {
+            var travelContext = new TravelContext();
+            var targetTrip = await travelContext.Trips.FindAsync(trip.Id);
+            var targetCategories = await GetItemCategoriesAsync(trip.Id);
+
+            foreach (var category in trip.Categories)
+            {
+                if (!targetCategories.Any(x => x.Name.Equals(category.Name)))
+                {
+                    targetTrip.Categories.Add(category);
+                }
+            }
+            travelContext.Update(targetTrip);
+            await travelContext.SaveChangesAsync();
         }
 
         public static async Task DeleteTripAsync(string id)
@@ -47,7 +73,7 @@ namespace Fernweh.Data
                 .Select(c => c.Categories).SingleOrDefault();
             return await Task.FromResult(storedChecklists);
         }
-        
+
         public static async Task AddItemAsync(string categoryId, Item item)
         {
             var travelContext = new TravelContext();

@@ -106,6 +106,10 @@
     <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve%401x.png" />
     <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve%402x.png" />
     <ImageAsset Include="Assets.xcassets\travelingreweve.imageset\Traveling_re_weve%403x.png" />
+    <ImageAsset Include="Assets.xcassets\nodata.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\nodata.imageset\No_data_re_kwbl%401x.png" />
+    <ImageAsset Include="Assets.xcassets\nodata.imageset\No_data_re_kwbl%402x.png" />
+    <ImageAsset Include="Assets.xcassets\nodata.imageset\No_data_re_kwbl%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -138,5 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\travelingreweve.imageset\" />
+    <Folder Include="Assets.xcassets\nodata.imageset\" />
   </ItemGroup>
 </Project>

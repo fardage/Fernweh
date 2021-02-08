@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Fernweh.Models
 {
@@ -9,7 +9,7 @@ namespace Fernweh.Models
         public string Destination { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Collection<ItemCategory> Categories { get; set; } = new Collection<ItemCategory>();
+        public List<ItemCategory> Categories { get; set; } = new List<ItemCategory>();
         public string ColorA { get; set; }
         public string ColorB { get; set; }
     }
