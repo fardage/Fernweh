@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Fernweh.Models
 {
@@ -12,6 +13,7 @@ namespace Fernweh.Models
             Items = new List<Item>();
         }
 
+        [JsonIgnore]
         public string Id { get; set; }
 
         public string Name { get; set; }

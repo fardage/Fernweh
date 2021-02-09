@@ -57,7 +57,6 @@ namespace Fernweh.ViewModels
                 {
                     var listGroup = new GroupedList
                     {
-                        Id = category.Id,
                         GroupName = category.Name,
                         Icon = category.Icon
                     };
