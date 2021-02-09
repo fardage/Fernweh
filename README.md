@@ -15,7 +15,7 @@
 
 ![Screenshots](images/screenshot.jpg)
 
-![Screenshot dark mode](images/screenshot2.jpg)
+![Screenshot dark mode](images/screenshot_dark.jpg)
 
 Fernweh is a packing list app and helps you to organise your packing list for your next vacation.
 
