@@ -31,6 +31,11 @@ namespace Fernweh.ViewModels
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
             DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
+            
+            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip", async (obj, trip) =>
+            {
+                _ = ExecuteLoadChecklistsCommand();
+            });
 
             _ = ExecuteLoadChecklistsCommand();
             _ = ExecuteLoadInfoCommand();
@@ -61,7 +66,7 @@ namespace Fernweh.ViewModels
             set => SetProperty(ref _tripName, value);
         }
 
-        private async Task ExecuteLoadChecklistsCommand()
+        internal async Task ExecuteLoadChecklistsCommand()
         {
             IsBusy = true;
             ChecklistGroups.Clear();
@@ -70,6 +75,7 @@ namespace Fernweh.ViewModels
                 var checklists = await DataStore.GetItemCategoriesAsync(Trip.Id);
 
                 foreach (var category in checklists)
+                {
                     if (category.Items.Count != 0)
                     {
                         var listGroup = new GroupedList
@@ -81,6 +87,7 @@ namespace Fernweh.ViewModels
                         foreach (var item in category.Items) listGroup.Add(item);
                         ChecklistGroups.Add(listGroup);
                     }
+                }
             }
             catch (Exception ex)
             {
