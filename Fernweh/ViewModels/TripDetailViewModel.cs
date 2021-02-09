@@ -131,7 +131,7 @@ namespace Fernweh.ViewModels
                 .MainPage.DisplayPromptAsync("Add Item", "Enter name of item:");
             if (!string.IsNullOrEmpty(itemName))
             {
-                var newItem = new Item { Name = itemName };
+                var newItem = new Item {Name = itemName};
                 groupedList.Add(newItem);
                 await DataStore.AddItemAsync(groupedList.Id, newItem);
             }

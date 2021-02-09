@@ -18,6 +18,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings" Clicked="Settings_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <Grid>
         <Image Source="travelingreweve.png"
                IsVisible="{Binding Converter={StaticResource countToBool}, Path=Trips.Count}"

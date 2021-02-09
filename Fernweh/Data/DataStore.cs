@@ -40,12 +40,8 @@ namespace Fernweh.Data
             var targetCategories = await GetItemCategoriesAsync(trip.Id);
 
             foreach (var category in trip.Categories)
-            {
                 if (!targetCategories.Any(x => x.Name.Equals(category.Name)))
-                {
                     targetTrip.Categories.Add(category);
-                }
-            }
             travelContext.Update(targetTrip);
             await travelContext.SaveChangesAsync();
         }

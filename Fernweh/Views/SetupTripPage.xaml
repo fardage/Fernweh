@@ -101,11 +101,11 @@
                 <Button Text="&#xf056;"
                         Style="{DynamicResource IconButtonLargeStyle}"
                         Clicked="DismissCard_Clicked"
-                        TextColor="#FE5D7A"/>
+                        TextColor="#FE5D7A" />
                 <Button Text="&#xf055;"
                         Style="{DynamicResource IconButtonLargeStyle}"
                         Clicked="AcceptCard_Clicked"
-                        TextColor="#45EC9C"/>
+                        TextColor="#45EC9C" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

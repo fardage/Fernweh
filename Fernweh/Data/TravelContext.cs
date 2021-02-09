@@ -29,7 +29,6 @@ namespace Fernweh.Data
                     Batteries_V2.Init();
                     databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
                         "Library", DatabaseName);
-                    ;
                     break;
                 case Device.Android:
                     databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
