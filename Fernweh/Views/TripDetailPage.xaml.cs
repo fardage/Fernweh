@@ -43,10 +43,14 @@ namespace Fernweh.Views
         private async Task RenameItem_Clicked()
         {
             var tripName = await DisplayPromptAsync("Rename Trip", "Enter New Trip Name:");
-            Title = tripName;
-            viewModel.TripName = tripName;
-            viewModel.Trip.Destination = tripName;
-            MessagingCenter.Send(this, "RenameTrip", viewModel.Trip);
+
+            if (!string.IsNullOrEmpty(tripName))
+            {
+                Title = tripName;
+                viewModel.TripName = tripName;
+                viewModel.Trip.Destination = tripName;
+                MessagingCenter.Send(this, "RenameTrip", viewModel.Trip);
+            }
         }
 
         private async Task AddCategory_Clicked()
