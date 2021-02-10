@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
@@ -30,7 +31,7 @@ namespace Fernweh.ViewModels
         {
             MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip", async (obj, trip) =>
             {
-                if (!Trips.Contains(trip))
+                if (!Trips.ToList().Any(t => t.Id.Equals(trip.Id)))
                 {
                     Trips.Add(trip);
                     await DataStore.AddTripAsync(trip);
