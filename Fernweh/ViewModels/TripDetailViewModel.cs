@@ -7,6 +7,7 @@ using Fernweh.Models;
 using Fernweh.Services.HereMaps;
 using Fernweh.Services.RestCountries;
 using Fernweh.Services.WorldBank;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Item = Fernweh.Models.Item;
 
@@ -92,6 +93,7 @@ namespace Fernweh.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                Crashes.TrackError(ex);
             }
             finally
             {

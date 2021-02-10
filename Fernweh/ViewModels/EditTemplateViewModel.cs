@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Models;
 using Fernweh.Services;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 
 namespace Fernweh.ViewModels
@@ -67,6 +68,7 @@ namespace Fernweh.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                Crashes.TrackError(ex);
             }
             finally
             {

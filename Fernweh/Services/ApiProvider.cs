@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AppCenter.Crashes;
 using MonkeyCache.FileStore;
 using Xamarin.Essentials;
 
@@ -32,6 +33,8 @@ namespace Fernweh.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Unable to get information from server {ex}");
+                Crashes.TrackError(ex);
+
             }
 
             return json;

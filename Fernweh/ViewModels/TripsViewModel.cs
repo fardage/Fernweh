@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
 using Fernweh.Views;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 
 namespace Fernweh.ViewModels
@@ -33,6 +35,7 @@ namespace Fernweh.ViewModels
             {
                 if (!Trips.ToList().Any(t => t.Id.Equals(trip.Id)))
                 {
+                    Analytics.TrackEvent($"Trip added: {trip.Destination}");
                     Trips.Add(trip);
                     await DataStore.AddTripAsync(trip);
                 }
@@ -70,6 +73,7 @@ namespace Fernweh.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                Crashes.TrackError(ex);
             }
             finally
             {

@@ -2,6 +2,11 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Fernweh.Services;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Platform = Xamarin.Essentials.Platform;
@@ -27,6 +32,12 @@ namespace Fernweh.Droid
 
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
+
+            if (DeviceInfo.DeviceType == DeviceType.Physical)
+            {
+                AppCenter.Start(Credentials.ApiKeyAppCenter,
+                   typeof(Analytics), typeof(Crashes));
+            }
 
             var width = Resources.DisplayMetrics.WidthPixels;
             var height = Resources.DisplayMetrics.HeightPixels;
