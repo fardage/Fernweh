@@ -13,18 +13,18 @@
 
 ## About The Project
 
+Fernweh is a packing list app and helps you to organise your packing list for your next vacation.
+
 ![Screenshots](images/screenshot.jpg)
 
 ![Screenshot dark mode](images/screenshot_dark.jpg)
 
-Fernweh is a packing list app and helps you to organise your packing list for your next vacation.
-
 ### Features
 
-- Places Autocomplete
 - Swipe trough categories to add from template
-- Customise the template
-- Show interesting facts about your destination
+- Customise template
+- Places Autocomplete
+- Interesting facts about your destination
 
 ### Built With
 
