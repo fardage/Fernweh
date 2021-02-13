@@ -30,11 +30,21 @@ namespace Fernweh.Views
                     await RenameItem_Clicked();
                     break;
                 case DialogActions.AddTemplateCategory:
-                    await AddCategory_Clicked();
+                    await AddTemplateCategory_Clicked();
                     break;
                 case DialogActions.AddEmptyCategory:
-                    await AddCategory_Clicked();
+                    await AddEmptyCategory_Clicked();
                     break;
+            }
+        }
+
+        private async Task AddEmptyCategory_Clicked()
+        {
+            var categoryName = await DisplayPromptAsync("Add Empty Category", "Enter New Category Name:");
+
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                viewModel.AddEmptyCategoryAsync(categoryName);
             }
         }
 
@@ -56,7 +66,7 @@ namespace Fernweh.Views
             }
         }
 
-        private async Task AddCategory_Clicked()
+        private async Task AddTemplateCategory_Clicked()
         {
             var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, viewModel.Trip));
             await Navigation.PushModalAsync(new NavigationPage(setupPage));
@@ -69,6 +79,6 @@ namespace Fernweh.Views
         public const string Delete = "Delete";
         public const string Rename = "Rename";
         public const string AddTemplateCategory = "Add Category from Template";
-        public const string AddEmptyCategory = "Add Empty Category";
+        public const string AddEmptyCategory = "Add Category Empty";
     }
 }

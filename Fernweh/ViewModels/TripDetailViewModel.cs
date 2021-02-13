@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
@@ -27,14 +28,14 @@ namespace Fernweh.ViewModels
             Trip = trip;
             ChecklistGroups = new ObservableCollection<GroupedList>();
 
-            LoadChecklistsCommand = new Command(ExecuteLoadChecklistsCommand);
+            LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
             DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
 
             MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip",
-                (obj, trip) => { ExecuteLoadChecklistsCommand(); });
+                async (obj, trip) => { await ExecuteLoadChecklistsCommand(); });
 
-            ExecuteLoadChecklistsCommand();
+            _ = ExecuteLoadChecklistsCommand(true);
             _ = ExecuteLoadInfoCommand();
         }
 
@@ -63,12 +64,15 @@ namespace Fernweh.ViewModels
             set => SetProperty(ref _tripName, value);
         }
 
-        private void ExecuteLoadChecklistsCommand()
+        private async Task ExecuteLoadChecklistsCommand(bool forceRefresh = false)
         {
             IsBusy = true;
+
+            var categoryies = forceRefresh ? await DataStore.GetItemCategoriesAsync(Trip.Id) : Trip.Categories;
+
             ChecklistGroups.Clear();
 
-            foreach (var category in Trip.Categories)
+            foreach (var category in categoryies)
             {
                 var listGroup = new GroupedList
                 {
@@ -123,9 +127,26 @@ namespace Fernweh.ViewModels
             if (!string.IsNullOrEmpty(itemName))
             {
                 var newItem = new Item {Name = itemName};
-                groupedList.Add(newItem);
+                groupedList.Insert(0, newItem);
                 await DataStore.AddItemAsync(groupedList.Id, newItem);
             }
+        }
+
+        internal void AddEmptyCategoryAsync(string name)
+        {
+            var category = new ItemCategory(name) { Icon = "\uf4ff" };
+
+            Trip.Categories.Add(category);
+
+            var listGroup = new GroupedList
+            {
+                Id = category.Id,
+                GroupName = category.Name,
+                Icon = category.Icon
+            };
+            ChecklistGroups.Add(listGroup);
+
+            _ = DataStore.UpdateTripChecklistsAsync(Trip);
         }
     }
 }
