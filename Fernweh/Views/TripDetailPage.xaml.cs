@@ -19,7 +19,7 @@ namespace Fernweh.Views
         private async void Menu_Clicked(object sender, EventArgs e)
         {
             var action = await DisplayActionSheet("Edit Trip", DialogActions.Cancel,
-                DialogActions.Delete, DialogActions.Rename, DialogActions.AddCategory);
+                DialogActions.Delete, DialogActions.Rename, DialogActions.AddTemplateCategory, DialogActions.AddEmptyCategory);
 
             switch (action)
             {
@@ -29,7 +29,10 @@ namespace Fernweh.Views
                 case DialogActions.Rename:
                     await RenameItem_Clicked();
                     break;
-                case DialogActions.AddCategory:
+                case DialogActions.AddTemplateCategory:
+                    await AddCategory_Clicked();
+                    break;
+                case DialogActions.AddEmptyCategory:
                     await AddCategory_Clicked();
                     break;
             }
@@ -65,6 +68,7 @@ namespace Fernweh.Views
         public const string Cancel = "Cancel";
         public const string Delete = "Delete";
         public const string Rename = "Rename";
-        public const string AddCategory = "Add Category";
+        public const string AddTemplateCategory = "Add Category from Template";
+        public const string AddEmptyCategory = "Add Empty Category";
     }
 }

@@ -24,7 +24,7 @@ namespace Fernweh.Views
         {
             await Navigation.PopAsync();
             var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, viewModel.NewTrip));
-            await Navigation.PushAsync(new NavigationPage(setupPage));
+            await Navigation.PushAsync(setupPage);
         }
 
         private async void Search_Clicked(object sender, EventArgs e)
