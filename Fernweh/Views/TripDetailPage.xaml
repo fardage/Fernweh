@@ -197,7 +197,7 @@
                         <StackLayout.Triggers>
                             <DataTrigger Value="True" TargetType="StackLayout"
                                          Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
-                                <Setter Property="Opacity" Value="0.9"/>
+                                <Setter Property="Opacity" Value="0.9" />
                             </DataTrigger>
                         </StackLayout.Triggers>
                         <CheckBox x:Name="checkBox"

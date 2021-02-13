@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
 using Fernweh.Services.HereMaps;
 using Fernweh.Services.RestCountries;
 using Fernweh.Services.WorldBank;
-using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Item = Fernweh.Models.Item;
 
@@ -33,11 +30,9 @@ namespace Fernweh.ViewModels
             LoadChecklistsCommand = new Command(ExecuteLoadChecklistsCommand);
             DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
-            
-            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip", (obj, trip) =>
-            {
-                ExecuteLoadChecklistsCommand();
-            });
+
+            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip",
+                (obj, trip) => { ExecuteLoadChecklistsCommand(); });
 
             ExecuteLoadChecklistsCommand();
             _ = ExecuteLoadInfoCommand();
@@ -81,15 +76,11 @@ namespace Fernweh.ViewModels
                     GroupName = category.Name,
                     Icon = category.Icon
                 };
-                foreach (var item in category.Items)
-                {
-                    listGroup.Add(item);
-                }
+                foreach (var item in category.Items) listGroup.Add(item);
                 ChecklistGroups.Add(listGroup);
             }
 
             IsBusy = false;
-            
         }
 
         private async Task ExecuteLoadInfoCommand()

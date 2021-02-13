@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using AndroidX.AppCompat.App;
 
 namespace Fernweh.Droid
 {

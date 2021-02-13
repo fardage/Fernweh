@@ -34,10 +34,8 @@ namespace Fernweh.Droid
             Forms.Init(this, savedInstanceState);
 
             if (DeviceInfo.DeviceType == DeviceType.Physical)
-            {
                 AppCenter.Start(Credentials.ApiKeyAppCenter,
-                   typeof(Analytics), typeof(Crashes));
-            }
+                    typeof(Analytics), typeof(Crashes));
 
             var width = Resources.DisplayMetrics.WidthPixels;
             var height = Resources.DisplayMetrics.HeightPixels;
