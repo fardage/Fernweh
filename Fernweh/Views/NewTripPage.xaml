@@ -47,7 +47,7 @@
                         <yummy:PancakeView.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Search_Clicked" />
                         </yummy:PancakeView.GestureRecognizers>
-                        <StackLayout Orientation="Horizontal">
+                        <Grid>
                             <Label Text="&#xf002;"
                                    Style="{DynamicResource IconMediumStyle}"
                                    HorizontalOptions="Start"
@@ -57,7 +57,7 @@
                                    Text=" Where are you going?"
                                    HorizontalOptions="CenterAndExpand"
                                    VerticalOptions="CenterAndExpand"/>
-                        </StackLayout>
+                        </Grid>
                     </yummy:PancakeView>
 
                     <Label Grid.Row="1"
