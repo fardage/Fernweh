@@ -15,22 +15,27 @@ namespace Fernweh.ViewModels
         private string _destination = "Destination";
         private DateTime _endDate = DateTime.Now;
         private DateTime _startDate = DateTime.Now;
+        private string _colorA;
+        private string _colorB;
 
         public NewTripViewModel()
         {
             NewTrip = new Trip
             {
                 Destination = "Destination",
-                ColorA = GetRandomColor(),
-                ColorB = GetRandomColor(),
                 StartDate = _startDate,
                 EndDate = _endDate
             };
+
+            ColorA = GetRandomColor();
+            ColorB = GetRandomColor();
+            SetRandomColorCommand = new Command(ExecuteSetRandomColorCommand);
 
             SubscribeToMessagingCenter();
         }
 
         public Trip NewTrip { get; }
+        public Command SetRandomColorCommand { get; set; }
 
         public DateTime StartDate
         {
@@ -62,6 +67,26 @@ namespace Fernweh.ViewModels
             }
         }
 
+        public string ColorA
+        {
+            get => _colorA;
+            set
+            {
+                NewTrip.ColorA = value;
+                SetProperty(ref _colorA, value);
+            }
+        }
+
+        public string ColorB
+        {
+            get => _colorB;
+            set
+            {
+                NewTrip.ColorB = value;
+                SetProperty(ref _colorB, value);
+            }
+        }
+
         private void SubscribeToMessagingCenter()
         {
             MessagingCenter.Subscribe<SearchDestinationPage, Suggestion>(this, "ItemSelected",
@@ -76,6 +101,11 @@ namespace Fernweh.ViewModels
                     else
                         Destination = selected.Label;
                 });
+        }
+
+        internal void ExecuteSetRandomColorCommand() {
+            ColorA = GetRandomColor();
+            ColorB = GetRandomColor();
         }
 
         private string GetRandomColor()

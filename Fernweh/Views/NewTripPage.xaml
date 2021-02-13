@@ -22,8 +22,8 @@
             <yummy:PancakeView Style="{StaticResource CardFullWidthStyle}">
                 <yummy:PancakeView.BackgroundGradientStops>
                     <yummy:GradientStopCollection>
-                        <yummy:GradientStop Color="{Binding NewTrip.ColorA}" Offset="0" />
-                        <yummy:GradientStop Color="{Binding NewTrip.ColorB}" Offset="1" />
+                        <yummy:GradientStop Color="{Binding ColorA}" Offset="0" />
+                        <yummy:GradientStop Color="{Binding ColorB}" Offset="1" />
                     </yummy:GradientStopCollection>
                 </yummy:PancakeView.BackgroundGradientStops>
 
@@ -80,6 +80,17 @@
                                 Date="{Binding NewTrip.StartDate}" />
                     <DatePicker Grid.Row="3" Grid.Column="1" Style="{DynamicResource DatePickerStyle}"
                                 Date="{Binding NewTrip.EndDate}" />
+                    <Label Grid.Row="4"
+                           Grid.ColumnSpan="2"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="End"
+                           Style="{DynamicResource IconMediumStyle}"
+                           TextColor="White"
+                           Text="&#xf522;">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SetRandomColorCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Grid>
             </yummy:PancakeView>
 
