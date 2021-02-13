@@ -12,11 +12,12 @@ namespace Fernweh.ViewModels
         private readonly List<string> _colors = new List<string>(new List<string>
             {"#45EC9C", "#7E57FF", "#FE5D7A", "#FFB422"});
 
+        private string _colorA;
+        private string _colorB;
+
         private string _destination = "Destination";
         private DateTime _endDate = DateTime.Now;
         private DateTime _startDate = DateTime.Now;
-        private string _colorA;
-        private string _colorB;
 
         public NewTripViewModel()
         {
@@ -103,7 +104,8 @@ namespace Fernweh.ViewModels
                 });
         }
 
-        internal void ExecuteSetRandomColorCommand() {
+        internal void ExecuteSetRandomColorCommand()
+        {
             ColorA = GetRandomColor();
             ColorB = GetRandomColor();
         }

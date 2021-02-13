@@ -19,7 +19,8 @@ namespace Fernweh.Views
         private async void Menu_Clicked(object sender, EventArgs e)
         {
             var action = await DisplayActionSheet("Edit Trip", DialogActions.Cancel,
-                DialogActions.Delete, DialogActions.Rename, DialogActions.AddTemplateCategory, DialogActions.AddEmptyCategory);
+                DialogActions.Delete, DialogActions.Rename, DialogActions.AddTemplateCategory,
+                DialogActions.AddEmptyCategory);
 
             switch (action)
             {
@@ -42,10 +43,7 @@ namespace Fernweh.Views
         {
             var categoryName = await DisplayPromptAsync("Add Empty Category", "Enter New Category Name:");
 
-            if (!string.IsNullOrEmpty(categoryName))
-            {
-                viewModel.AddEmptyCategoryAsync(categoryName);
-            }
+            if (!string.IsNullOrEmpty(categoryName)) viewModel.AddEmptyCategoryAsync(categoryName);
         }
 
         private async Task DeleteItem_Clicked()

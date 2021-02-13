@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
@@ -31,7 +30,8 @@ namespace Fernweh.ViewModels
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
             DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
-            DeleteCategoryCommand = new Command<GroupedList>(async groupedList => await ExecuteDeleteCategoryCommand(groupedList));
+            DeleteCategoryCommand =
+                new Command<GroupedList>(async groupedList => await ExecuteDeleteCategoryCommand(groupedList));
 
             MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip",
                 async (obj, trip) => { await ExecuteLoadChecklistsCommand(); });
@@ -143,7 +143,7 @@ namespace Fernweh.ViewModels
 
         internal void AddEmptyCategoryAsync(string name)
         {
-            var category = new ItemCategory(name) { Icon = "\uf4ff" };
+            var category = new ItemCategory(name) {Icon = "\uf4ff"};
 
             Trip.Categories.Add(category);
 
@@ -156,6 +156,6 @@ namespace Fernweh.ViewModels
             ChecklistGroups.Add(listGroup);
 
             _ = DataStore.UpdateTripChecklistsAsync(Trip);
-        }  
+        }
     }
 }

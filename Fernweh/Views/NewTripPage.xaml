@@ -51,12 +51,12 @@
                             <Label Text="&#xf002;"
                                    Style="{DynamicResource IconMediumStyle}"
                                    HorizontalOptions="Start"
-                                   VerticalOptions="CenterAndExpand"/>
+                                   VerticalOptions="CenterAndExpand" />
                             <Label x:Name="DestinationSearchBar"
                                    Style="{StaticResource Heading3Style}"
                                    Text=" Where are you going?"
                                    HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"/>
+                                   VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </yummy:PancakeView>
 
