@@ -17,9 +17,9 @@ namespace Fernweh.Views
             SwipeCardView.Dragging += OnDragging;
         }
 
-        private async void Done_Clicked(object sender, EventArgs e)
+        private void Done_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopModalAsync();
+            viewModel.WrapUpTrip();
         }
 
         private void OnDragging(object sender, DraggingCardEventArgs e)

@@ -50,7 +50,7 @@ namespace Fernweh.ViewModels
             if (selected == TemplateCategories.Last()) WrapUpTrip();
         }
 
-        private void WrapUpTrip()
+        internal void WrapUpTrip()
         {
             Trip.Categories.AddRange(SelectedCategories);
             MessagingCenter.Send(this, "SetupTrip", Trip);

@@ -17,6 +17,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Clicked="Done_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid Padding="24">
             <Grid.RowDefinitions>
