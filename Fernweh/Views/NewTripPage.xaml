@@ -47,15 +47,17 @@
                         <yummy:PancakeView.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Search_Clicked" />
                         </yummy:PancakeView.GestureRecognizers>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Style="{DynamicResource IconMediumStyle}"
-                                          Text="&#xf002;" />
-                                    <Span Style="{StaticResource Heading3Style}" Text=" Where are you going?" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf002;"
+                                   Style="{DynamicResource IconMediumStyle}"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="DestinationSearchBar"
+                                   Style="{StaticResource Heading3Style}"
+                                   Text=" Where are you going?"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
                     </yummy:PancakeView>
 
                     <Label Grid.Row="1"
