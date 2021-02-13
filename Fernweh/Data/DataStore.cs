@@ -46,6 +46,17 @@ namespace Fernweh.Data
             await travelContext.SaveChangesAsync();
         }
 
+        public static async Task DeleteChecklistAsync(string id)
+        {
+            var travelContext = new TravelContext();
+            var toDelete = travelContext.Checklists
+                .Where(c => c.Id.Equals(id))
+                .Include(i => i.Items)
+                .SingleOrDefault();
+            travelContext.Checklists.Remove(toDelete);
+            await travelContext.SaveChangesAsync();
+        }
+
         public static async Task DeleteTripAsync(string id)
         {
             var travelContext = new TravelContext();

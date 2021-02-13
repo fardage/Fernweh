@@ -175,6 +175,13 @@
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
                                               Path=AddItemCommand}"
                             CommandParameter="{Binding .}" />
+                    <Button Style="{StaticResource IconButtonSmallStyle}"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="End"
+                            Text="&#xf2ed;"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TripDetailViewModel}}, 
+                                              Path=DeleteCategoryCommand}"
+                            CommandParameter="{Binding .}" />
                 </StackLayout>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>

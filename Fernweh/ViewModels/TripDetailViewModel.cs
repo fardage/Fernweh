@@ -31,6 +31,7 @@ namespace Fernweh.ViewModels
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
             DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
+            DeleteCategoryCommand = new Command<GroupedList>(async groupedList => await ExecuteDeleteCategoryCommand(groupedList));
 
             MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip",
                 async (obj, trip) => { await ExecuteLoadChecklistsCommand(); });
@@ -42,6 +43,7 @@ namespace Fernweh.ViewModels
         public Command LoadChecklistsCommand { get; set; }
         public Command<Item> DeleteChecklistItemCommand { get; set; }
         public Command<GroupedList> AddItemCommand { get; set; }
+        public Command<GroupedList> DeleteCategoryCommand { get; set; }
         public Trip Trip { get; set; }
 
         public CountryFacts Facts
@@ -132,6 +134,13 @@ namespace Fernweh.ViewModels
             }
         }
 
+        public async Task ExecuteDeleteCategoryCommand(GroupedList groupedList)
+        {
+            ChecklistGroups.Remove(groupedList);
+            Trip.Categories.RemoveAll(c => c.Id == groupedList.Id);
+            await DataStore.DeleteChecklistAsync(groupedList.Id);
+        }
+
         internal void AddEmptyCategoryAsync(string name)
         {
             var category = new ItemCategory(name) { Icon = "\uf4ff" };
@@ -147,6 +156,6 @@ namespace Fernweh.ViewModels
             ChecklistGroups.Add(listGroup);
 
             _ = DataStore.UpdateTripChecklistsAsync(Trip);
-        }
+        }  
     }
 }
