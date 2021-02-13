@@ -194,6 +194,12 @@
                     <StackLayout Orientation="Horizontal"
                                  Padding="24,0"
                                  Style="{DynamicResource ChecklistRowStyle}">
+                        <StackLayout.Triggers>
+                            <DataTrigger Value="True" TargetType="StackLayout"
+                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
                         <CheckBox x:Name="checkBox"
                                   IsChecked="{Binding Packed}"
                                   Style="{StaticResource CheckboxStyle}" />
@@ -201,7 +207,7 @@
                             <Label.Triggers>
                                 <DataTrigger Value="True" TargetType="Label"
                                              Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
-                                    <Setter Property="TextDecorations" Value="Strikethrough" />
+                                    <Setter Property="TextColor" Value="LightGray" />
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
