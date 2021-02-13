@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Fernweh.Data;
 using Fernweh.Models;
 using Fernweh.Services.HereMaps;
 using Fernweh.Services.RestCountries;
 using Fernweh.Services.WorldBank;
-using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Item = Fernweh.Models.Item;
 
@@ -22,23 +20,21 @@ namespace Fernweh.ViewModels
         private CountryFacts _facts;
         private string _tripName;
 
-        public TripDetailViewModel(Trip trip = null)
+        public TripDetailViewModel(Trip trip)
         {
-            Title = trip?.Destination;
-            TripName = trip?.Destination;
+            Title = trip.Destination;
+            TripName = trip.Destination;
             Trip = trip;
             ChecklistGroups = new ObservableCollection<GroupedList>();
 
-            LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
+            LoadChecklistsCommand = new Command(ExecuteLoadChecklistsCommand);
             DeleteChecklistItemCommand = new Command<Item>(async item => await ExecuteDeleteChecklistItemCommand(item));
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
-            
-            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip", async (obj, trip) =>
-            {
-                _ = ExecuteLoadChecklistsCommand();
-            });
 
-            _ = ExecuteLoadChecklistsCommand();
+            MessagingCenter.Subscribe<SetupTripViewModel, Trip>(this, "SetupTrip",
+                (obj, trip) => { ExecuteLoadChecklistsCommand(); });
+
+            ExecuteLoadChecklistsCommand();
             _ = ExecuteLoadInfoCommand();
         }
 
@@ -67,38 +63,24 @@ namespace Fernweh.ViewModels
             set => SetProperty(ref _tripName, value);
         }
 
-        internal async Task ExecuteLoadChecklistsCommand()
+        private void ExecuteLoadChecklistsCommand()
         {
             IsBusy = true;
             ChecklistGroups.Clear();
-            try
-            {
-                var checklists = await DataStore.GetItemCategoriesAsync(Trip.Id);
 
-                foreach (var category in checklists)
+            foreach (var category in Trip.Categories)
+            {
+                var listGroup = new GroupedList
                 {
-                    if (category.Items.Count != 0)
-                    {
-                        var listGroup = new GroupedList
-                        {
-                            Id = category.Id,
-                            GroupName = category.Name,
-                            Icon = category.Icon
-                        };
-                        foreach (var item in category.Items) listGroup.Add(item);
-                        ChecklistGroups.Add(listGroup);
-                    }
-                }
+                    Id = category.Id,
+                    GroupName = category.Name,
+                    Icon = category.Icon
+                };
+                foreach (var item in category.Items) listGroup.Add(item);
+                ChecklistGroups.Add(listGroup);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                Crashes.TrackError(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+
+            IsBusy = false;
         }
 
         private async Task ExecuteLoadInfoCommand()

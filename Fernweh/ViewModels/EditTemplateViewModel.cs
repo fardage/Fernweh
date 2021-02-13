@@ -103,10 +103,10 @@ namespace Fernweh.ViewModels
         {
             var newTemplate = new List<ItemCategory>();
             foreach (var group in ChecklistGroups)
-                newTemplate.Add(new ItemCategory(@group.GroupName)
+                newTemplate.Add(new ItemCategory(group.GroupName)
                 {
-                    Icon = @group.Icon,
-                    Items = @group.ToList()
+                    Icon = group.Icon,
+                    Items = group.ToList()
                 });
 
             TemplateProvider.SetChecklist(newTemplate);

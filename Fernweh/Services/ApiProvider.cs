@@ -34,7 +34,6 @@ namespace Fernweh.Services
             {
                 Console.WriteLine($"Unable to get information from server {ex}");
                 Crashes.TrackError(ex);
-
             }
 
             return json;

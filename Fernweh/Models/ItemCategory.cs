@@ -13,8 +13,7 @@ namespace Fernweh.Models
             Items = new List<Item>();
         }
 
-        [JsonIgnore]
-        public string Id { get; set; }
+        [JsonIgnore] public string Id { get; set; }
 
         public string Name { get; set; }
 
