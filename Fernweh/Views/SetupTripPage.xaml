@@ -46,12 +46,13 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Button Style="{DynamicResource IconMediumStyle}"
-                                       Text="&#xf0ae;"
-                                       Clicked="EditCategory_Clicked"
-                                       HorizontalOptions="Start"
-                                       VerticalOptions="Start"
-                                       BindingContext="{Binding .}">
+                                <Button Style="{DynamicResource IconButtonMediumStyle}"
+                                        BackgroundColor="Transparent"
+                                        Text="&#xf0ae;"
+                                        Clicked="EditCategory_Clicked"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Start"
+                                        BindingContext="{Binding .}">
                                 </Button>
                                 <Label Grid.Row="1"
                                        Style="{DynamicResource IconLargeStyle}"
