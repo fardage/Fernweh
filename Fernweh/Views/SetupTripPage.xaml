@@ -25,7 +25,7 @@
         <Grid Padding="24">
             <Grid.RowDefinitions>
                 <RowDefinition Height="8*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <swipeCardView:SwipeCardView
                 Grid.Row="0"
@@ -41,20 +41,27 @@
                         <Frame Style="{DynamicResource SwipeCardStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0"
+                                <Button Style="{DynamicResource IconMediumStyle}"
+                                       Text="&#xf0ae;"
+                                       Clicked="EditCategory_Clicked"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start"
+                                       BindingContext="{Binding .}">
+                                </Button>
+                                <Label Grid.Row="1"
                                        Style="{DynamicResource IconLargeStyle}"
                                        Text="{Binding Icon}"
                                        HorizontalOptions="CenterAndExpand"
                                        VerticalOptions="End" />
-                                <Label Grid.Row="1"
+                                <Label Grid.Row="2"
                                        Style="{DynamicResource Heading1Style}"
                                        Text="{Binding Name}"
                                        HorizontalOptions="CenterAndExpand" />
-
                                 <Frame Grid.Row="2"
                                        x:Name="NopeFrame"
                                        Style="{DynamicResource SwipeCardStampFrameStyle}"

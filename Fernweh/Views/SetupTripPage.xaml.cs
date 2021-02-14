@@ -1,6 +1,8 @@
 ﻿using System;
+using Fernweh.Models;
 using Fernweh.ViewModels;
 using MLToolkit.Forms.SwipeCardView.Core;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Fernweh.Views
@@ -116,6 +118,13 @@ namespace Fernweh.Views
         private async void AcceptCard_Clicked(object sender, EventArgs e)
         {
             await SwipeCardView.InvokeSwipe(SwipeCardDirection.Right, 20, 10, new TimeSpan(1), new TimeSpan(200));
+        }
+
+        private async void EditCategory_Clicked(object sender, EventArgs e)
+        {
+            var editPage = new EditCategoryPage();
+            editPage.BindingContext = ((Button) sender).BindingContext as ItemCategory;
+            await PopupNavigation.Instance.PushAsync(editPage);
         }
     }
 }

@@ -25,6 +25,8 @@ namespace Fernweh.iOS
             Calabash.Start();
 #endif
             Forms.SetFlags("SwipeView_Experimental");
+            
+            Rg.Plugins.Popup.Popup.Init();
             Forms.Init();
 
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;

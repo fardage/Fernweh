@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:models="clr-namespace:Fernweh.Models;assembly=Fernweh"
+                 x:Class="Fernweh.Views.EditCategoryPage" x:DataType="models:ItemCategory">
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation 
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            DurationIn="300"
+            DurationOut="200"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout  Margin="24,48">
+        <yummy:PancakeView BackgroundColor="{AppThemeBinding
+                                Light={StaticResource LightPrimaryPageBackgroundColor},
+                                Dark={StaticResource DarkPrimaryPageBackgroundColor}}"
+                           CornerRadius="25">
+        <CollectionView ItemsSource="{Binding Items}">
+        <CollectionView.Header>
+            <Grid Padding="24">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="CenterAndExpand"
+                       Style="{DynamicResource IconMediumStyle}"
+                       Text="{Binding Icon}" />
+
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       x:Name="DestinationSearchBar"
+                       Style="{StaticResource Heading1Style}"
+                       Text="{Binding Name}" />
+
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource Heading3Style}"
+                       Text="Uncheck to discard" />
+            </Grid>
+        </CollectionView.Header>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Item">
+
+                    <StackLayout Orientation="Horizontal"
+                                 Padding="12,0,0,0"
+                                 Style="{DynamicResource ChecklistRowStyle}">
+                        <StackLayout.Triggers>
+                            <DataTrigger Value="False" TargetType="StackLayout"
+                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                <Setter Property="Opacity" Value="0.9" />
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+                        <CheckBox x:Name="checkBox"
+                                  IsChecked="{Binding IsEnabled}"
+                                  Style="{StaticResource CheckboxStyle}" />
+                        <Label VerticalOptions="Center" Text="{Binding Name}">
+                            <Label.Triggers>
+                                <DataTrigger Value="False" TargetType="Label"
+                                             Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                    <Setter Property="TextColor" Value="LightGray" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+        <CollectionView.Footer>
+            <Label Padding="24" />
+        </CollectionView.Footer>
+        </CollectionView>
+    </yummy:PancakeView>
+
+        <Button Style="{StaticResource IconButtonMediumStyle}"
+                Margin="0,18,0,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Text="&#xf057;"
+                TextColor="White"
+                BackgroundColor="Red"
+                Clicked="Close_Clicked"/>
+    </StackLayout>
+</pages:PopupPage>

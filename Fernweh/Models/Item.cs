@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Fernweh.Data;
 
@@ -22,5 +23,8 @@ namespace Fernweh.Models
                 _ = DataStore.UpdateItemAsync(this);
             }
         }
+
+        [JsonIgnore, NotMapped]
+        public bool IsEnabled { get; set; } = true;
     }
 }

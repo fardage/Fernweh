@@ -30,6 +30,7 @@ namespace Fernweh.Droid
 
             Forms.SetFlags("SwipeView_Experimental");
 
+            Rg.Plugins.Popup.Popup.Init(this);
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
 

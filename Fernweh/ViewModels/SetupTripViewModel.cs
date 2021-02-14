@@ -45,7 +45,11 @@ namespace Fernweh.ViewModels
         {
             var selected = eventArgs.Item as ItemCategory;
 
-            if (eventArgs.Direction == SwipeCardDirection.Right) AddCategory(selected);
+            if (eventArgs.Direction == SwipeCardDirection.Right)
+            {
+                selected.Items.RemoveAll(x => x.IsEnabled == false);
+                AddCategory(selected);
+            }
 
             if (selected == TemplateCategories.Last()) WrapUpTrip();
         }
