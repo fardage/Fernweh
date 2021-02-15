@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text.Json;
 using Fernweh.Models;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Fernweh.Services
@@ -39,7 +39,7 @@ namespace Fernweh.Services
         private static List<ItemCategory> GetUserCheckList()
         {
             var jsonContent = File.ReadAllText(CustomTemplatePath);
-            return JsonSerializer.Deserialize<List<ItemCategory>>(jsonContent);
+            return JsonConvert.DeserializeObject<List<ItemCategory>>(jsonContent);
         }
 
         public static List<ItemCategory> GetResourceChecklist()
@@ -53,12 +53,12 @@ namespace Fernweh.Services
                 jsonContent = reader.ReadToEnd();
             }
 
-            return JsonSerializer.Deserialize<List<ItemCategory>>(jsonContent);
+            return JsonConvert.DeserializeObject<List<ItemCategory>>(jsonContent);
         }
 
         public static void SetChecklist(List<ItemCategory> template)
         {
-            var json = JsonSerializer.Serialize(template);
+            var json = JsonConvert.SerializeObject(template);
             File.WriteAllText(CustomTemplatePath, json);
         }
     }
