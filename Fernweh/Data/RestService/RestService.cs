@@ -12,21 +12,21 @@ namespace Fernweh.Data.RestService
 {
     public class RestService : IRestService
     {
-        private const string SharingURL = "http://fernweh.db:3000/api/trips/";
-        private readonly HttpClient client;
+        private const string SharingUrl = "http://fernweh.db:3000/api/trips/";
+        private readonly HttpClient _client;
 
         public RestService()
         {
-            client = new HttpClient();
+            _client = new HttpClient();
         }
 
         public async Task DeleteTripAsync(string id)
         {
-            var uri = new Uri(string.Format(SharingURL, id));
+            var uri = new Uri(string.Format(SharingUrl));
 
             try
             {
-                var response = await client.DeleteAsync(uri);
+                var response = await _client.DeleteAsync(uri);
 
                 if (response.IsSuccessStatusCode) Debug.WriteLine(@"\tTodoItem successfully deleted.");
             }
@@ -39,15 +39,14 @@ namespace Fernweh.Data.RestService
 
         public async Task<Trip> GetTripAsync(string id)
         {
-            var trip = new Trip();
-            var uri = new Uri(SharingURL + id);
+            var uri = new Uri(SharingUrl + id);
             try
             {
-                var response = await client.GetAsync(uri);
+                var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    trip = JsonConvert.DeserializeObject<Trip>(content);
+                    var trip = JsonConvert.DeserializeObject<Trip>(content);
                     return trip;
                 }
             }
@@ -62,7 +61,7 @@ namespace Fernweh.Data.RestService
 
         public async Task SaveTripAsync(Trip trip, bool isNewTrip = false)
         {
-            var uri = new Uri(string.Format(SharingURL, string.Empty));
+            var uri = new Uri(SharingUrl);
 
             try
             {
@@ -75,9 +74,9 @@ namespace Fernweh.Data.RestService
 
                 HttpResponseMessage response = null;
                 if (isNewTrip)
-                    response = await client.PostAsync(uri, content);
+                    response = await _client.PostAsync(uri, content);
                 else
-                    response = await client.PutAsync(uri, content);
+                    response = await _client.PutAsync(uri, content);
 
                 if (response.IsSuccessStatusCode) Debug.WriteLine(@"\tTodoItem successfully saved.");
             }

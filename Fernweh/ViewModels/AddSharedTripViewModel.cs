@@ -7,7 +7,7 @@ namespace Fernweh.ViewModels
 {
     public class AddSharedTripViewModel : BaseViewModel
     {
-        private readonly RestService restService = new RestService();
+        private readonly RestService _restService = new RestService();
 
         private readonly string _guid_pattern =
             @"(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}";
@@ -44,7 +44,7 @@ namespace Fernweh.ViewModels
         {
             if (IsValidCode)
             {
-                var trip = await restService.GetTripAsync(TripCode);
+                var trip = await _restService.GetTripAsync(TripCode);
 
                 if (trip != null)
                 {
