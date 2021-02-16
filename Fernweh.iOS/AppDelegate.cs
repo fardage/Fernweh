@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Rg.Plugins.Popup;
 using UIKit;
 using Xamarin;
 using Xamarin.Forms;
@@ -25,8 +26,8 @@ namespace Fernweh.iOS
             Calabash.Start();
 #endif
             Forms.SetFlags("SwipeView_Experimental");
-            
-            Rg.Plugins.Popup.Popup.Init();
+
+            Popup.Init();
             Forms.Init();
 
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;

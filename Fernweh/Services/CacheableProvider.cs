@@ -7,7 +7,7 @@ using Xamarin.Essentials;
 
 namespace Fernweh.Services
 {
-    public abstract class ApiProvider
+    public abstract class CacheableProvider
     {
         internal async Task<string> GetAsync(string url, int days = 7, bool forceRefresh = false)
         {

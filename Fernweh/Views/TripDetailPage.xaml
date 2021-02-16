@@ -11,6 +11,10 @@
                         Light={StaticResource LightPrimaryPageBackgroundColor}, 
                         Dark={StaticResource DarkPrimaryPageBackgroundColor}}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Clicked="Share_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <CollectionView ItemsSource="{Binding ChecklistGroups}" IsGrouped="true">
         <CollectionView.Header>
             <StackLayout>
@@ -26,10 +30,22 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="{Binding TripName}"
-                           Grid.Row="0"
+
+                    <Label Grid.Row="0"
                            Grid.Column="0"
-                           Style="{DynamicResource Heading1Style}" />
+                           Style="{DynamicResource Heading1Style}"
+                           Text="{Binding TripName}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource IconMediumStyle}"
+                           Text="&#xf0c2;"
+                           TextColor="MediumSpringGreen"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand" />
+
                     <Label Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}"
                            Grid.Row="1"
                            Grid.Column="0"
@@ -45,7 +61,7 @@
 
                 <Label Text="About the Country"
                        Margin="24,0"
-                       Style="{DynamicResource Heading2Style}"/>
+                       Style="{DynamicResource Heading2Style}" />
 
                 <ScrollView Orientation="Horizontal"
                             Margin="12,12,0,24">

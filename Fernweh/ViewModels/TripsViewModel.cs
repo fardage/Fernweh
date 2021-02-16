@@ -45,6 +45,13 @@ namespace Fernweh.ViewModels
                 }
             });
 
+            MessagingCenter.Subscribe<AddSharedTripViewModel, Trip>(this, "AddSharedTrip", async (obj, trip) =>
+            {
+                Analytics.TrackEvent($"Trip added: {trip.Destination}");
+                Trips.Add(trip);
+                await DataStore.AddTripAsync(trip);
+            });
+
             MessagingCenter.Subscribe<TripDetailPage, Trip>(this, "DeleteTrip",
                 async (obj, trip) =>
                 {

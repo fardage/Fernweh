@@ -25,7 +25,18 @@ namespace Fernweh.Views
 
         private async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(new NewTripViewModel())));
+            var action = await DisplayActionSheet("Add Trip", DialogActions.Cancel,
+                null, DialogActions.AddNewTrip, DialogActions.AddNewTripCode);
+
+            switch (action)
+            {
+                case DialogActions.AddNewTrip:
+                    await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(new NewTripViewModel())));
+                    break;
+                case DialogActions.AddNewTripCode:
+                    await Navigation.PushModalAsync(new NavigationPage(new AddSharedTripPage()));
+                    break;
+            }
         }
 
         private async void Settings_Clicked(object sender, EventArgs e)

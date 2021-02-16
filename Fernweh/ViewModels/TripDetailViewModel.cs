@@ -2,12 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Fernweh.Data;
+using Fernweh.Data.RestService;
 using Fernweh.Models;
 using Fernweh.Services.HereMaps;
 using Fernweh.Services.RestCountries;
 using Fernweh.Services.WorldBank;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Item = Fernweh.Models.Item;
 
@@ -17,7 +17,9 @@ namespace Fernweh.ViewModels
     {
         private readonly HereMapsProvider _hereMapsProvider = new HereMapsProvider();
         private readonly RestCountriesProvider _restCountriesProvider = new RestCountriesProvider();
+        private readonly RestService _restService = new RestService();
         private readonly WorldBankProvider _worldBankProvider = new WorldBankProvider();
+
         private double _averageTemperature;
         private CountryFacts _facts;
         private string _tripName;
@@ -158,6 +160,19 @@ namespace Fernweh.ViewModels
             ChecklistGroups.Add(listGroup);
 
             _ = DataStore.UpdateTripChecklistsAsync(Trip);
+        }
+
+        internal async Task ShareTripAsync()
+        {
+            try
+            {
+                await _restService.SaveTripAsync(Trip, !Trip.IsShared);
+                Trip.IsShared = !Trip.IsShared;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+            }
         }
     }
 }

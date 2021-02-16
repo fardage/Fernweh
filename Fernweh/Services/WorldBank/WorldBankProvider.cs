@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Fernweh.Services.WorldBank
 {
-    public class WorldBankProvider : ApiProvider
+    public class WorldBankProvider : CacheableProvider
     {
         private const string WorldBankAvgTempUrl =
             "http://climatedataapi.worldbank.org/climateweb/rest/v1/country/mavg/tas/2020/2039/";

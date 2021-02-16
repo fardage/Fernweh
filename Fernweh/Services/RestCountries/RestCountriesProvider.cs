@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Fernweh.Services.RestCountries
 {
-    public class RestCountriesProvider : ApiProvider
+    public class RestCountriesProvider : CacheableProvider
     {
         private const string AllCountriesUrl = "https://restcountries.eu/rest/v2/alpha/";
 

@@ -16,6 +16,24 @@ namespace Fernweh.Views
             BindingContext = this.viewModel = viewModel;
         }
 
+        private async void Share_Clicked(object sender, EventArgs e)
+        {
+            if (viewModel.Trip.IsShared)
+            {
+                await DisplayAlert("Share Checklist", "This checklist is already being shared.", "OK");
+            }
+            else
+            {
+                var answer = await DisplayAlert("Share Checklist?", "Want to share this checklist with someone?", "Yes",
+                    "No");
+                if (answer)
+                {
+                    await viewModel.ShareTripAsync();
+                    await DisplayAlert("Success", $"Sharing code: {viewModel.Trip.Id}", "OK");
+                }
+            }
+        }
+
         private async void Menu_Clicked(object sender, EventArgs e)
         {
             var action = await DisplayActionSheet("Edit Trip", DialogActions.Cancel,
@@ -69,14 +87,5 @@ namespace Fernweh.Views
             var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, viewModel.Trip));
             await Navigation.PushModalAsync(new NavigationPage(setupPage));
         }
-    }
-
-    internal static class DialogActions
-    {
-        public const string Cancel = "Cancel";
-        public const string Delete = "Delete";
-        public const string Rename = "Rename";
-        public const string AddTemplateCategory = "Add Category from Template";
-        public const string AddEmptyCategory = "Add Category Empty";
     }
 }

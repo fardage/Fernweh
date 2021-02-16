@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Fernweh.Services.HereMaps
 {
-    public class HereMapsProvider : ApiProvider
+    public class HereMapsProvider : CacheableProvider
     {
         private const string HereAutocompleteUrl =
             "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?&language=en&query=";
