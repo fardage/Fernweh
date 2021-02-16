@@ -23,12 +23,14 @@ namespace Fernweh.ViewModels
         private double _averageTemperature;
         private CountryFacts _facts;
         private string _tripName;
+        private bool _isShared;
 
         public TripDetailViewModel(Trip trip)
         {
             Title = trip.Destination;
             TripName = trip.Destination;
             Trip = trip;
+            _isShared = Trip.IsShared;
             ChecklistGroups = new ObservableCollection<GroupedList>();
 
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
@@ -68,6 +70,16 @@ namespace Fernweh.ViewModels
         {
             get => _tripName;
             set => SetProperty(ref _tripName, value);
+        }
+
+        public bool IsShared
+        {
+            get => _isShared;
+            set
+            {
+                Trip.IsShared = value;
+                SetProperty(ref _isShared, value);
+            }
         }
 
         private async Task ExecuteLoadChecklistsCommand(bool forceRefresh = false)
@@ -167,7 +179,8 @@ namespace Fernweh.ViewModels
             try
             {
                 await _restService.SaveTripAsync(Trip, !Trip.IsShared);
-                Trip.IsShared = !Trip.IsShared;
+                IsShared = !Trip.IsShared;
+                await DataStore.UpdateTripAsync(Trip);
             }
             catch (Exception ex)
             {

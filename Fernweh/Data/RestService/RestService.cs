@@ -12,7 +12,7 @@ namespace Fernweh.Data.RestService
 {
     public class RestService : IRestService
     {
-        private const string SharingUrl = "http://fernweh.db:3000/api/trips/";
+        private const string SharingUrl = "https://fernweh-backend.herokuapp.com/api/trips/";
         private readonly HttpClient _client;
 
         public RestService()

@@ -31,20 +31,18 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Label Grid.Row="0"
-                           Grid.Column="0"
-                           Style="{DynamicResource Heading1Style}"
-                           Text="{Binding TripName}"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalOptions="CenterAndExpand" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label Style="{DynamicResource Heading1Style}"
+                               Text="{Binding TripName}"
+                               VerticalOptions="CenterAndExpand" />
 
-                    <Label Grid.Row="0"
-                           Grid.Column="1"
-                           Style="{StaticResource IconMediumStyle}"
-                           Text="&#xf0c2;"
-                           TextColor="MediumSpringGreen"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalOptions="CenterAndExpand" />
+                        <Label Style="{StaticResource IconMediumStyle}"
+                               Text="&#xf0c2;"
+                               TextColor="MediumSpringGreen"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               IsVisible="{Binding IsShared}"/>
+                    </StackLayout>
 
                     <Label Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}"
                            Grid.Row="1"

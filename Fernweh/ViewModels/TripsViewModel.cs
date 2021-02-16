@@ -36,13 +36,13 @@ namespace Fernweh.ViewModels
                 if (!Trips.ToList().Any(t => t.Id.Equals(trip.Id)))
                 {
                     Analytics.TrackEvent($"Trip added: {trip.Destination}");
-                    Trips.Add(trip);
                     await DataStore.AddTripAsync(trip);
                 }
                 else
                 {
                     await DataStore.UpdateTripChecklistsAsync(trip);
                 }
+                await ExecuteLoadTripsCommand();
             });
 
             MessagingCenter.Subscribe<AddSharedTripViewModel, Trip>(this, "AddSharedTrip", async (obj, trip) =>

@@ -20,7 +20,7 @@ namespace Fernweh.Views
         {
             if (viewModel.Trip.IsShared)
             {
-                await DisplayAlert("Share Checklist", "This checklist is already being shared.", "OK");
+                await DisplayAlert("Share Checklist", $"Already being shared:\n{viewModel.Trip.Id}", "OK");
             }
             else
             {
@@ -29,7 +29,7 @@ namespace Fernweh.Views
                 if (answer)
                 {
                     await viewModel.ShareTripAsync();
-                    await DisplayAlert("Success", $"Sharing code: {viewModel.Trip.Id}", "OK");
+                    await DisplayAlert("Success", $"Sharing code:\n{viewModel.Trip.Id}", "OK");
                 }
             }
         }
