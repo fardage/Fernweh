@@ -61,8 +61,6 @@ namespace Fernweh.Data.RestService
 
         public async Task SaveTripAsync(Trip trip, bool isNewTrip = false)
         {
-            var uri = new Uri(SharingUrl);
-
             try
             {
                 var json = JsonConvert.SerializeObject(trip,
@@ -74,9 +72,13 @@ namespace Fernweh.Data.RestService
 
                 HttpResponseMessage response = null;
                 if (isNewTrip)
-                    response = await _client.PostAsync(uri, content);
+                {
+                    response = await _client.PostAsync(new Uri(SharingUrl), content);
+                }
                 else
-                    response = await _client.PutAsync(uri, content);
+                {
+                    response = await _client.PutAsync(new Uri(SharingUrl + trip.Id), content);
+                }
 
                 if (response.IsSuccessStatusCode) Debug.WriteLine(@"\tTodoItem successfully saved.");
             }

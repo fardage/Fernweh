@@ -43,7 +43,7 @@ namespace Fernweh.Views
             switch (action)
             {
                 case DialogActions.Delete:
-                    await DeleteItem_Clicked();
+                    await DeleteTrip_Clicked();
                     break;
                 case DialogActions.Rename:
                     await RenameItem_Clicked();
@@ -64,7 +64,7 @@ namespace Fernweh.Views
             if (!string.IsNullOrEmpty(categoryName)) viewModel.AddEmptyCategoryAsync(categoryName);
         }
 
-        private async Task DeleteItem_Clicked()
+        private async Task DeleteTrip_Clicked()
         {
             await Navigation.PopAsync().ContinueWith(_ => MessagingCenter.Send(this, "DeleteTrip", viewModel.Trip));
         }

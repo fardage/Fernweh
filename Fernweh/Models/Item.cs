@@ -9,7 +9,14 @@ namespace Fernweh.Models
     {
         private bool _packed;
 
-        [JsonIgnore] public string Id { get; set; } = Guid.NewGuid().ToString();
+        [JsonIgnore]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+
+        [JsonIgnore]
+        public string ParentId { get; set; }
+
+        [JsonIgnore]
+        public ItemCategory Parent { get; set; }
 
         public string Name { get; set; }
 
@@ -24,6 +31,7 @@ namespace Fernweh.Models
             }
         }
 
-        [JsonIgnore] [NotMapped] public bool IsEnabled { get; set; } = true;
+        [JsonIgnore] [NotMapped]
+        public bool IsEnabled { get; set; } = true;
     }
 }

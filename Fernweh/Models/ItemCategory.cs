@@ -13,7 +13,14 @@ namespace Fernweh.Models
             Items = new List<Item>();
         }
 
-        [JsonIgnore] public string Id { get; set; }
+        [JsonIgnore]
+        public string Id { get; set; }
+
+        [JsonIgnore]
+        public string ParentId { get; set; }
+
+        [JsonIgnore]
+        public Trip Parent { get; set; }
 
         public string Name { get; set; }
 
