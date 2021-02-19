@@ -6,6 +6,7 @@ using Fernweh.Services;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Rg.Plugins.Popup;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -30,7 +31,7 @@ namespace Fernweh.Droid
 
             Forms.SetFlags("SwipeView_Experimental");
 
-            Rg.Plugins.Popup.Popup.Init(this);
+            Popup.Init(this);
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
 

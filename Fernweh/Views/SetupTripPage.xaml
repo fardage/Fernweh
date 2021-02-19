@@ -52,8 +52,7 @@
                                         Clicked="EditCategory_Clicked"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Start"
-                                        BindingContext="{Binding .}">
-                                </Button>
+                                        BindingContext="{Binding .}" />
                                 <Label Grid.Row="1"
                                        Style="{DynamicResource IconLargeStyle}"
                                        Text="{Binding Icon}"

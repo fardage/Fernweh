@@ -6,8 +6,6 @@ using Fernweh.Models;
 using Fernweh.Services.HereMaps;
 using Fernweh.Services.RestCountries;
 using Fernweh.Services.WorldBank;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Xamarin.Forms;
 using Item = Fernweh.Models.Item;
 

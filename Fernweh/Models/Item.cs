@@ -24,7 +24,6 @@ namespace Fernweh.Models
             }
         }
 
-        [JsonIgnore, NotMapped]
-        public bool IsEnabled { get; set; } = true;
+        [JsonIgnore] [NotMapped] public bool IsEnabled { get; set; } = true;
     }
 }

@@ -1,21 +1,17 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Fernweh.Views
 {
-    public partial class EditCategoryPage : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class EditCategoryPage : PopupPage
     {
         public EditCategoryPage()
         {
             InitializeComponent();
         }
-        
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -88,7 +84,7 @@ namespace Fernweh.Views
             return base.OnBackgroundClicked();
         }
 
-        async void Close_Clicked(object sender, EventArgs e)
+        private async void Close_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PopAllAsync();
         }
