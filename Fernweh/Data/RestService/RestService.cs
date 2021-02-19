@@ -59,7 +59,7 @@ namespace Fernweh.Data.RestService
             return null;
         }
 
-        public async Task SaveTripAsync(Trip trip, bool isNewTrip = false)
+        public async Task<Trip> SaveTripAsync(Trip trip, bool isNewTrip = false)
         {
             try
             {
@@ -80,13 +80,18 @@ namespace Fernweh.Data.RestService
                     response = await _client.PutAsync(new Uri(SharingUrl + trip.Id), content);
                 }
 
-                if (response.IsSuccessStatusCode) Debug.WriteLine(@"\tTodoItem successfully saved.");
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\tTodoItem successfully saved.");
+                    return JsonConvert.DeserializeObject<Trip>(response.Content.ReadAsStringAsync().Result);
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 Crashes.TrackError(ex);
             }
+            return null;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Fernweh.Data.RestService
     {
         Task<Trip> GetTripAsync(string id);
 
-        Task SaveTripAsync(Trip trip, bool isNewItem);
+        Task<Trip> SaveTripAsync(Trip trip, bool isNewItem);
 
         Task DeleteTripAsync(string id);
     }
