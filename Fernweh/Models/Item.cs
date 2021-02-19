@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Fernweh.Data;
+using Newtonsoft.Json;
 
 namespace Fernweh.Models
 {
@@ -24,7 +24,6 @@ namespace Fernweh.Models
             }
         }
 
-        [JsonIgnore, NotMapped]
-        public bool IsEnabled { get; set; } = true;
+        [JsonIgnore] [NotMapped] public bool IsEnabled { get; set; } = true;
     }
 }

@@ -33,7 +33,7 @@
                     <Label Text="{Binding Trip.StartDate, StringFormat='{0:dd. MMMM, yyyy}'}"
                            Grid.Row="1"
                            Grid.Column="0"
-                           Style="{DynamicResource Heading2Style}" />
+                           Style="{DynamicResource Heading3Style}" />
 
                     <Button Text="&#xf142;"
                             Style="{DynamicResource IconButtonMediumStyle}"
@@ -42,6 +42,11 @@
                             Grid.Column="2"
                             Grid.RowSpan="2" />
                 </Grid>
+
+                <Label Text="About the Country"
+                       Margin="24,0"
+                       Style="{DynamicResource Heading2Style}" />
+
                 <ScrollView Orientation="Horizontal"
                             Margin="12,12,0,24">
                     <StackLayout Orientation="Horizontal">
