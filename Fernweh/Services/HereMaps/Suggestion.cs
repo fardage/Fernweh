@@ -22,7 +22,7 @@
 
         public string Label { get; set; }
         public string CountryCode { get; set; }
-        public Address Address { get; set; }
+        public Address Address { get; set; } = new Address();
         public SuggestionKind MatchLevel { get; set; }
     }
 }
