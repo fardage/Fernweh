@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Fernweh.Models
 {
-    public class ItemCategory
+    public class ItemCategory : IEntityDate
     {
         public ItemCategory(string name)
         {
@@ -27,5 +27,8 @@ namespace Fernweh.Models
         public string Icon { get; set; }
 
         public List<Item> Items { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

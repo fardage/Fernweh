@@ -1,5 +1,8 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Fernweh.Models;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -40,5 +43,32 @@ namespace Fernweh.Data
 
             optionsBuilder.UseSqlite($"Filename={databasePath}");
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var now = DateTime.UtcNow;
+
+            foreach (var changedEntity in ChangeTracker.Entries())
+            {
+                if (changedEntity.Entity is IEntityDate entity)
+                {
+                    switch (changedEntity.State)
+                    {
+                        case EntityState.Added:
+                            entity.CreatedAt = now;
+                            entity.UpdatedAt = now;
+                            break;
+
+                        case EntityState.Modified:
+                            Entry(entity).Property(x => x.CreatedAt).IsModified = false;
+                            entity.UpdatedAt = now;
+                            break;
+                    }
+                }
+            }
+
+            return (await SaveChangesAsync(true, cancellationToken));
+        }
+
     }
 }

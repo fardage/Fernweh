@@ -2,12 +2,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Fernweh.Models;
+using Fernweh.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fernweh.Data
 {
     public static class DataStore
     {
+        private static readonly SerialQueue _serialQueue = new SerialQueue();
+
         public static async Task AddTripAsync(Trip trip)
         {
             await using var tripContext = new TravelContext();
@@ -18,11 +21,11 @@ namespace Fernweh.Data
         public static async Task<IEnumerable<Trip>> GetTripsAsync()
         {
             var travelContext = new TravelContext();
-            var storedTrips = travelContext.Trips
+            var trips = travelContext.Trips
                 .Include(t => t.Categories)
                 .ThenInclude(c => c.Items)
                 .ToList();
-            return await Task.FromResult(storedTrips);
+            return await Task.FromResult(trips);
         }
 
         public static async Task UpdateTripAsync(Trip trip)
@@ -31,7 +34,7 @@ namespace Fernweh.Data
             travelContext.Update(trip);
             await travelContext.SaveChangesAsync();
 
-            await UpdateRemoteByTripId(trip.Id);
+            UpdateRemoteByTripId(trip.Id);
         }
 
         public static async Task UpdateTripChecklistsAsync(Trip trip)
@@ -46,7 +49,7 @@ namespace Fernweh.Data
             travelContext.Update(targetTrip);
             await travelContext.SaveChangesAsync();
 
-            await UpdateRemoteByTripId(trip.Id);
+            UpdateRemoteByTripId(trip.Id);
         }
 
         public static async Task DeleteChecklistAsync(string id)
@@ -59,7 +62,7 @@ namespace Fernweh.Data
             travelContext.Checklists.Remove(checklist);
             await travelContext.SaveChangesAsync();
 
-            await UpdateRemoteByTripId(checklist.ParentId);
+            UpdateRemoteByTripId(checklist.ParentId);
         }
 
         public static async Task DeleteTripAsync(string id)
@@ -93,7 +96,7 @@ namespace Fernweh.Data
             travelContext.Update(category);
             await travelContext.SaveChangesAsync();
 
-            await UpdateRemoteByCategoryId(category.Id);
+            UpdateRemoteByCategoryId(category.Id);
         }
 
         public static async Task UpdateItemAsync(Item item)
@@ -102,7 +105,7 @@ namespace Fernweh.Data
             travelContext.Update(item);
             await travelContext.SaveChangesAsync();
 
-            await UpdateRemoteByItemId(item.Id);
+            UpdateRemoteByItemId(item.Id);
         }
 
         public static async Task DeleteItemAsync(Item item)
@@ -111,10 +114,10 @@ namespace Fernweh.Data
             travelContext.ChecklistItems.Remove(item);
             await travelContext.SaveChangesAsync();
 
-            await UpdateRemoteByCategoryId(item.ParentId);
+            UpdateRemoteByCategoryId(item.ParentId);
         }
 
-        private static async Task UpdateRemoteByTripId(string tripId)
+        private static void UpdateRemoteByTripId(string tripId)
         {
             using (var travelContext = new TravelContext())
             {
@@ -127,12 +130,12 @@ namespace Fernweh.Data
                 if (trip.IsShared)
                 {
                     var restService = new RestService.RestService();
-                    await restService.SaveTripAsync(trip);
+                    _ = _serialQueue.Enqueue(async () => { await restService.SaveTripAsync(trip); });
                 }
             }
         }
 
-        private static async Task UpdateRemoteByCategoryId(string categoryId)
+        private static void UpdateRemoteByCategoryId(string categoryId)
         {
             using (var travelContext = new TravelContext())
             {
@@ -141,11 +144,11 @@ namespace Fernweh.Data
                     .Include(c => c.Parent)
                     .SingleOrDefault();
 
-                await UpdateRemoteByTripId(category.ParentId);
+                UpdateRemoteByTripId(category.ParentId);
             }
         }
 
-        private static async Task UpdateRemoteByItemId(string itemId)
+        private static void UpdateRemoteByItemId(string itemId)
         {
             using (var travelContext = new TravelContext())
             {
@@ -154,7 +157,7 @@ namespace Fernweh.Data
                     .Include(c => c.Parent)
                     .SingleOrDefault();
 
-                await UpdateRemoteByCategoryId(item.ParentId);
+                UpdateRemoteByCategoryId(item.ParentId);
             }
         }
     }

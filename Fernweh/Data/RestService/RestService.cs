@@ -22,7 +22,7 @@ namespace Fernweh.Data.RestService
 
         public async Task DeleteTripAsync(string id)
         {
-            var uri = new Uri(string.Format(SharingUrl));
+            var uri = new Uri(SharingUrl + id);
 
             try
             {

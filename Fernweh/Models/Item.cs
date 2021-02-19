@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Fernweh.Models
 {
-    public class Item
+    public class Item : IEntityDate
     {
         private bool _packed;
 
@@ -20,7 +20,6 @@ namespace Fernweh.Models
 
         public string Name { get; set; }
 
-        [JsonIgnore]
         public bool Packed
         {
             get => _packed;
@@ -33,5 +32,8 @@ namespace Fernweh.Models
 
         [JsonIgnore] [NotMapped]
         public bool IsEnabled { get; set; } = true;
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
