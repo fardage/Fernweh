@@ -70,11 +70,11 @@ namespace Fernweh.ViewModels
         {
             IsBusy = true;
 
-            var categoryies = forceRefresh ? await DataStore.GetItemCategoriesAsync(Trip.Id) : Trip.Categories;
+            var categories = forceRefresh ? await DataStore.GetItemCategoriesAsync(Trip.Id) : Trip.Categories;
 
             ChecklistGroups.Clear();
 
-            foreach (var category in categoryies)
+            foreach (var category in categories)
             {
                 var listGroup = new GroupedList
                 {
@@ -102,9 +102,7 @@ namespace Fernweh.ViewModels
         private async Task LoadWeather(string countryCode)
         {
             var weather = await _worldBankProvider.GetAverageWeatherAsync(countryCode);
-            var startTemp = weather.MonthVals[Trip.StartDate.Month - 1];
-            var endTemp = weather.MonthVals[Trip.EndDate.Month - 1];
-            AverageTemperature = Math.Round((startTemp + endTemp) / 2, 1);
+            AverageTemperature = Math.Round(weather.MonthVals[Trip.StartDate.Month - 1], 1);
         }
 
         private async Task LoadFacts(string countryCode)

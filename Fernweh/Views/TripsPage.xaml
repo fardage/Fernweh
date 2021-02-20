@@ -19,7 +19,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Settings" Clicked="Settings_Clicked" />
+        <ToolbarItem Text="Edit" Clicked="Settings_Clicked" />
     </ContentPage.ToolbarItems>
 
     <Grid>
