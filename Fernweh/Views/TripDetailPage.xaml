@@ -156,6 +156,72 @@
                                        HorizontalTextAlignment="End" />
                             </Grid>
                         </yummy:PancakeView>
+
+                        <yummy:PancakeView Style="{StaticResource TileStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Style="{DynamicResource Heading2Style}"
+                                       Text="Most Spoken" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Style="{DynamicResource Heading3Style}"
+                                       Text="{Binding Facts.MostSpokenLanguage}" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Grid.RowSpan="2"
+                                       Grid.ColumnSpan="2"
+                                       Style="{DynamicResource IconLargeStyle}"
+                                       Text="&#xf1ab;"
+                                       HorizontalTextAlignment="End" />
+                            </Grid>
+                        </yummy:PancakeView>
+
+                        <yummy:PancakeView Style="{StaticResource TileStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Style="{DynamicResource Heading2Style}"
+                                       Text="Most Used" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Style="{DynamicResource Heading3Style}"
+                                       Text="{Binding Facts.MostUsedCurrency}" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Grid.RowSpan="2"
+                                       Grid.ColumnSpan="2"
+                                       Style="{DynamicResource IconLargeStyle}"
+                                       Text="&#xf53a;"
+                                       HorizontalTextAlignment="End" />
+                            </Grid>
+                        </yummy:PancakeView>
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
@@ -204,24 +270,27 @@
                         </SwipeItems>
                     </SwipeView.RightItems>
                     <StackLayout Orientation="Horizontal"
-                                 Padding="24,0"
+                                 Padding="24,4"
                                  Style="{DynamicResource ChecklistRowStyle}">
                         <StackLayout.Triggers>
                             <DataTrigger Value="True" TargetType="StackLayout"
-                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                         Binding="{Binding Source={x:Reference CheckBox}, Path=IsChecked}">
                                 <Setter Property="Opacity" Value="0.9" />
                             </DataTrigger>
                         </StackLayout.Triggers>
-                        <CheckBox x:Name="checkBox"
+                        <CheckBox x:Name="CheckBox"
                                   IsChecked="{Binding Packed}"
                                   Style="{StaticResource CheckboxStyle}" />
                         <Label VerticalOptions="Center" Text="{Binding Name}">
                             <Label.Triggers>
                                 <DataTrigger Value="True" TargetType="Label"
-                                             Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}">
+                                             Binding="{Binding Source={x:Reference CheckBox}, Path=IsChecked}">
                                     <Setter Property="TextColor" Value="LightGray" />
                                 </DataTrigger>
                             </Label.Triggers>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Label_Clicked" />
+                            </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
                 </SwipeView>

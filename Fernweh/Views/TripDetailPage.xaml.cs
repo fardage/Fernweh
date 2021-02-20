@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Fernweh.Models;
 using Fernweh.ViewModels;
 using Xamarin.Forms;
 
 namespace Fernweh.Views
 {
-    public partial class TripDetailPage : ContentPage
+    public partial class TripDetailPage
     {
-        private readonly TripDetailViewModel viewModel;
+        private readonly TripDetailViewModel _viewModel;
 
         public TripDetailPage(TripDetailViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = _viewModel = viewModel;
         }
 
         private async void Menu_Clicked(object sender, EventArgs e)
@@ -43,12 +44,12 @@ namespace Fernweh.Views
         {
             var categoryName = await DisplayPromptAsync("Add Empty Category", "Enter New Category Name:");
 
-            if (!string.IsNullOrEmpty(categoryName)) viewModel.AddEmptyCategoryAsync(categoryName);
+            if (!string.IsNullOrEmpty(categoryName)) _viewModel.AddEmptyCategoryAsync(categoryName);
         }
 
         private async Task DeleteItem_Clicked()
         {
-            await Navigation.PopAsync().ContinueWith(_ => MessagingCenter.Send(this, "DeleteTrip", viewModel.Trip));
+            await Navigation.PopAsync().ContinueWith(_ => MessagingCenter.Send(this, "DeleteTrip", _viewModel.Trip));
         }
 
         private async Task RenameItem_Clicked()
@@ -58,16 +59,21 @@ namespace Fernweh.Views
             if (!string.IsNullOrEmpty(tripName))
             {
                 Title = tripName;
-                viewModel.TripName = tripName;
-                viewModel.Trip.Destination = tripName;
-                MessagingCenter.Send(this, "RenameTrip", viewModel.Trip);
+                _viewModel.TripName = tripName;
+                _viewModel.Trip.Destination = tripName;
+                MessagingCenter.Send(this, "RenameTrip", _viewModel.Trip);
             }
         }
 
         private async Task AddTemplateCategory_Clicked()
         {
-            var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, viewModel.Trip));
+            var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, _viewModel.Trip));
             await Navigation.PushModalAsync(new NavigationPage(setupPage));
+        }
+
+        private void Label_Clicked(object sender, EventArgs e)
+        {
+            if ((sender as Label)?.BindingContext is Item item) item.Packed = !item.Packed;
         }
     }
 

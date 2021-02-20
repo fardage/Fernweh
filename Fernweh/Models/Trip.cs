@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Fernweh.Models
 {
@@ -13,7 +12,5 @@ namespace Fernweh.Models
         public List<ItemCategory> Categories { get; set; } = new List<ItemCategory>();
         public string ColorA { get; set; }
         public string ColorB { get; set; }
-
-        [JsonIgnore] public bool IsShared { get; set; }
     }
 }
