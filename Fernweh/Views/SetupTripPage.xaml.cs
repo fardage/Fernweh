@@ -21,7 +21,7 @@ namespace Fernweh.Views
 
         private void Done_Clicked(object sender, EventArgs e)
         {
-            viewModel.WrapUpTrip();
+            viewModel.WrapUpTripAsync();
         }
 
         private void OnDragging(object sender, DraggingCardEventArgs e)

@@ -20,12 +20,12 @@ namespace Fernweh.Views
         {
             var layout = (BindableObject) sender;
             var item = (Trip) layout.BindingContext;
-            await Navigation.PushAsync(new TripDetailPage(new TripDetailViewModel(item)));
+            await Navigation.PushAsync(new TripDetailPage(new TripDetailViewModel(item, viewModel.TripsHolder)));
         }
 
         private async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(new NewTripViewModel())));
+            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(new NewTripViewModel(viewModel.TripsHolder))));
         }
 
         private async void Settings_Clicked(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace Fernweh.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Trips.Count == 0)
+            if (viewModel.TripsHolder.Trips.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

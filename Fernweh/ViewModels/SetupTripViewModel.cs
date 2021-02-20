@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Fernweh.Data;
 using Fernweh.Models;
 using Fernweh.Services;
 using MLToolkit.Forms.SwipeCardView.Core;
@@ -13,10 +15,11 @@ namespace Fernweh.ViewModels
         private readonly List<Item> _existingItems = new List<Item>();
         private uint _threshold;
 
-        public SetupTripViewModel(INavigation navigation, Trip trip)
+        public SetupTripViewModel(INavigation navigation, Trip trip, TripsHolder tripsHolder)
         {
             Navigation = navigation;
             Trip = trip;
+            TripsHolder = tripsHolder;
 
             SwipedCommand = new Command<SwipedCardEventArgs>(eventArgs => ExecuteSwipedCommand(eventArgs));
 
@@ -28,9 +31,15 @@ namespace Fernweh.ViewModels
         }
 
         public INavigation Navigation { get; set; }
+
+        public TripsHolder TripsHolder { get; set; }
+
         public Trip Trip { get; set; }
+
         public List<ItemCategory> TemplateCategories { get; set; }
+
         public List<ItemCategory> SelectedCategories { get; set; }
+
         public SwipeCardDirection SupportedSwipeDirections => SwipeCardDirection.Right | SwipeCardDirection.Left;
 
         public ICommand SwipedCommand { get; }
@@ -51,15 +60,15 @@ namespace Fernweh.ViewModels
                 AddCategory(selected);
             }
 
-            if (selected == TemplateCategories.Last()) WrapUpTrip();
+            if (selected == TemplateCategories.Last()) _ = WrapUpTripAsync();
         }
 
-        internal void WrapUpTrip()
+        internal async Task WrapUpTripAsync()
         {
             Trip.Categories.AddRange(SelectedCategories);
-            MessagingCenter.Send(this, "SetupTrip", Trip);
+            await TripsHolder.AddTrip(Trip);
 
-            Navigation.PopModalAsync();
+            _ = Navigation.PopModalAsync();
         }
 
         private void AddCategory(ItemCategory category)

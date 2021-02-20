@@ -18,6 +18,7 @@ namespace Fernweh.ViewModels
             AddItemCommand = new Command<GroupedList>(async groupedList => await ExecuteAddItemCommand(groupedList));
             DeleteItemCommand = new Command<Item>(ExecuteDeleteItemCommand);
             AddCategoryCommand = new Command(async () => await ExecuteAddCategoryCommand());
+
             ExecuteLoadChecklistsCommand();
         }
 

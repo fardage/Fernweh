@@ -35,6 +35,12 @@ This app is build with Xamarin, an open-source platform for building modern and 
 
 ### Installation
 
+Get it from the Play Store:
+
+<a href='https://play.google.com/store/apps/details?id=ch.tseng.Fernweh&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='200'/></a>
+
+### Build
+
 1. Get a free API Key [https://developer.here.com](https://developer.here.com)
 2. Clone the repo
    ```sh
@@ -56,3 +62,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [SwipeCardView](https://github.com/markolazic88/SwipeCardView)
 * [Undraw](https://undraw.co)
 * [Monkey Cache](https://github.com/jamesmontemagno/monkey-cache)
+* Google Play and the Google Play logo are trademarks of Google LLC.

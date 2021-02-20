@@ -49,7 +49,7 @@ namespace Fernweh.Views
 
         private async Task DeleteItem_Clicked()
         {
-            await Navigation.PopAsync().ContinueWith(_ => MessagingCenter.Send(this, "DeleteTrip", _viewModel.Trip));
+            await Navigation.PopAsync().ContinueWith(_ => _viewModel.TripsHolder.RemoveTrip(_viewModel.Trip));
         }
 
         private async Task RenameItem_Clicked()
@@ -61,13 +61,13 @@ namespace Fernweh.Views
                 Title = tripName;
                 _viewModel.TripName = tripName;
                 _viewModel.Trip.Destination = tripName;
-                MessagingCenter.Send(this, "RenameTrip", _viewModel.Trip);
+                await _viewModel.TripsHolder.UpdateTrip(_viewModel.Trip);
             }
         }
 
         private async Task AddTemplateCategory_Clicked()
         {
-            var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, _viewModel.Trip));
+            var setupPage = new SetupTripPage(new SetupTripViewModel(Navigation, _viewModel.Trip, _viewModel.TripsHolder));
             await Navigation.PushModalAsync(new NavigationPage(setupPage));
         }
 

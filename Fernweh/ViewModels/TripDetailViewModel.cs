@@ -20,11 +20,13 @@ namespace Fernweh.ViewModels
         private CountryFacts _facts;
         private string _tripName;
 
-        public TripDetailViewModel(Trip trip)
+        public TripDetailViewModel(Trip trip, TripsHolder tripsHolder)
         {
             Title = trip.Destination;
             TripName = trip.Destination;
             Trip = trip;
+            TripsHolder = tripsHolder;
+
             ChecklistGroups = new ObservableCollection<GroupedList>();
 
             LoadChecklistsCommand = new Command(async () => await ExecuteLoadChecklistsCommand());
@@ -40,10 +42,16 @@ namespace Fernweh.ViewModels
             _ = ExecuteLoadInfoCommand();
         }
 
+        public TripsHolder TripsHolder { get; set; }
+
         public Command LoadChecklistsCommand { get; set; }
+
         public Command<Item> DeleteChecklistItemCommand { get; set; }
+
         public Command<GroupedList> AddItemCommand { get; set; }
+
         public Command<GroupedList> DeleteCategoryCommand { get; set; }
+
         public Trip Trip { get; set; }
 
         public CountryFacts Facts

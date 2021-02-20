@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fernweh.Data;
 using Fernweh.Models;
 using Fernweh.Services.HereMaps;
 using Fernweh.Views;
@@ -17,10 +18,12 @@ namespace Fernweh.ViewModels
 
         private string _destination = "Destination";
         private DateTime _endDate = DateTime.Now;
-        private DateTime _startDate = DateTime.Now;
+        private DateTime _startDate = DateTime.Now;    
 
-        public NewTripViewModel()
+        public NewTripViewModel(TripsHolder tripsHolder)
         {
+            TripsHolder = tripsHolder;
+
             NewTrip = new Trip
             {
                 Destination = "Destination",
@@ -36,6 +39,9 @@ namespace Fernweh.ViewModels
         }
 
         public Trip NewTrip { get; }
+
+        public TripsHolder TripsHolder { get; set; }
+
         public Command SetRandomColorCommand { get; set; }
 
         public DateTime StartDate

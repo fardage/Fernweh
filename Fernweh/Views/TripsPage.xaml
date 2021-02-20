@@ -24,9 +24,9 @@
 
     <Grid>
         <Image Source="travelingreweve.png"
-               IsVisible="{Binding Converter={StaticResource countToBool}, Path=Trips.Count}"
+               IsVisible="{Binding Converter={StaticResource countToBool}, Path=TripsHolder.Trips.Count}"
                Margin="48" />
-        <CollectionView ItemsSource="{Binding Trips}">
+        <CollectionView ItemsSource="{Binding TripsHolder.Trips}">
             <CollectionView.Header>
                 <Grid Padding="24">
                     <Grid.RowDefinitions>
@@ -48,7 +48,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Style="{StaticResource Heading3Style}"
-                                      Text="{Binding Trips.Count}" />
+                                      Text="{Binding TripsHolder.Trips.Count}" />
                                 <Span Style="{StaticResource Heading3Style}" Text=" Pending" />
                             </FormattedString>
                         </Label.FormattedText>
